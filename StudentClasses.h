@@ -5,6 +5,8 @@
 #define PROJETOAED_STUDENTCLASSES_H
 
 #include <string>
+#include "ClassPerUC.h"
+#include <list>
 using namespace std;
 class StudentClasses{
 public:
@@ -23,8 +25,7 @@ public:
 private:
     long int studentCode;
     string studentName;
-    string ucCode;
-    string classCode;
+    list <ClassPerUC> clas;
 };
 
 #endif //PROJETOAED_STUDENTCLASSES_H

@@ -48,6 +48,7 @@ void readStudentClasses(){
     inFile.open("/Users/madalenaye/Downloads/AED/Project/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     vector<StudentClasses> st_classes;
+
     StudentClasses st_class;
     while(getline(inFile,line)){
         stringstream is(line);
