@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "/home/sereno/CLionProjects/PROJETOAED/cmake-build-debug",
-		"source" : "/home/sereno/CLionProjects/PROJETOAED"
+		"build" : "/home/sereno/CLionProjects/ProjetoAED/schedule/cmake-build-debug",
+		"source" : "/home/sereno/CLionProjects/ProjetoAED/schedule"
 	},
 	"version" : 
 	{
