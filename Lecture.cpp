@@ -1,23 +1,24 @@
 //
-// Created by sereno on 28-10-2022.
+// Created by Madalena Ye on 29/10/2022.
 //
 
 #include "Lecture.h"
+
 Lecture::Lecture() {
-    ucCode="";
-    classCode="";
-    weekday="";
-    startHour=0;
-    duration=0;
-    type="";
+    ucCode = "";
+    classCode = "";
+    weekday = "";
+    startHour = 0.0;
+    duration = 0.0;
+    type = "";
 }
-Lecture::Lecture(string uc,string cc,string wd,float sh,float dur,string t){
-ucCode=uc;
-classCode=cc;
-weekday=wd;
-startHour=sh;
-duration=dur;
-type=t;
+Lecture::Lecture(string uc, string cc, string wd, float sh, float dur, string t){
+    ucCode= uc;
+    classCode = cc;
+    weekday = wd;
+    startHour = sh;
+    duration = dur;
+    type = t;
 }
 //getters
 string Lecture::get_ucCode(){return ucCode;}
