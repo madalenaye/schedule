@@ -6,28 +6,25 @@
 
 #include <string>
 using namespace std;
-class studentsClass{
+class StudentClasses{
 public:
-    studentsClass();
-    studentsClass(int stc,string stn, string ucc, string cc);
+    StudentClasses();
+    StudentClasses(long int stc , string stn, string ucc, string cc);
     int get_studentCode();
     string get_studentName();
     string get_ucCode();
     string get_classCode();
-//setters
-    void set_studentCode(int stc);
+    //setters
+    void set_studentCode(long int stc);
     void set_studentName(string stn);
     void set_ucCode(string uc);
     void set_classCode(string cc);
 
 private:
-    //FALTA PREENCHER ESTA CLASSES AQUI COM OS ATRIBUTOS DA TABELA students_classes.csv
-    int studentCode;
+    long int studentCode;
     string studentName;
     string ucCode;
     string classCode;
 };
-
-
 
 #endif //PROJETOAED_STUDENTCLASSES_H
