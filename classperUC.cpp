@@ -3,6 +3,11 @@
 //
 
 #include "classperUC.h"
+classperUC::classperUC() {
+    ucCode = "";
+    classCode="";
+}
+classperUC::classperUC(std::string uc, std::string cc) {ucCode=uc;classCode=cc;}
 string classperUC::get_ucCode(){return ucCode;}
 string classperUC::get_classCode(){return classCode;}
 //setters

@@ -3,6 +3,14 @@
 //
 
 #include "Lecture.h"
+Lecture::Lecture() {
+    ucCode="";
+    classCode="";
+    weekday="";
+    startHour=0;
+    duration=0;
+    type="";
+}
 Lecture::Lecture(string uc,string cc,string wd,float sh,float dur,string t){
 ucCode=uc;
 classCode=cc;

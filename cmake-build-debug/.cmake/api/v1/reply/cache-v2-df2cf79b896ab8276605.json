@@ -55,7 +55,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/sereno/CLionProjects/PROJETOAED/cmake-build-debug"
+			"value" : "/home/sereno/CLionProjects/ProjetoAED/schedule/cmake-build-debug"
 		},
 		{
 			"name" : "CMAKE_CACHE_MAJOR_VERSION",
@@ -591,7 +591,7 @@
 				}
 			],
 			"type" : "INTERNAL",
-			"value" : "/home/sereno/CLionProjects/PROJETOAED"
+			"value" : "/home/sereno/CLionProjects/ProjetoAED/schedule"
 		},
 		{
 			"name" : "CMAKE_INSTALL_PREFIX",
@@ -1123,7 +1123,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/sereno/CLionProjects/PROJETOAED/cmake-build-debug"
+			"value" : "/home/sereno/CLionProjects/ProjetoAED/schedule/cmake-build-debug"
 		},
 		{
 			"name" : "ProjetoAED_IS_TOP_LEVEL",
@@ -1147,7 +1147,7 @@
 				}
 			],
 			"type" : "STATIC",
-			"value" : "/home/sereno/CLionProjects/PROJETOAED"
+			"value" : "/home/sereno/CLionProjects/ProjetoAED/schedule"
 		}
 	],
 	"kind" : "cache",

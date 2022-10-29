@@ -10,6 +10,8 @@ using namespace std;
 
 class classperUC{
 public:
+    classperUC();
+    classperUC(string uc,string cc);
     //getters
     string get_ucCode();
     string get_classCode();

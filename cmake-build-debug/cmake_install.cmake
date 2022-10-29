@@ -1,4 +1,4 @@
-# Install script for directory: /home/sereno/CLionProjects/PROJETOAED
+# Install script for directory: /home/sereno/CLionProjects/ProjetoAED/schedule
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -50,5 +50,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/home/sereno/CLionProjects/PROJETOAED/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/home/sereno/CLionProjects/ProjetoAED/schedule/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

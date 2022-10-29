@@ -3,6 +3,12 @@
 //
 
 #include "studentClasses.h"
+studentsClass::studentsClass() {
+    studentCode=0;
+    studentName="";
+    ucCode="";
+    classCode="";
+}
 studentsClass::studentsClass(int stc,string stn, string ucc, string cc){
     studentCode=stc;
     studentName=stn;

@@ -5,8 +5,6 @@
 #ifndef PROJETOAED_LECTURE_H
 #define PROJETOAED_LECTURE_H
 
-#ifndef classes.h
-#define classes.h
 #include <string>
 using namespace std;
 
@@ -39,6 +37,5 @@ private:
     string type;
 };
 
-#endif
 
 #endif //PROJETOAED_LECTURE_H

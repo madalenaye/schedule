@@ -8,6 +8,7 @@
 using namespace std;
 class studentsClass{
 public:
+    studentsClass();
     studentsClass(int stc,string stn, string ucc, string cc);
     int get_studentCode();
     string get_studentName();
