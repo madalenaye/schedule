@@ -38,7 +38,6 @@ void readClasses(){
         lectures.push_back(lecture);
 
     }
-    cout << lectures[5].get_classCode() << endl;
 }
 
 void readStudentClasses(){
@@ -48,23 +47,29 @@ void readStudentClasses(){
     inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     vector<StudentClasses> st_classes;
+    list<ClassPerUC> cpu;
     StudentClasses st_class;
+    string testline="";
     while(getline(inFile,line)){
         stringstream is(line);
         getline(is,stCode,',');
+        if (testline == ""){
+            testline = stCode;
+        }
+        else if(testline != stCode){
+            st_class.set_ClassPerUC(cpu);
+            st_class.set_studentCode(stoul(testline));
+            st_class.set_studentName(stName);
+            st_classes.push_back(st_class);
+            cpu.clear();
+            testline = stCode;
+        }
         getline(is,stName,',');
         getline(is,ucCode,',');
         getline(is,classCode,',');
-        st_class.set_studentCode(stoul(stCode));
-        st_class.set_studentName(stName);
-        st_class.set_ucCode(ucCode);
-        st_class.set_classCode(classCode);
-        st_classes.push_back(st_class);
+        cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    cout << st_classes[5].get_ucCode() << " " << st_classes[5].get_classCode() << endl;
-
-
 }
 void readClassesPerUC(){
     string line;

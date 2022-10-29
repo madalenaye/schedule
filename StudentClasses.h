@@ -5,26 +5,26 @@
 #define PROJETOAED_STUDENTCLASSES_H
 
 #include <string>
+#include <list>
+#include "ClassPerUC.h"
+
 using namespace std;
 class StudentClasses{
 public:
     StudentClasses();
-    StudentClasses(long int stc , string stn, string ucc, string cc);
+    StudentClasses(long int stc , string stn, list<ClassPerUC> cpuc);
     int get_studentCode();
     string get_studentName();
-    string get_ucCode();
-    string get_classCode();
+    list<ClassPerUC> get_classPerUC();
     //setters
     void set_studentCode(long int stc);
     void set_studentName(string stn);
-    void set_ucCode(string uc);
-    void set_classCode(string cc);
+    void set_ClassPerUC(list<ClassPerUC> cpu1);
 
 private:
     long int studentCode;
     string studentName;
-    string ucCode;
-    string classCode;
+    list<ClassPerUC> cpu;
 };
 
 #endif //PROJETOAED_STUDENTCLASSES_H
