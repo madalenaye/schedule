@@ -1,9 +1,0 @@
-# ninja log v5
-2	424	1667068260850976342	CMakeFiles/ProjetoAED.dir/ReadFiles.cpp.o	bf20a7563084d092
-20	53	1667068290520797803	ProjetoAED	e14d84c16187d12d
-1	20	1667068290487383609	CMakeFiles/ProjetoAED.dir/main.cpp.o	5f3bf37f9c017d3d
-2	407	1667060764473041496	CMakeFiles/ProjetoAED.dir/Read_classes.cpp.o	f0ba20c474a0accb
-2	229	1667063691927474839	CMakeFiles/ProjetoAED.dir/Lecture.cpp.o	9dee2ded839889c8
-0	47	1667070096933599394	build.ninja	bc3c205ecd267d3
-2	229	1667063691927038546	CMakeFiles/ProjetoAED.dir/ClassPerUC.cpp.o	7ca38d78029a4b31
-2	242	1667067795376269552	CMakeFiles/ProjetoAED.dir/StudentClasses.cpp.o	39ac070519b9ba2a

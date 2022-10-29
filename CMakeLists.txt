@@ -3,4 +3,4 @@ project(ProjetoAED)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ProjetoAED main.cpp ReadFiles.cpp ReadFiles.h ClassPerUC.cpp Lecture.cpp StudentClasses.cpp Menu.cpp Menu.h)
+add_executable(ProjetoAED main.cpp ReadFiles.cpp ReadFiles.h ClassPerUC.cpp Lecture.cpp StudentClasses.cpp)
