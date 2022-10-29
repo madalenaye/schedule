@@ -1,25 +1,25 @@
 //
-// Created by sereno on 28-10-2022.
+// Created by Madalena Ye on 29/10/2022.
 //
 
-#include "studentClasses.h"
-studentsClass::studentsClass() {
-    studentCode=0;
-    studentName="";
-    ucCode="";
-    classCode="";
+#include "StudentClasses.h"
+StudentClasses::StudentClasses() {
+    studentCode = 0;
+    studentName = "";
+    ucCode = "";
+    classCode = "";
 }
-studentsClass::studentsClass(int stc,string stn, string ucc, string cc){
-    studentCode=stc;
-    studentName=stn;
-    ucCode=ucc;
-    classCode=cc;
+StudentClasses::StudentClasses(long int stc, string stn, string ucc, string cc){
+    studentCode = stc;
+    studentName = stn;
+    ucCode = ucc;
+    classCode = cc;
 }
-int studentsClass::get_studentCode(){return studentCode;}
-string studentsClass::get_studentName(){return studentName;}
-string studentsClass::get_ucCode(){return ucCode;}
-string studentsClass::get_classCode(){return classCode;}
-void studentsClass::set_studentCode(int stc){studentCode=stc;}
-void studentsClass::set_studentName(string stn){studentName=stn;}
-void studentsClass::set_ucCode(string uc){ucCode=uc;}
-void studentsClass::set_classCode(string cc){classCode=cc;}
+int StudentClasses::get_studentCode(){return studentCode;}
+string StudentClasses::get_studentName(){return studentName;}
+string StudentClasses::get_ucCode(){return ucCode;}
+string StudentClasses::get_classCode(){return classCode;}
+void StudentClasses::set_studentCode(long int stc){studentCode = stc;}
+void StudentClasses::set_studentName(string stn){studentName = stn;}
+void StudentClasses::set_ucCode(string uc){ucCode = uc;}
+void StudentClasses::set_classCode(string cc){classCode = cc;}

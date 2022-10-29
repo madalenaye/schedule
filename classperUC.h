@@ -8,10 +8,10 @@
 #include <string>
 using namespace std;
 
-class classperUC{
+class ClassPerUC{
 public:
-    classperUC();
-    classperUC(string uc,string cc);
+    ClassPerUC();
+    ClassPerUC(string uc, string cc);
     //getters
     string get_ucCode();
     string get_classCode();
