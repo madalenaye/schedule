@@ -76,6 +76,12 @@ build CMakeFiles/ProjetoAED.dir/StudentClasses.cpp.o: CXX_COMPILER__ProjetoAED_D
   OBJECT_DIR = CMakeFiles/ProjetoAED.dir
   OBJECT_FILE_DIR = CMakeFiles/ProjetoAED.dir
 
+build CMakeFiles/ProjetoAED.dir/Menu.cpp.o: CXX_COMPILER__ProjetoAED_Debug /Users/madalenaye/Downloads/AED/Project/schedule/Menu.cpp || cmake_object_order_depends_target_ProjetoAED
+  DEP_FILE = CMakeFiles/ProjetoAED.dir/Menu.cpp.o.d
+  FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk -std=gnu++14
+  OBJECT_DIR = CMakeFiles/ProjetoAED.dir
+  OBJECT_FILE_DIR = CMakeFiles/ProjetoAED.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target ProjetoAED
@@ -84,7 +90,7 @@ build CMakeFiles/ProjetoAED.dir/StudentClasses.cpp.o: CXX_COMPILER__ProjetoAED_D
 #############################################
 # Link the executable ProjetoAED
 
-build ProjetoAED: CXX_EXECUTABLE_LINKER__ProjetoAED_Debug CMakeFiles/ProjetoAED.dir/main.cpp.o CMakeFiles/ProjetoAED.dir/ReadFiles.cpp.o CMakeFiles/ProjetoAED.dir/ClassPerUC.cpp.o CMakeFiles/ProjetoAED.dir/Lecture.cpp.o CMakeFiles/ProjetoAED.dir/StudentClasses.cpp.o
+build ProjetoAED: CXX_EXECUTABLE_LINKER__ProjetoAED_Debug CMakeFiles/ProjetoAED.dir/main.cpp.o CMakeFiles/ProjetoAED.dir/ReadFiles.cpp.o CMakeFiles/ProjetoAED.dir/ClassPerUC.cpp.o CMakeFiles/ProjetoAED.dir/Lecture.cpp.o CMakeFiles/ProjetoAED.dir/StudentClasses.cpp.o CMakeFiles/ProjetoAED.dir/Menu.cpp.o
   FLAGS = -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX12.3.sdk
   OBJECT_DIR = CMakeFiles/ProjetoAED.dir
   POST_BUILD = :
