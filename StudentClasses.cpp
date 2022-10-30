@@ -3,11 +3,11 @@
 //
 
 #include "StudentClasses.h"
-Student::StudentClasses() {
+Student::Student() {
     studentCode = 0;
     studentName = "";
 }
-Student::StudentClasses(long int stc, string stn, list<ClassPerUC> cpuc){
+Student::Student(long int stc, string stn, list<ClassPerUC> cpuc){
     studentCode = stc;
     studentName = stn;
     cpu = cpuc;
