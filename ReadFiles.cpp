@@ -75,7 +75,7 @@ void readStudents(){
     getline(is,ucCode,',');
     getline(is,classCode,',');
     string prevStCode=stCode;
-    vector<Student> st_classes;
+    set<Student> st_classes;
     list<ClassPerUC> cpu;
     Student st_class;
     while(getline(inFile,line)){
@@ -85,7 +85,7 @@ void readStudents(){
             st_class.set_ClassPerUC(cpu);
             st_class.set_studentCode(stoul(prevStCode));
             st_class.set_studentName(stName);
-            st_classes.push_back(st_class);
+            st_classes.insert(st_class);
             cpu.clear();
             prevStCode = stCode;
         }
@@ -95,10 +95,10 @@ void readStudents(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    /*for (auto i: st_classes){
+    for (auto i: st_classes){
         auto j = i.get_classPerUC();
         cout << i.get_studentName() << "-" <<  j.size() << endl;
-    }*/
+    }
 }
 void readClassesPerUC(){
     string line;
