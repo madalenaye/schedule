@@ -59,15 +59,15 @@ void readClasses(){
     }
 }
 //ISTO RESULTOU OU NÃO???
-void readStudentClasses(){
+void readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
-    vector<StudentClasses> st_classes;
+    vector<Student> st_classes;
     list<ClassPerUC> cpu;
-    StudentClasses st_class;
+    Student st_class;
     string testline="";
     while(getline(inFile,line)){
         stringstream is(line);

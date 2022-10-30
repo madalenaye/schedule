@@ -1,3 +1,3 @@
 void readClasses();
-void readStudentClasses();
+void readStudents();
 void readClassesPerUC();

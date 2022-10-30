@@ -4,7 +4,7 @@
 
 #include "ScheduleManagement.h"
 
-ScheduleManagement::ScheduleManagement(set<StudentClasses> stu, vector<Lecture> sch){
+ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
     students = stu;
     schedule = sch;
 }

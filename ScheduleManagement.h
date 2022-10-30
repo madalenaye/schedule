@@ -13,15 +13,15 @@ class ScheduleManagement{
 public:
     //constructors
     ScheduleManagement();
-    ScheduleManagement(set<StudentClasses> stu, vector<Lecture> sch);
+    ScheduleManagement(set<Student> stu, vector<Lecture> sch);
     //getters
-    set<StudentClasses> get_students();
+    set<Student> get_students();
     vector<Lecture> get_schedule();
     //setters
-    void set_students(set<StudentClasses> stu);
+    void set_students(set<Student> stu);
     void set_schedule(vector<Lecture> sch);
 private:
-    set<StudentClasses> students;
+    set<Student> students;
     vector<Lecture> schedule;
 
 };
