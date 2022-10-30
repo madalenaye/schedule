@@ -3,7 +3,7 @@
 //
 #include "Lecture.h"
 #include "ClassPerUC.h"
-#include "StudentClasses.h"
+#include "Student.h"
 #include <fstream>
 #include <vector>
 #include <iostream>

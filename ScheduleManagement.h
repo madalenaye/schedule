@@ -5,7 +5,7 @@
 #ifndef SCHEDULE_SCHEDULEMANAGEMENT_H
 #define SCHEDULE_SCHEDULEMANAGEMENT_H
 
-#include "StudentClasses.h"
+#include "Student.h"
 #include "Lecture.h"
 #include <set>
 #include <vector>
