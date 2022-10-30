@@ -10,7 +10,7 @@ ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
 }
 //getter
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
-set<StudentClasses> ScheduleManagement::get_students() {return students;}
+set<Student> ScheduleManagement::get_students() {return students;}
 //setter
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
-void ScheduleManagement::set_students(set<StudentClasses> stu) {students=stu;}
+void ScheduleManagement::set_students(set<Student> stu) {students=stu;}

@@ -2,7 +2,7 @@
 // Created by Madalena Ye on 29/10/2022.
 //
 
-#include "StudentClasses.h"
+#include "Student.h"
 Student::Student() {
     studentCode = 0;
     studentName = "";
