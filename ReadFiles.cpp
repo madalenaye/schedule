@@ -55,15 +55,16 @@ void readClasses(){
     }
     for (auto i:lectures){
         auto j = i.get_Slot();
-        cout << i.get_classCode() << '-' << j.size()<< endl;
+        cout << i.get_classCode() << '-' << i.get_ucCode() << ':' << j.size()<< endl;
     }
 }
-//ISTO RESULTOU OU NÃO???
+
 void readStudentClasses(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     vector<StudentClasses> st_classes;
     list<ClassPerUC> cpu;
@@ -98,7 +99,8 @@ void readClassesPerUC(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
