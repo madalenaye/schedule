@@ -65,23 +65,27 @@ void readStudents(){
     ifstream inFile;
     inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
+    //Reading the first line with actual data
+    getline(inFile,line);
+    stringstream is(line);
+    getline(is,stCode,',');
+    getline(is,stName,',');
+    getline(is,ucCode,',');
+    getline(is,classCode,',');
+    string prevStCode=stCode;
     vector<Student> st_classes;
     list<ClassPerUC> cpu;
     Student st_class;
-    string testline="";
     while(getline(inFile,line)){
         stringstream is(line);
         getline(is,stCode,',');
-        if (testline == ""){
-            testline = stCode;
-        }
-        else if(testline != stCode){
+        if(prevStCode != stCode){
             st_class.set_ClassPerUC(cpu);
-            st_class.set_studentCode(stoul(testline));
+            st_class.set_studentCode(stoul(prevStCode));
             st_class.set_studentName(stName);
             st_classes.push_back(st_class);
             cpu.clear();
-            testline = stCode;
+            prevStCode = stCode;
         }
         getline(is,stName,',');
         getline(is,ucCode,',');
