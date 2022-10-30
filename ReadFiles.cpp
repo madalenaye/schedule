@@ -1,7 +1,7 @@
 //
 // Created by Madalena Ye on 29/10/2022.
 //
-#include "Lecture.h"
+/*#include "Lecture.h"
 #include "ClassPerUC.h"
 #include "Student.h"
 #include <fstream>
@@ -120,3 +120,4 @@ void readClassesPerUC(){
     }
     cout << classes[5].get_ucCode() << " " << classes[5].get_classCode() << endl;
 }
+ */
