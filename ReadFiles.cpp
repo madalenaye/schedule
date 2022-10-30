@@ -18,7 +18,7 @@ void readClasses(){
     string line;
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -31,19 +31,19 @@ void readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
-        string cc,lixo;
+        string cc,uc;
         while (getline(inFile2,line2)){
 
             stringstream os(line2);
             getline(os,cc,',');
-            getline(os,lixo,',');
+            getline(os,uc,',');
             getline(os,weekday,',');
             getline(os,startHour,',');
             getline(os,duration,',');
             getline(os,type,',');
-            if ( lixo == ucCode && cc == classCode ){
+            if ( uc == ucCode && cc == classCode ){
                 slots.push_back(Slot(weekday,stod(startHour),stod(duration),type));
             }
         }
@@ -59,30 +59,35 @@ void readClasses(){
     }
 }
 
-void readStudentClasses(){
+void readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
+    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
-    vector<StudentClasses> st_classes;
+    //Reading the first line with actual data
+    getline(inFile,line);
+    stringstream is(line);
+    getline(is,stCode,',');
+    getline(is,stName,',');
+    getline(is,ucCode,',');
+    getline(is,classCode,',');
+    string prevStCode=stCode;
+    vector<Student> st_classes;
     list<ClassPerUC> cpu;
-    StudentClasses st_class;
-    string testline="";
+    Student st_class;
     while(getline(inFile,line)){
         stringstream is(line);
         getline(is,stCode,',');
-        if (testline == ""){
-            testline = stCode;
-        }
-        else if(testline != stCode){
+        if(prevStCode != stCode){
             st_class.set_ClassPerUC(cpu);
-            st_class.set_studentCode(stoul(testline));
+            st_class.set_studentCode(stoul(prevStCode));
             st_class.set_studentName(stName);
             st_classes.push_back(st_class);
             cpu.clear();
-            testline = stCode;
+            prevStCode = stCode;
         }
         getline(is,stName,',');
         getline(is,ucCode,',');
@@ -101,6 +106,7 @@ void readClassesPerUC(){
     ifstream inFile;
     //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
