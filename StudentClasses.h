@@ -20,7 +20,6 @@ public:
     void set_studentCode(long int stc);
     void set_studentName(string stn);
     void set_ClassPerUC(list<ClassPerUC> cpu1);
-
 private:
     long int studentCode;
     string studentName;

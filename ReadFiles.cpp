@@ -9,6 +9,7 @@
 #include <iostream>
 #include <sstream>
 #include "ReadFiles.h"
+#include "Slot.cpp"
 
 using namespace std;
 
@@ -17,26 +18,45 @@ void readClasses(){
     string line;
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     Lecture lecture;
     vector<Lecture> lectures;
+    list<Slot> slots;
+    //Slot slot;
+    string testline ="";
     while(getline(inFile,line)){
         stringstream is(line);
         getline(is,classCode,',');
         getline(is,ucCode,',');
-        getline(is,weekday,',');
-        getline(is,startHour,',');
-        getline(is,duration,',');
-        getline(is,type,',');
-        lecture.set_classCode(classCode);
-        lecture.set_ucCode(ucCode);
-        lecture.set_weekday(weekday);
-        lecture.set_startHour(stof(startHour));
-        lecture.set_duration(stof(duration));
-        lecture.set_type(type);
-        lectures.push_back(lecture);
+        testline =ucCode;
+        string line2;
+        ifstream inFile2;
+        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        getline(inFile2,line2);
+        string cc,lixo;
+        while (testline == ucCode && getline(inFile2,line2)){
 
+            stringstream os(line2);
+            getline(os,cc,',');
+            getline(os,lixo,',');
+            getline(os,weekday,',');
+            getline(os,startHour,',');
+            getline(os,duration,',');
+            getline(os,type,',');
+            if (cc == classCode){
+                slots.push_back(Slot(weekday,stod(startHour),stod(duration),type));
+            }
+        }
+        lecture.set_Slot(slots);
+        lecture.set_classCode(classCode);
+        lecture.set_ucCode(testline);
+        lectures.push_back(lecture);
+        slots.clear();
+    }
+    for (auto i: lectures){
+        auto j = i.get_Slot();
+        cout << i.get_ucCode() << '-' << j.size() << endl;
     }
 }
 
@@ -69,6 +89,10 @@ void readStudentClasses(){
         getline(is,classCode,',');
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
+    }
+    for (auto i: st_classes){
+        auto j = i.get_classPerUC();
+        cout << i.get_studentName() << "-" <<  j.size() << endl;
     }
 }
 void readClassesPerUC(){
