@@ -24,18 +24,16 @@ void readClasses(){
     vector<Lecture> lectures;
     list<Slot> slots;
     //Slot slot;
-    string testline ="";
     while(getline(inFile,line)){
         stringstream is(line);
-        getline(is,classCode,',');
         getline(is,ucCode,',');
-        testline =ucCode;
+        getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
         inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,lixo;
-        while (testline == ucCode && getline(inFile2,line2)){
+        while (getline(inFile2,line2)){
 
             stringstream os(line2);
             getline(os,cc,',');
@@ -44,19 +42,19 @@ void readClasses(){
             getline(os,startHour,',');
             getline(os,duration,',');
             getline(os,type,',');
-            if (cc == classCode){
+            if ( lixo == ucCode && cc == classCode ){
                 slots.push_back(Slot(weekday,stod(startHour),stod(duration),type));
             }
         }
-        lecture.set_Slot(slots);
         lecture.set_classCode(classCode);
-        lecture.set_ucCode(testline);
+        lecture.set_ucCode(ucCode);
+        lecture.set_Slot(slots);
         lectures.push_back(lecture);
         slots.clear();
     }
-    for (auto i: lectures){
+    for (auto i:lectures){
         auto j = i.get_Slot();
-        cout << i.get_ucCode() << '-' << j.size() << endl;
+        cout << i.get_classCode() << '-' << j.size()<< endl;
     }
 }
 
@@ -90,10 +88,10 @@ void readStudentClasses(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    for (auto i: st_classes){
+    /*for (auto i: st_classes){
         auto j = i.get_classPerUC();
         cout << i.get_studentName() << "-" <<  j.size() << endl;
-    }
+    }*/
 }
 void readClassesPerUC(){
     string line;
