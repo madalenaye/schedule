@@ -17,7 +17,7 @@ void readClasses(){
     string line;
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
-    inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
     getline(inFile,line);
     Lecture lecture;
     vector<Lecture> lectures;
@@ -44,7 +44,7 @@ void readStudentClasses(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     vector<StudentClasses> st_classes;
     list<ClassPerUC> cpu;
@@ -75,7 +75,7 @@ void readClassesPerUC(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
