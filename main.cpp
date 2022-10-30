@@ -1,14 +1,14 @@
-#include "ReadFiles.h"
-
 #include "Menu.h"
+#include "ScheduleManagement.h"
 #include <iostream>
 #include <iomanip>
 
 using namespace std;
 int main() {
+    ScheduleManagement manager;
 
-    readClasses();
-    readStudents();
-    readClassesPerUC();
+    manager.readClasses();
+    manager.readStudents();
+    manager.readClassesPerUC();
     createMenu();
 }

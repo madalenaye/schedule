@@ -20,10 +20,13 @@ public:
     //setters
     void set_students(set<Student> stu);
     void set_schedule(vector<Lecture> sch);
+    //readers
+    void readClasses();
+    void readStudents();
+    void readClassesPerUC();
 private:
     set<Student> students;
     vector<Lecture> schedule;
-
 };
 
 #endif //SCHEDULE_SCHEDULEMANAGEMENT_H
