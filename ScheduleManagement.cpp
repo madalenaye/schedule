@@ -3,3 +3,8 @@
 //
 
 #include "ScheduleManagement.h"
+
+ScheduleManagement::ScheduleManagement(set<StudentClasses> stu, vector<Lecture> sch){
+    students = stu;
+    schedule = sch;
+}

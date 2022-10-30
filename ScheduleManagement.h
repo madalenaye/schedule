@@ -13,7 +13,7 @@ class ScheduleManagement{
 public:
     //constructors
     ScheduleManagement();
-    ScheduleManagement(set<StudentClasses> students, vector<Lecture> schedule);
+    ScheduleManagement(set<StudentClasses> stu, vector<Lecture> sch);
     //getters
     set<StudentClasses> get_students();
     vector<Lecture> get_schedule();
@@ -25,4 +25,5 @@ private:
     vector<Lecture> schedule;
 
 };
+
 #endif //SCHEDULE_SCHEDULEMANAGEMENT_H
