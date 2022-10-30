@@ -22,6 +22,10 @@ public:
     void set_studentCode(long int stc);
     void set_studentName(string stn);
     void set_ClassPerUC(list<ClassPerUC> cpu1);
+    bool operator < (StudentClasses P) const
+    {
+        return (studentCode < P.get_studentCode());
+    }
 
 private:
     long int studentCode;
