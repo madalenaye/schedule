@@ -12,7 +12,7 @@ int main() {
     manager.readStudents();
     manager.readClassesPerUC();
     //createMenu();
-    string year;
+    /*string year;
     while(true){
         cin>>year;
         if(!(year=="1" || year=="2" || year=="3")){
@@ -22,4 +22,7 @@ int main() {
     }
 
     manager.listingClassPerYear((char)year[0]);
+    manager.listingClassSchedule("1LEIC01");
+    manager.listingStudentSchedule("202071557");
+    manager.listingUcSchedule("L.EIC003");*/
 }
