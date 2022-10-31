@@ -24,6 +24,8 @@ public:
     void readClasses();
     void readStudents();
     void readClassesPerUC();
+    //listing
+    void listingClassPerYear(char year);
 private:
     set<Student> students;
     vector<Lecture> schedule;
