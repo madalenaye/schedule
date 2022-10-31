@@ -32,7 +32,7 @@ void ScheduleManagement::readClasses(){
     string line;
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
-    inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -44,7 +44,7 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        inFile2.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
         while (getline(inFile2,line2)){
@@ -65,10 +65,6 @@ void ScheduleManagement::readClasses(){
         lecture.set_Slot(slots);
         schedule.push_back(lecture);
         slots.clear();
-    }
-    for (auto i:schedule){
-        auto j = i.get_Slot();
-        cout << i.get_classCode() << '-' << i.get_ucCode() << ':' << j.size()<< endl;
     }
 }
 
@@ -108,10 +104,6 @@ void ScheduleManagement::readStudents(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    for (auto i: students){
-        auto j = i.get_classPerUC();
-        cout << i.get_studentName() << "-" <<  j.size() << endl;
-    }
 }
 void ScheduleManagement::readClassesPerUC(){
     string line;
@@ -131,5 +123,17 @@ void ScheduleManagement::readClassesPerUC(){
         uc_class.set_classCode(classCode);
         classes.push_back(uc_class);
     }
-    cout << classes[5].get_ucCode() << " " << classes[5].get_classCode() << endl;
+}
+void ScheduleManagement::listingClassPerYear(char year) {
+
+    set<string> classes;
+    for(Lecture lecture: schedule){
+        if(lecture.get_classCode()[0]==year){
+            classes.insert(lecture.get_classCode());
+        }
+    }
+    for(auto it:classes){
+        cout<<it<<endl;
+    }
+    cout<<"There are "<< classes.size()<<" classes in year "<<year;
 }
