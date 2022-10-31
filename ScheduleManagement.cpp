@@ -10,8 +10,8 @@
 #include <vector>
 #include <iostream>
 #include <sstream>
+#include <algorithm>
 #include "Slot.cpp"
-
 ScheduleManagement::ScheduleManagement() {
     students={};
     schedule={};
@@ -100,10 +100,13 @@ void ScheduleManagement::readStudents(){
         }
         getline(is,stName,',');
         getline(is,ucCode,',');
-        getline(is,classCode,',');
+        getline(is,classCode,'\r');
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
+    /*for (Student student: students){
+        cout << student.get_studentCode() << endl;
+    }*/
 }
 void ScheduleManagement::readClassesPerUC(){
     string line;
@@ -136,4 +139,49 @@ void ScheduleManagement::listingClassPerYear(char year) {
         cout<<it<<endl;
     }
     cout<<"There are "<< classes.size()<<" classes in year "<<year;
+}
+void ScheduleManagement::listingStudentSchedule(string studentCode) {
+    Student student1;
+    cout << "The student " << studentCode << " has the following schedule" << endl;
+    for (Student student : students) {
+        if (stoul(studentCode) == student.get_studentCode()) {
+            student1 = student;
+            break;
+        }
+    }
+    for (ClassPerUC cpu: student1.get_classPerUC()) {
+        for (Lecture lecture: schedule) {
+            if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
+                for (Slot slot: lecture.get_Slot()) {
+                    cout << cpu.get_ucCode() << '-' << cpu.get_classCode() << ':' << slot.get_WeekDay() << '-'
+                         << slot.get_StartHour() << '-' << slot.get_Duration() << '-' << slot.get_Type()
+                         << endl;
+                }
+            }
+        }
+    }
+}
+void ScheduleManagement::listingClassSchedule(string cl) {
+    cout << "The class " << cl << " has the following schedule." << endl;
+    for (Lecture lecture : schedule){
+        if (lecture.get_classCode() == cl){
+            for (Slot slot: lecture.get_Slot()) {
+                cout << lecture.get_ucCode() << ':' << slot.get_WeekDay() << '-'
+                     << slot.get_StartHour() << '-' << slot.get_Duration() << '-' << slot.get_Type()
+                     << endl;
+            }
+        }
+    }
+}
+void ScheduleManagement::listingUcSchedule(string uc) {
+    cout << "The UC " << uc << " has the following schedule." << endl;
+    for (Lecture lecture : schedule){
+        if (lecture.get_ucCode() == uc){
+            for (Slot slot: lecture.get_Slot()) {
+                cout << lecture.get_classCode() << ':' << slot.get_WeekDay() << '-'
+                     << slot.get_StartHour() << '-' << slot.get_Duration() << '-' << slot.get_Type()
+                     << endl;
+            }
+        }
+    }
 }

@@ -26,6 +26,9 @@ public:
     void readClassesPerUC();
     //listing
     void listingClassPerYear(char year);
+    void listingStudentSchedule(string studentCode);
+    void listingClassSchedule(string cl);
+    void listingUcSchedule(string uc);
 private:
     set<Student> students;
     vector<Lecture> schedule;
