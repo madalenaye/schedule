@@ -30,6 +30,8 @@ public:
     void listingClassSchedule(string cl);
     void listingUcSchedule(string uc);
     void listingClasses(string order);
+    void listingAllStudentsCode();
+    void listingAllStudentsName();
 private:
     set<Student> students;
     vector<Lecture> schedule;

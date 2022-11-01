@@ -13,6 +13,7 @@ int main(){
     manager.readClasses();
     manager.readStudents();
     manager.readClassesPerUC();
+    manager.listingAllStudentsName();
     vector<Student> v;
     for(auto it: manager.get_students()){v.push_back(it);}
     TreeNode* StudentBST= sortedVectorToBST(v);
