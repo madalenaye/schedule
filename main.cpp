@@ -5,7 +5,8 @@
 #include <string>
 
 int main(){
-    createMenu();
+    /*
+    createMenu();*/
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -23,5 +24,7 @@ int main(){
     manager.listingClassSchedule("1LEIC01");
     manager.listingStudentSchedule("202071557");
     manager.listingUcSchedule("L.EIC003");*/
-    endMenu();
+    manager.listingClasses("1");
+    /*
+    endMenu();*/
 }

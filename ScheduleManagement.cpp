@@ -188,3 +188,26 @@ void ScheduleManagement::listingUcSchedule(string uc) {
         }
     }
 }
+
+void ScheduleManagement::listingClasses(string order){
+
+    if (order == "0") {
+        set<string> classes;
+        for (Lecture lecture: schedule) {
+            classes.insert(lecture.get_classCode());
+        }
+        for (auto it: classes) {
+            cout << it << endl;
+        }
+    }
+    else{
+        std::set<string, std::greater<string>> classes;
+        for (Lecture lecture: schedule) {
+            classes.insert(lecture.get_classCode());
+        }
+        for (auto it: classes) {
+            cout << it << endl;
+        }
+    }
+
+}

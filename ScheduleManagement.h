@@ -29,6 +29,7 @@ public:
     void listingStudentSchedule(string studentCode);
     void listingClassSchedule(string cl);
     void listingUcSchedule(string uc);
+    void listingClasses(string order);
 private:
     set<Student> students;
     vector<Lecture> schedule;
