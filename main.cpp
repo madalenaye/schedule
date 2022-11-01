@@ -3,6 +3,7 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include "BinarySearchTree.h"
 
 int main(){
     /*
@@ -12,6 +13,10 @@ int main(){
     manager.readClasses();
     manager.readStudents();
     manager.readClassesPerUC();
+    vector<Student> v;
+    for(auto it: manager.get_students()){v.push_back(it);}
+    TreeNode* StudentBST= sortedVectorToBST(v);
+    cout<<findInBST(binarySearchTreeStudents(manager.get_students()),202054812)->value.get_studentName();
     /*
     string year;
     cin >> year;
@@ -24,7 +29,8 @@ int main(){
     manager.listingClassSchedule("1LEIC01");
     manager.listingStudentSchedule("202071557");
     manager.listingUcSchedule("L.EIC003");*/
-    manager.listingClasses("1");
+    /*
+    manager.listingClasses("1");*/
     /*
     endMenu();*/
 }
