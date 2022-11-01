@@ -25,7 +25,7 @@ public:
     void readStudents();
     void readClassesPerUC();
     //listing
-    void listingClassPerYear(char year);
+    void listingClassPerYear();
     void listingStudentSchedule(string studentCode);
     void listingClassSchedule(string cl);
     void listingUcSchedule(string uc);

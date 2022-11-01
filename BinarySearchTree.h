@@ -2,8 +2,7 @@
 // Created by Madalena Ye on 01/11/2022.
 //
 
-#ifndef SCHEDULE_BINARYSEARCHTREE_H
-#define SCHEDULE_BINARYSEARCHTREE_H
+
 #include "Student.h"
 #include <vector>
 struct TreeNode{
@@ -27,9 +26,9 @@ TreeNode* sortedVectorToBST(vector<Student> students){
     return buildTree(students,0,(int)students.size()-1);
 }
 
-TreeNode* findInBST(TreeNode* node,int val){
-    if(node== nullptr)return nullptr;
-    if(val==node->value.get_studentCode()){
+TreeNode* findInBST(TreeNode* node,long int val){
+    if(node == nullptr) return nullptr;
+    if(val == node->value.get_studentCode()){
         return node;
     }
     if(val>node->value.get_studentCode()) return findInBST(node->right,val);
@@ -44,4 +43,4 @@ TreeNode* binarySearchTreeStudents(set<Student> students){
     return studentBST;
 }
 
-#endif //SCHEDULE_BINARYSEARCHTREE_H
+

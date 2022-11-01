@@ -12,6 +12,7 @@
 #include <sstream>
 #include <algorithm>
 #include "Slot.cpp"
+#include "Menu.h"
 ScheduleManagement::ScheduleManagement() {
     students={};
     schedule={};
@@ -111,6 +112,7 @@ void ScheduleManagement::readStudents(){
         cout << student.get_studentCode() << endl;
     }*/
 }
+
 void ScheduleManagement::readClassesPerUC(){
     string line;
     string stCode, stName, ucCode, classCode;
@@ -130,8 +132,17 @@ void ScheduleManagement::readClassesPerUC(){
         classes.push_back(uc_class);
     }
 }
-void ScheduleManagement::listingClassPerYear(char year) {
 
+void ScheduleManagement::listingClassPerYear() {
+    cout << "\nPretende ver as turmas de que ano? (1/2/3): ";
+    string y; cin >> y;
+    // input error
+    while(!(y == "1" || y == "2" || y == "3")){
+
+        cout << "There is no such class, please try again: ";
+        cin >> y;
+    }
+    char year = y[0];
     set<string> classes;
     for(Lecture lecture: schedule){
         if(lecture.get_classCode()[0]==year){
@@ -141,8 +152,17 @@ void ScheduleManagement::listingClassPerYear(char year) {
     for(auto it:classes){
         cout<<it<<endl;
     }
-    cout<<"There are "<< classes.size()<<" classes in year "<<year;
+    cout<<"Há "<< classes.size()<<" turmas no "<<year <<"º ano";
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
+
 void ScheduleManagement::listingStudentSchedule(string studentCode) {
     Student student1;
     cout << "The student " << studentCode << " has the following schedule" << endl;
@@ -191,7 +211,7 @@ void ScheduleManagement::listingUcSchedule(string uc) {
 
 void ScheduleManagement::listingClasses(string order){
 
-    if (order == "0") {
+    if (order == "1") {
         set<string> classes;
         for (Lecture lecture: schedule) {
             classes.insert(lecture.get_classCode());
@@ -209,6 +229,14 @@ void ScheduleManagement::listingClasses(string order){
             cout << it << endl;
         }
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 
 }
 
