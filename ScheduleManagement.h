@@ -16,9 +16,11 @@ public:
     ScheduleManagement(set<Student> stu, vector<Lecture> sch);
     //getters
     set<Student> get_students();
+    vector<Student> get_auxStudents();
     vector<Lecture> get_schedule();
     //setters
     void set_students(set<Student> stu);
+    void set_auxStudents(vector<Student> stu);
     void set_schedule(vector<Lecture> sch);
     //readers
     void readClasses();
@@ -30,10 +32,14 @@ public:
     void listingClassSchedule(string cl);
     void listingUcSchedule(string uc);
     void listingClasses(string order);
+    //listing students
     void listingAllStudentsCode();
     void listingAllStudentsName();
+    void listingStudentsInYear(int year);
+
 private:
     set<Student> students;
+    vector<Student> auxStudents;
     vector<Lecture> schedule;
 };
 

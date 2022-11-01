@@ -23,18 +23,21 @@ ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
     schedule = sch;
 }
 //getter
-vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
 set<Student> ScheduleManagement::get_students() {return students;}
+vector<Student> ScheduleManagement::get_auxStudents() {return auxStudents;}
+vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
 //setter
-void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
+void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
+void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
+
 void ScheduleManagement::readClasses(){
 
     string line;
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
-    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     Lecture lecture;
@@ -76,8 +79,8 @@ void ScheduleManagement::readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/students_classes.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     //Reading the first line with actual data
@@ -108,18 +111,16 @@ void ScheduleManagement::readStudents(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    /*for (Student student: students){
-        cout << student.get_studentCode() << endl;
-    }*/
+    //for(auto it: students){auxStudents.push_back(it);}
 }
 
 void ScheduleManagement::readClassesPerUC(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
@@ -247,10 +248,12 @@ void ScheduleManagement::listingAllStudentsCode() {
 }
 
 void ScheduleManagement::listingAllStudentsName(){
-    vector<Student> v;
-    for(auto it: get_students()){v.push_back(it);}
-    std::sort(v.begin(), v.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
-    for(auto i:v){
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+    for(auto i:auxStudents){
         cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
     }
+}
+
+void ScheduleManagement::listingStudentsInYear(int year){
+    for(auto it:students){return;}
 }

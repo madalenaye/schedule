@@ -10,11 +10,11 @@ Student::Student() {
 Student::Student(long int stc, string stn, list<ClassPerUC> cpuc){
     studentCode = stc;
     studentName = stn;
-    cpu = cpuc;
+    this->cpu = cpu;
 }
 int Student::get_studentCode() const {return studentCode;}
 string Student::get_studentName() const {return studentName;}
 list<ClassPerUC> Student::get_classPerUC() {return cpu;}
 void Student::set_studentCode(long int stc){studentCode = stc;}
 void Student::set_studentName(string stn){studentName = stn;}
-void Student::set_ClassPerUC(list<ClassPerUC> cpu1) {cpu= cpu1;}
+void Student::set_ClassPerUC(list<ClassPerUC> cpu) {this->cpu= cpu;}

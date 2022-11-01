@@ -23,7 +23,7 @@ public:
     //setters
     void set_studentCode(long int stc);
     void set_studentName(string stn);
-    void set_ClassPerUC(list<ClassPerUC> cpu1);
+    void set_ClassPerUC(list<ClassPerUC> cpu);
     const bool operator<( Student P) const
     {
         return (studentCode < P.get_studentCode());

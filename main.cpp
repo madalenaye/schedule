@@ -1,10 +1,14 @@
 #include <iostream>
 #include <iomanip>
 #include <string>
+#include "ScheduleManagement.h"
 #include "Menu.h"
-int main(){
-    createMenu();
 
+int main(){
+    //createMenu();
+    ScheduleManagement manager;
+    manager.readStudents();
+    manager.listingAllStudentsName();
     //manager.listingAllStudentsName();
 
 
@@ -15,6 +19,5 @@ int main(){
     //manager.listingUcSchedule("L.EIC003");
     /*
     manager.listingClasses("1");*/
-
     endMenu();
 }
