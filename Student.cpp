@@ -12,8 +12,8 @@ Student::Student(long int stc, string stn, list<ClassPerUC> cpuc){
     studentName = stn;
     cpu = cpuc;
 }
-int Student::get_studentCode(){return studentCode;}
-string Student::get_studentName(){return studentName;}
+int Student::get_studentCode() const {return studentCode;}
+string Student::get_studentName() const {return studentName;}
 list<ClassPerUC> Student::get_classPerUC() {return cpu;}
 void Student::set_studentCode(long int stc){studentCode = stc;}
 void Student::set_studentName(string stn){studentName = stn;}

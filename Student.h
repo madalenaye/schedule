@@ -12,18 +12,19 @@
 
 
 using namespace std;
+
 class Student{
 public:
     Student();
     Student(long int stc , string stn, list<ClassPerUC> cpuc);
-    int get_studentCode();
-    string get_studentName();
+    int get_studentCode() const;
+    string get_studentName() const;
     list<ClassPerUC> get_classPerUC();
     //setters
     void set_studentCode(long int stc);
     void set_studentName(string stn);
     void set_ClassPerUC(list<ClassPerUC> cpu1);
-    bool operator<(Student P) const
+    const bool operator<( Student P) const
     {
         return (studentCode < P.get_studentCode());
     }

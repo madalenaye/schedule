@@ -1,23 +1,13 @@
-#include "Menu.h"
-#include "ScheduleManagement.h"
 #include <iostream>
 #include <iomanip>
 #include <string>
-#include "BinarySearchTree.h"
-
+#include "Menu.h"
 int main(){
-    /*
-    createMenu();*/
+    createMenu();
 
-    ScheduleManagement manager;
-    manager.readClasses();
-    manager.readStudents();
-    manager.readClassesPerUC();
-    manager.listingAllStudentsName();
-    vector<Student> v;
-    for(auto it: manager.get_students()){v.push_back(it);}
-    TreeNode* StudentBST= sortedVectorToBST(v);
-    cout<<findInBST(binarySearchTreeStudents(manager.get_students()),202054812)->value.get_studentName();
+    //manager.listingAllStudentsName();
+
+
     /*
     string year;
     cin >> year;
@@ -25,13 +15,15 @@ int main(){
 
         cout << "There is no such class, please try again: ";
         cin >> year;
-    }
-    manager.listingClassPerYear((char)year[0]);
-    manager.listingClassSchedule("1LEIC01");
-    manager.listingStudentSchedule("202071557");
-    manager.listingUcSchedule("L.EIC003");*/
+    }*/
+
+    //manager.listingClassPerYear((char)year[0]);
+
+    //manager.listingClassSchedule("1LEIC01");
+    //manager.listingStudentSchedule("202071557");
+    //manager.listingUcSchedule("L.EIC003");
     /*
     manager.listingClasses("1");*/
-    /*
-    endMenu();*/
+
+    endMenu();
 }
