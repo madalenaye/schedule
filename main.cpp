@@ -6,11 +6,11 @@
 int main(){
     createMenu();
     endMenu();
-
+    /*
     ScheduleManagement manager;
     manager.readClasses();
     manager.readStudents();
-    manager.readClassesPerUC();
+    manager.readClassesPerUC();*/
 
     /*
     string year;
@@ -26,4 +26,5 @@ int main(){
     manager.listingClassSchedule("1LEIC01");
     manager.listingStudentSchedule("202071557");
     manager.listingUcSchedule("L.EIC003");*/
+    return 0;
 }
