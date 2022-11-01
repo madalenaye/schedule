@@ -211,3 +211,18 @@ void ScheduleManagement::listingClasses(string order){
     }
 
 }
+
+void ScheduleManagement::listingAllStudentsCode() {
+    for(auto i:students){
+        cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+    }
+}
+
+void ScheduleManagement::listingAllStudentsName(){
+    vector<Student> v;
+    for(auto it: get_students()){v.push_back(it);}
+    std::sort(v.begin(), v.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+    for(auto i:v){
+        cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+    }
+}
