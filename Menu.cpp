@@ -6,12 +6,18 @@
 #include <iomanip>
 #include "Menu.h"
 using namespace std;
-void createMenu() {
-    printf("\033[44m==================================================== IɴғᴏPᴏᴄᴋᴇᴛ ================================================================\033[0m\t\t");
+
+void createMenu(){
+    printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
     printf("\n");
     printf("\n");
-    cout << setw(79) << "Welcome to the best schedule manager! \n" << setw(74) << "What would you like to do today?"
+    cout << setw(52) << "Welcome to the best schedule manager! \n" << setw(54) << "What operation would you like to perform today?"
          << endl;
     printf("\n");
-    printf("\033[45m================================================================================================================================\033[0m\t\t");
+    cout << setw(36) << "1. Listings\n" << setw(38) <<"2. Modifications\n" << setw(33) << "3. Exit\n";
+}
+
+void endMenu(){
+    printf("\n");
+    printf("\033[46m=============================================================\033[0m\t\t");
 }
