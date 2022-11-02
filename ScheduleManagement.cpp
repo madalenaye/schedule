@@ -111,7 +111,8 @@ void ScheduleManagement::readStudents(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    //for(auto it: students){auxStudents.push_back(it);}
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
 
 void ScheduleManagement::readClassesPerUC(){
@@ -248,12 +249,41 @@ void ScheduleManagement::listingAllStudentsCode() {
 }
 
 void ScheduleManagement::listingAllStudentsName(){
-    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
     for(auto i:auxStudents){
         cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
     }
 }
 
-void ScheduleManagement::listingStudentsInYear(int year){
-    for(auto it:students){return;}
+void ScheduleManagement::listingStudentsInYear(char year){
+    for(auto i:auxStudents){
+        for(auto j:i.get_classPerUC()) {
+            if ((int)j.get_classCode()[0] == year) {
+                cout << i.get_studentCode() << "-" << i.get_studentName()<<endl;
+                break;
+            }
+        }
+    }
+}
+void ScheduleManagement::listingStudentsByYearOfEntry(int year){
+    int count=0;
+    for(auto i:students){
+        if((int)(i.get_studentCode()/100000)==year){
+            cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+            count++;
+        }
+    }
+    if(count==0) cout<<"There are no students who entered this year";
+}
+
+void ScheduleManagement::listingStudentsInClass(std::string _uc, std::string _class) {
+    int count=0;
+    for(auto i:auxStudents){
+        for(auto j: i.get_classPerUC()){
+            if(j.get_classCode()==_class && j.get_ucCode()==_uc){
+                cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+                count++;
+            }
+        }
+    }
+    if(count==0){cout<<"There are no students who attend this class";}
 }

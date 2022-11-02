@@ -35,7 +35,10 @@ public:
     //listing students
     void listingAllStudentsCode();
     void listingAllStudentsName();
-    void listingStudentsInYear(int year);
+    void listingStudentsInYear(char year);
+    void listingStudentsByYearOfEntry(int year);
+    void listingStudentsInClass(string _uc,string _class);
+
 
 private:
     set<Student> students;

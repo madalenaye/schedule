@@ -2,12 +2,13 @@
 // Created by Madalena Ye on 29/10/2022.
 //
 
+#include <algorithm>
 #include "Student.h"
 Student::Student() {
     studentCode = 0;
     studentName = "";
 }
-Student::Student(long int stc, string stn, list<ClassPerUC> cpuc){
+Student::Student(long int stc, string stn, list<ClassPerUC> cpu){
     studentCode = stc;
     studentName = stn;
     this->cpu = cpu;
