@@ -7,7 +7,6 @@
 #include <string>
 #include "ClassPerUC.h"
 #include <list>
-#include "ClassPerUC.h"
 #include <set>
 
 
@@ -17,15 +16,15 @@ class Student{
 public:
     //constructors
     Student();
-    Student(long int stc , string stn, list<ClassPerUC> cpuc);
+    Student(long int stc , string stn, list<ClassPerUC> cpu);
     //getters
     int get_studentCode() const;
     string get_studentName() const;
-    list<ClassPerUC> get_classPerUC();
+    list<ClassPerUC> get_classPerUC() const;
     //setters
     void set_studentCode(long int stc);
     void set_studentName(string stn);
-    void set_ClassPerUC(list<ClassPerUC> cpu1);
+    void set_ClassPerUC(list<ClassPerUC> cpu);
     //operator overloading
     const bool operator<( Student P) const
     {

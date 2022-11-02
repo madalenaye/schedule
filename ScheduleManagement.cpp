@@ -11,8 +11,9 @@
 #include <iostream>
 #include <sstream>
 #include <algorithm>
-#include "Slot.cpp"
+#include "Slot.h"
 #include "Menu.h"
+
 //constructors
 ScheduleManagement::ScheduleManagement() {
     students={};
@@ -22,22 +23,25 @@ ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
     students = stu;
     schedule = sch;
 }
-
 //getters
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
-set<Student> ScheduleManagement::get_students() {return students;}
+set<Student> ScheduleManagement::get_students() const {return students;}
 //setters
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
+void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
 //read files
+
 void ScheduleManagement::readClasses(){
 
     string line;
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
-    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
+
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+
     getline(inFile,line);
     Lecture lecture;
     list<Slot> slots;
@@ -77,9 +81,11 @@ void ScheduleManagement::readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/students_classes.csv");
+
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
+
     getline(inFile,line);
     //Reading the first line with actual data
     getline(inFile,line);
@@ -109,17 +115,18 @@ void ScheduleManagement::readStudents(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
-    /*for (Student student: students){
-        cout << student.get_studentCode() << endl;
-    }*/
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
 vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string line;
     string ucCode, classCode;
     ifstream inFile;
+    
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
@@ -214,6 +221,7 @@ void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
     }*/
 }
 //listing of schedule
+/*
 void ScheduleManagement::listingStudentSchedule(string studentCode) {
     Student student1;
     cout << "The student " << studentCode << " has the following schedule" << endl;
@@ -221,9 +229,20 @@ void ScheduleManagement::listingStudentSchedule(string studentCode) {
         if (stoul(studentCode) == student.get_studentCode()) {
             student1 = student;
             break;
+ */
+void ScheduleManagement::listingStudentSchedule(string studentCode) const{
+    struct find_by_studentCode{
+        find_by_studentCode(long int code) : code(code) {}
+
+        bool operator()(Student student) const{
+            return student.get_studentCode() == code;
         }
-    }
-    for (ClassPerUC cpu: student1.get_classPerUC()) {
+
+    private:
+        long int code;
+    };
+    auto student1 = std::find_if(students.begin(),students.end(),find_by_studentCode(stoul(studentCode)));
+    for (ClassPerUC cpu: (*student1).get_classPerUC()) {
         for (Lecture lecture: schedule) {
             if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
                 for (Slot slot: lecture.get_Slot()) {
@@ -266,10 +285,41 @@ void ScheduleManagement::listingAllStudentsCode() {
     }
 }
 void ScheduleManagement::listingAllStudentsName(){
-    vector<Student> v;
-    for(auto it: get_students()){v.push_back(it);}
-    std::sort(v.begin(), v.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
-    for(auto i:v){
+    for(auto i:auxStudents){
         cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
     }
+}
+
+void ScheduleManagement::listingStudentsInYear(char year){
+    for(auto i:auxStudents){
+        for(auto j:i.get_classPerUC()) {
+            if ((int)j.get_classCode()[0] == year) {
+                cout << i.get_studentCode() << "-" << i.get_studentName()<<endl;
+                break;
+            }
+        }
+    }
+}
+void ScheduleManagement::listingStudentsByYearOfEntry(int year){
+    int count=0;
+    for(auto i:students){
+        if((int)(i.get_studentCode()/100000)==year){
+            cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+            count++;
+        }
+    }
+    if(count==0) cout << "Não há estudantes que entraram neste ano.";
+}
+
+void ScheduleManagement::listingStudentsInClass(std::string _uc, std::string _class) {
+    int count=0;
+    for(auto i:auxStudents){
+        for(auto j: i.get_classPerUC()){
+            if(j.get_classCode()==_class && j.get_ucCode()==_uc){
+                cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+                count++;
+            }
+        }
+    }
+    if(count==0){cout<<"Não há estudantes que estão nesta turma";}
 }

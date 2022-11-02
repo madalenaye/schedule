@@ -11,16 +11,7 @@ using namespace std;
 
 
 // functors
-struct find_by_studentCode{
-    find_by_studentCode(long int code) : code(code) {}
 
-    bool operator()(Student student) const{
-        return student.get_studentCode() == code;
-    }
-
-private:
-    long int code;
-};
 struct find_by_studentName{
     find_by_studentName(string n) : name(n) {}
 
@@ -94,6 +85,7 @@ void listClasses(){
     cout << "\nOpção: ";
     string mode;
     cin >> mode;
+
     // input error
     while (!(mode == "1" || mode == "2" || mode == "3" || mode == "4" || mode == "5")){
         cout << "Input inválido, tente novamente: ";
@@ -123,4 +115,10 @@ manager.readClasses();
 manager.readStudents();
 manager.readClassesPerUC();
 set<Student> students = manager.get_students();
-*/
+
+
+auto it = find_if(students.begin(), students.end(), find_by_studentName("Ludovico"));
+cout << (*it).get_studentCode();
+printf("\n");
+/*
+
