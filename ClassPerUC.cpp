@@ -13,3 +13,4 @@ string ClassPerUC::get_classCode(){return classCode;}
 //setters
 void ClassPerUC::set_ucCode(string uc){ucCode=uc;}
 void ClassPerUC::set_classCode(string cc){classCode=cc;}
+
