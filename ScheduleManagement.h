@@ -1,11 +1,11 @@
 //
 // Created by Madalena Ye on 30/10/2022.
 //
-
 #ifndef SCHEDULE_SCHEDULEMANAGEMENT_H
 #define SCHEDULE_SCHEDULEMANAGEMENT_H
 
 #include "Student.h"
+#include "ClassPerUC.h"
 #include "Lecture.h"
 #include <set>
 #include <vector>
@@ -20,16 +20,21 @@ public:
     //setters
     void set_students(set<Student> stu);
     void set_schedule(vector<Lecture> sch);
+
     //readers
     void readClasses();
     void readStudents();
-    void readClassesPerUC();
-    //listing
+    vector<ClassPerUC> readClassesPerUC();
+
+    //listing classes
     void listingClassPerYear();
+    void listingClasses(string order);
+    void listingClassesPerUC(vector<ClassPerUC> v);
+    //listing schedule
     void listingStudentSchedule(string studentCode);
     void listingClassSchedule(string cl);
     void listingUcSchedule(string uc);
-    void listingClasses(string order);
+    //listing students
     void listingAllStudentsCode();
     void listingAllStudentsName();
 private:

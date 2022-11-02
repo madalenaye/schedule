@@ -13,21 +13,23 @@
 #include <algorithm>
 #include "Slot.cpp"
 #include "Menu.h"
+//constructors
 ScheduleManagement::ScheduleManagement() {
     students={};
     schedule={};
 }
-
 ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
     students = stu;
     schedule = sch;
 }
-//getter
+
+//getters
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
 set<Student> ScheduleManagement::get_students() {return students;}
-//setter
+//setters
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
+//read files
 void ScheduleManagement::readClasses(){
 
     string line;
@@ -71,7 +73,6 @@ void ScheduleManagement::readClasses(){
         slots.clear();
     }
 }
-
 void ScheduleManagement::readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
@@ -112,10 +113,9 @@ void ScheduleManagement::readStudents(){
         cout << student.get_studentCode() << endl;
     }*/
 }
-
-void ScheduleManagement::readClassesPerUC(){
+vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string line;
-    string stCode, stName, ucCode, classCode;
+    string ucCode, classCode;
     ifstream inFile;
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
@@ -126,20 +126,22 @@ void ScheduleManagement::readClassesPerUC(){
     while(getline(inFile,line)){
         stringstream is(line);
         getline(is,ucCode,',');
-        getline(is,classCode,',');
+        getline(is,classCode,'\r');
         uc_class.set_ucCode(ucCode);
         uc_class.set_classCode(classCode);
         classes.push_back(uc_class);
     }
+    return classes;
 }
 
+//listings of classes
 void ScheduleManagement::listingClassPerYear() {
-    cout << "\nPretende ver as turmas de que ano? (1/2/3): ";
+    cout << "Pretende ver as turmas de que ano? (1/2/3): ";
     string y; cin >> y;
     // input error
     while(!(y == "1" || y == "2" || y == "3")){
 
-        cout << "There is no such class, please try again: ";
+        cout << "Não há nenhuma turma desse ano, tente novamente: ";
         cin >> y;
     }
     char year = y[0];
@@ -162,7 +164,56 @@ void ScheduleManagement::listingClassPerYear() {
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
+void ScheduleManagement::listingClasses(string order){
 
+    if (order == "1") {
+        set<string> classes;
+        for (Lecture lecture: schedule) {
+            classes.insert(lecture.get_classCode());
+        }
+        for (auto it: classes) {
+            cout << it << endl;
+        }
+    }
+    else{
+        std::set<string, std::greater<string>> classes;
+        for (Lecture lecture: schedule) {
+            classes.insert(lecture.get_classCode());
+        }
+        for (auto it: classes) {
+            cout << it << endl;
+        }
+    }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
+
+}
+void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
+    cout << "Introduza o código da cadeira (L.EIC0XX - 2 dígitos / UPXXX - 3 dígitos): ";
+    string uc; cin >> uc;
+    // input error
+    while(uc.length() < 2 || uc > "25"){
+
+        cout << "Não há nenhuma UC com este código, tente novamente: ";
+        cin >> uc;
+    }
+    string uni;
+    if (uc == "001") uni = "UP" + uc;
+    else uni = "E.LEIC0" + uc;
+
+    /*
+    if
+    for (auto it : v){
+        f
+    }*/
+}
+//listing of schedule
 void ScheduleManagement::listingStudentSchedule(string studentCode) {
     Student student1;
     cout << "The student " << studentCode << " has the following schedule" << endl;
@@ -208,44 +259,12 @@ void ScheduleManagement::listingUcSchedule(string uc) {
         }
     }
 }
-
-void ScheduleManagement::listingClasses(string order){
-
-    if (order == "1") {
-        set<string> classes;
-        for (Lecture lecture: schedule) {
-            classes.insert(lecture.get_classCode());
-        }
-        for (auto it: classes) {
-            cout << it << endl;
-        }
-    }
-    else{
-        std::set<string, std::greater<string>> classes;
-        for (Lecture lecture: schedule) {
-            classes.insert(lecture.get_classCode());
-        }
-        for (auto it: classes) {
-            cout << it << endl;
-        }
-    }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
-    string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
-        cout << "Input inválido, tente novamente: ";
-        cin >> answer;
-    }
-    if (answer == "Y" || answer == "y") createMenu();
-    else return;
-
-}
-
+//listing of students
 void ScheduleManagement::listingAllStudentsCode() {
     for(auto i:students){
         cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
     }
 }
-
 void ScheduleManagement::listingAllStudentsName(){
     vector<Student> v;
     for(auto it: get_students()){v.push_back(it);}

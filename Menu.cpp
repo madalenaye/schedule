@@ -102,12 +102,12 @@ void listClasses(){
     ScheduleManagement manager;
     manager.readClasses();
     manager.readStudents();
-    manager.readClassesPerUC();
+    vector<ClassPerUC> v = manager.readClassesPerUC();
     switch (stoi(mode)){
         case 1: manager.listingClasses(mode); break;
         case 2: manager.listingClasses(mode); break;
         case 3: manager.listingClassPerYear(); break;
-        case 4: endMenu(); break; // EM STANDBY
+        case 4: manager.listingClassesPerUC(v); break;
         case 5: listingOptions(); break;
     }
 }
@@ -116,15 +116,11 @@ void endMenu(){
     printf("\n");
     printf("\033[46m=============================================================\033[0m\t\t");
 }
+
 /*
 ScheduleManagement manager;
 manager.readClasses();
 manager.readStudents();
 manager.readClassesPerUC();
 set<Student> students = manager.get_students();
-auto it = find_if(students.begin(), students.end(), find_by_studentName("Ludovico"));
-cout << (*it).get_studentCode();
-printf("\n");
-/*
-TreeNode* BST = sortedVectorToBST(v);
-cout<<findInBST(binarySearchTreeStudents(manager.get_students()),202071557)->value.get_studentName();*/
+*/

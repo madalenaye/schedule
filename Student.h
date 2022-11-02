@@ -15,8 +15,10 @@ using namespace std;
 
 class Student{
 public:
+    //constructors
     Student();
     Student(long int stc , string stn, list<ClassPerUC> cpuc);
+    //getters
     int get_studentCode() const;
     string get_studentName() const;
     list<ClassPerUC> get_classPerUC();
@@ -24,6 +26,7 @@ public:
     void set_studentCode(long int stc);
     void set_studentName(string stn);
     void set_ClassPerUC(list<ClassPerUC> cpu1);
+    //operator overloading
     const bool operator<( Student P) const
     {
         return (studentCode < P.get_studentCode());
