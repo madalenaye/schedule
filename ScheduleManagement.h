@@ -15,7 +15,7 @@ public:
     ScheduleManagement();
     ScheduleManagement(set<Student> stu, vector<Lecture> sch);
     //getters
-    set<Student> get_students();
+    set<Student> get_students() const;
     vector<Lecture> get_schedule();
     //setters
     void set_students(set<Student> stu);
@@ -26,8 +26,8 @@ public:
     void readClassesPerUC();
     //listing
     void listingClassPerYear();
-    void listingStudentSchedule(string studentCode);
-    void listingClassSchedule(string cl);
+    void listingStudentSchedule(string studentCode) const;
+    void listingClassSchedule(string cl) ;
     void listingUcSchedule(string uc);
     void listingClasses(string order);
     void listingAllStudentsCode();
