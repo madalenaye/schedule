@@ -18,7 +18,7 @@ public:
     Student(long int stc , string stn, list<ClassPerUC> cpu);
     int get_studentCode() const;
     string get_studentName() const;
-    list<ClassPerUC> get_classPerUC();
+    list<ClassPerUC> get_classPerUC() const;
     //setters
     void set_studentCode(long int stc);
     void set_studentName(string stn);
