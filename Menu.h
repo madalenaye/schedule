@@ -13,3 +13,4 @@ void listClasses(ScheduleManagement manager);
 void listStudents(ScheduleManagement manager);
 void listUCs(ScheduleManagement manager);
 void listSchedule(ScheduleManagement manager);
+void terminate(ScheduleManagement manager);
