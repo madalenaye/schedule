@@ -37,9 +37,15 @@ public:
     //listing students
     void listingAllStudentsCode();
     void listingAllStudentsName();
-    void listingStudentsInYear(char year);
-    void listingStudentsByYearOfEntry(int year);
-    void listingStudentsInClass(string _uc,string _class);
+    void listingStudentsInYear();
+    void listingStudentsByYearOfEntry();
+    void listingStudentsInClass();
+    void listingStudentsWithNUCs();
+    //listing ucs
+    void listingAllUCs(string order, vector<ClassPerUC> v);
+    void listingUCsByYear();
+    void listingUcsPerStudent();
+    void listingUcsByClass();
 
 
 private:

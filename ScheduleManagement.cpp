@@ -148,7 +148,7 @@ void ScheduleManagement::listingClassPerYear() {
     // input error
     while(!(y == "1" || y == "2" || y == "3")){
 
-        cout << "Não há nenhuma turma desse ano, tente novamente: ";
+        cout << "Não há nenhuma turma nesse ano, tente novamente: ";
         cin >> y;
     }
     char year = y[0];
@@ -212,13 +212,19 @@ void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
     }
     string uni;
     if (uc == "001") uni = "UP" + uc;
-    else uni = "E.LEIC0" + uc;
+    else uni = "L.EIC0" + uc;
+    for (auto it: v){
+        if (it.get_ucCode() == uni){ cout << it.get_classCode() << "\n";}
+    }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 
-    /*
-    if
-    for (auto it : v){
-        f
-    }*/
 }
 //listing of schedule
 /*
@@ -281,16 +287,41 @@ void ScheduleManagement::listingUcSchedule(string uc) {
 //listing of students
 void ScheduleManagement::listingAllStudentsCode() {
     for(auto i:students){
-        cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+        cout<<i.get_studentCode()<<" - "<<i.get_studentName()<<endl;
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
 void ScheduleManagement::listingAllStudentsName(){
     for(auto i:auxStudents){
-        cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+        cout<<i.get_studentName()<<"-"<<i.get_studentCode()<<endl;
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
 
-void ScheduleManagement::listingStudentsInYear(char year){
+void ScheduleManagement::listingStudentsInYear(){
+    cout << "Pretende ver os alunos de que ano curricular? (1/2/3): ";
+    string y; cin >> y;
+    // input error
+    while(!(y == "1" || y == "2" || y == "3")){
+
+        cout << "Não há nenhum aluno nesse ano, tente novamente: ";
+        cin >> y;
+    }
+    char year = y[0];
     for(auto i:auxStudents){
         for(auto j:i.get_classPerUC()) {
             if ((int)j.get_classCode()[0] == year) {
@@ -299,8 +330,25 @@ void ScheduleManagement::listingStudentsInYear(char year){
             }
         }
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
-void ScheduleManagement::listingStudentsByYearOfEntry(int year){
+void ScheduleManagement::listingStudentsByYearOfEntry(){
+    cout << "Pretende ver os alunos de que ano de entrada? (2019/2020): ";
+    string y; cin >> y;
+    // input error
+    while(!(y == "2019" || y == "2020")){
+
+        cout << "Não há nenhum aluno que entrou nesse ano, tente novamente: ";
+        cin >> y;
+    }
+    int year = stoi(y);
     int count=0;
     for(auto i:students){
         if((int)(i.get_studentCode()/100000)==year){
@@ -309,9 +357,21 @@ void ScheduleManagement::listingStudentsByYearOfEntry(int year){
         }
     }
     if(count==0) cout << "Não há estudantes que entraram neste ano.";
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
 
-void ScheduleManagement::listingStudentsInClass(std::string _uc, std::string _class) {
+void ScheduleManagement::listingStudentsInClass() {
+    cout << "Pretende ver os alunos de que turma? (Ex: 1LEIC13/2LEIC01/3LEIC06): ";
+    string _class; cin >> _class;
+    cout << "De que unidade curricular? (Ex: L.EIC003): ";
+    string _uc; cin >> _uc;
     int count=0;
     for(auto i:auxStudents){
         for(auto j: i.get_classPerUC()){
@@ -321,5 +381,159 @@ void ScheduleManagement::listingStudentsInClass(std::string _uc, std::string _cl
             }
         }
     }
-    if(count==0){cout<<"Não há estudantes que estão nesta turma";}
+    if(count==0){cout<<"Não há estudantes que estão nesta turma e nesta unidade curricular";}
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
+}
+void ScheduleManagement::listingStudentsWithNUCs(){
+    cout << "Estudantes com mais de quantas UCs? ";
+    int n; cin >> n;
+    int count = 0;
+
+    for (Student student : auxStudents){
+        count = student.get_classPerUC().size();
+        if (count >= n){
+            cout << student.get_studentName() << "\n";
+        }
+    }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
+}
+void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
+    if (order == "1") {
+        set<string> ucs;
+        for (auto it: v) {
+            ucs.insert(it.get_ucCode());
+        }
+        for (auto it: ucs) {
+            cout << it << endl;
+        }
+    }
+    else{
+        std::set<string, std::greater<string>> ucs;
+        for (auto it: v) {
+            ucs.insert(it.get_ucCode());
+        }
+        for (auto it: ucs) {
+            cout << it << endl;
+        }
+    }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
+
+}
+void ScheduleManagement::listingUCsByYear(){
+    cout << "Pretende ver as UCs de que ano? (1/2/3): ";
+    string y; cin >> y;
+    // input error
+    while(!(y == "1" || y == "2" || y == "3")){
+
+        cout << "Não há nenhuma UC nesse ano, tente novamente: ";
+        cin >> y;
+    }
+    char year = y[0];
+    set<string> UCs;
+    for(Lecture lecture: schedule){
+        if(lecture.get_classCode()[0]==year){
+            UCs.insert(lecture.get_ucCode());
+        }
+    }
+    for(auto it:UCs){
+        cout<<it<<endl;
+    }
+    cout<<"Há "<< UCs.size()<<" UCs no "<<year <<"º ano";
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
+
+}
+void ScheduleManagement::listingUcsPerStudent() {
+    cout << "Escolha o modo de pesquisa de UCs por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
+    cout << "Opção: ";
+    string mode; cin >> mode;
+    while (!(mode == "1" || mode == "2")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> mode;
+    }
+    if (mode == "1"){
+        cout << "Introduza o número UP (Ex: 202041977): ";
+        long int up; cin >> up;
+        for (Student it: students){
+            if (it.get_studentCode() == up){
+                cout << up << ": ";
+                for (auto i: it.get_classPerUC()){
+                    cout << i.get_ucCode() << ",";
+                }
+                cout<<'\b';  //Cursor moves 1 position backwards
+                cout<<" ";
+            }
+
+        }
+    }
+    else{
+        cout << "Introduza o nome do aluno: ";
+        string name; cin >> name;
+        for (Student student : students){
+            if (student.get_studentName() == name){
+                cout << name << ": ";
+                for (auto it: student.get_classPerUC()){
+                    cout << it.get_ucCode() << ",";
+                }
+                cout<<'\b';  //Cursor moves 1 position backwards
+                cout<<" ";
+            }
+        }
+    }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
+}
+void ScheduleManagement::listingUcsByClass() {
+    cout << "Introduza a turma (Ex: 1LEIC01): ";
+    string _class; cin >> _class;
+    vector<ClassPerUC> v = readClassesPerUC();
+    cout << _class << ": ";
+    for (auto it : v){
+        if (it.get_classCode() == _class){
+            cout << it.get_ucCode() << ",";
+        }
+    }
+    cout<<'\b';  //Cursor moves 1 position backwards
+    cout<<" ";
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
