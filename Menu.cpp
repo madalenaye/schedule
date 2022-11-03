@@ -24,6 +24,7 @@ private:
 
 // for later implementation
 void listingOptions();
+void modifyOptions();
 void menuOperations();
 void listClasses();
 void listStudents();
@@ -54,7 +55,7 @@ void menuOperations(){
     }
     if (option == "1") listingOptions();
     else if (option == "2"){
-
+    modifyOptions();
     }
         // end program
     else return;
@@ -150,6 +151,19 @@ void listUCs(){
         case 5: manager.listingUcsByClass(); break;
         case 6: listingOptions(); break;
     }
+}
+void modifyOptions(){
+    cout << "\nSelecione a alteração que pretende fazer:\n";
+    cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";
+    cout << "\nOpção: ";
+    string type;
+    cin >> type;
+    // input error
+    while (!(type == "1" || type == "2" || type == "3" || type == "4" || type == "5")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> type;
+    }
+
 }
 // end menu
 void endMenu(){

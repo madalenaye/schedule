@@ -95,7 +95,6 @@ void ScheduleManagement::readStudents(){
     getline(is,ucCode,',');
     getline(is,classCode,',');
     string prevStCode=stCode;
-    //set<Student> st_classes;
     list<ClassPerUC> cpu;
     Student st_class;
     while(getline(inFile,line)){
@@ -315,6 +314,7 @@ void ScheduleManagement::listingAllStudentsName(){
 void ScheduleManagement::listingStudentsInYear(){
     cout << "Pretende ver os alunos de que ano curricular? (1/2/3): ";
     string y; cin >> y;
+    int count = 0;
     // input error
     while(!(y == "1" || y == "2" || y == "3")){
 
@@ -326,10 +326,12 @@ void ScheduleManagement::listingStudentsInYear(){
         for(auto j:i.get_classPerUC()) {
             if ((int)j.get_classCode()[0] == year) {
                 cout << i.get_studentCode() << "-" << i.get_studentName()<<endl;
+                count++;
                 break;
             }
         }
     }
+    cout << "Há " << count << " alunos neste ano.\n";
     cout << "\nDeseja realizar outra operação? (Y/N)? ";
     string answer; cin >> answer;
     while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
