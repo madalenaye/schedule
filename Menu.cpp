@@ -24,13 +24,14 @@ void createMenu(){
     printf("\n");
     printf("\n");
     cout << setw(53) << "Bem-vind@ ao melhor gestor de horários! \n";
-    cout<<"Que ficheiro deseja ler?"<<endl;
-    cout<<"1. Ficheiro inicial"<<endl;
-    cout<<"2. Ficheiro atualizado"<<endl;
+    cout<< setw(43) << "Que ficheiro deseja1 ler?\n";
+    cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(32) << "2. Ficheiro atualizado\n";
+    printf("\n  Opção: ");
     char c; cin >> c;
+    // file versions
     string filename;
-    if(c=='1') filename="/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv";
-    else filename="/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
+    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -298,7 +299,7 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file;
-    file.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
