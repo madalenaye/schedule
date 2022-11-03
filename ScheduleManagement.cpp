@@ -179,7 +179,10 @@ void ScheduleManagement::listingClassPerYear() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingClasses(string order){
@@ -208,7 +211,10 @@ void ScheduleManagement::listingClasses(string order){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 
 }
@@ -233,7 +239,10 @@ void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 
 }
@@ -339,7 +348,10 @@ void ScheduleManagement::listingStudentSchedule() const{
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingClassSchedule() {
@@ -367,7 +379,10 @@ void ScheduleManagement::listingClassSchedule() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingUcSchedule() {
@@ -395,7 +410,10 @@ void ScheduleManagement::listingUcSchedule() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 //listing of students
@@ -409,7 +427,10 @@ void ScheduleManagement::listingAllStudentsCode() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 
 }
@@ -423,7 +444,10 @@ void ScheduleManagement::listingAllStudentsName(){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingStudentsInYear(){
@@ -453,7 +477,10 @@ void ScheduleManagement::listingStudentsInYear(){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingStudentsByYearOfEntry(){
@@ -480,7 +507,10 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingStudentsInClass() {
@@ -505,7 +535,10 @@ void ScheduleManagement::listingStudentsInClass() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::push_request(Request r) {
@@ -609,7 +642,10 @@ void ScheduleManagement::listingStudentsWithNUCs(){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y"){
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
@@ -637,7 +673,10 @@ void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 
 }
@@ -667,7 +706,10 @@ void ScheduleManagement::listingUCsByYear(){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 
 }
@@ -710,7 +752,10 @@ void ScheduleManagement::listingUcsPerStudent() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 void ScheduleManagement::listingUcsByClass() {
@@ -731,7 +776,10 @@ void ScheduleManagement::listingUcsByClass() {
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") menuOperations(*this);
+    if (answer == "Y" || answer == "y") {
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
     else terminate(*this);
 }
 
