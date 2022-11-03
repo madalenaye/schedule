@@ -25,7 +25,7 @@ public:
     void set_schedule(vector<Lecture> sch);
     //readers
     void readClasses();
-    void readStudents();
+    void readStudents(string filename);
     vector<ClassPerUC> readClassesPerUC();
     //listing classes
     void listingClassPerYear();

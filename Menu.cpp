@@ -27,10 +27,14 @@ void createMenu(){
     cout<<"Que ficheiro deseja ler?"<<endl;
     cout<<"1. Ficheiro inicial"<<endl;
     cout<<"2. Ficheiro atualizado"<<endl;
+    char c; cin >> c;
+    string filename;
+    if(c=='1') filename="/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv";
+    else filename="/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
-    manager.readStudents();
+    manager.readStudents(filename);
     vector<ClassPerUC> v = manager.readClassesPerUC();
     menuOperations(manager);
 }

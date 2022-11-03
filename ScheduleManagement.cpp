@@ -80,14 +80,14 @@ void ScheduleManagement::readClasses(){
         slots.clear();
     }
 }
-void ScheduleManagement::readStudents(){
+void ScheduleManagement::readStudents(string filename){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
 
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/new_students_classes.csv");
+    inFile.open(filename);
     getline(inFile,line);
     //Reading the first line with actual data
     getline(inFile,line);
