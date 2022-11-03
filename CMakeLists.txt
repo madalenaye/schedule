@@ -3,4 +3,6 @@ project(schedule)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(ProjetoAED main.cpp ClassPerUC.cpp Lecture.cpp Student.cpp Menu.cpp Menu.h ScheduleManagement.cpp ScheduleManagement.h Slot.h Slot.cpp)
+
+add_executable(ProjetoAED main.cpp ClassPerUC.cpp Lecture.cpp Student.cpp Menu.cpp Menu.h ScheduleManagement.cpp ScheduleManagement.h Request.cpp Slot.cpp)
+

@@ -7,6 +7,7 @@
 #include "Student.h"
 #include "ClassPerUC.h"
 #include "Lecture.h"
+#include "Request.h"
 #include <set>
 #include <vector>
 class ScheduleManagement{
@@ -17,6 +18,7 @@ public:
     //getters
     set<Student> get_students() const;
     vector<Lecture> get_schedule();
+    queue<Request> get_requests();
     //setters
     void set_students(set<Student> stu);
     void set_auxStudents(vector<Student> stu);
@@ -46,14 +48,20 @@ public:
     void listingUCsByYear();
     void listingUcsPerStudent();
     void listingUcsByClass();
-    // number of students per class
-    int studentsPerClass(string u, string c);
-
+    //requests
+    void removeStudent(long code, string _uc, string _cc);
+    void addStudent(long code, string _uc, string _cc);
+    void changeStudentclass(long code, string _uc, string _class,string new_class);
+    void push_request(Request r);
+    void doRequest();
+    //counters
+    int studentsPerClass(string _uc,string _class);
 
 private:
     set<Student> students;
     vector<Student> auxStudents;
     vector<Lecture> schedule;
+    queue<Request> requests;
 };
 
 #endif //SCHEDULE_SCHEDULEMANAGEMENT_H
