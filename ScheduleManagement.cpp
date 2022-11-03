@@ -41,8 +41,8 @@ void ScheduleManagement::readClasses(){
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
 
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -55,8 +55,8 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
-        inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
@@ -85,8 +85,8 @@ void ScheduleManagement::readStudents(){
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
 
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     //Reading the first line with actual data
@@ -134,9 +134,9 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string ucCode, classCode;
     ifstream inFile;
     
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     vector<ClassPerUC> classes;
@@ -180,7 +180,7 @@ void ScheduleManagement::listingClassPerYear() {
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingClasses(string order){
 
@@ -209,7 +209,7 @@ void ScheduleManagement::listingClasses(string order){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 
 }
 void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
@@ -234,7 +234,7 @@ void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 
 }
 //listing of schedule
@@ -340,7 +340,7 @@ void ScheduleManagement::listingStudentSchedule() const{
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingClassSchedule() {
     cout << "Deseja ver o horário de que turma? (Ex: 1LEIC07): ";
@@ -368,7 +368,7 @@ void ScheduleManagement::listingClassSchedule() {
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingUcSchedule() {
     cout << "Deseja ver o horário de que unidade curricular? (Ex: L.EIC003): ";
@@ -396,7 +396,7 @@ void ScheduleManagement::listingUcSchedule() {
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 //listing of students
 void ScheduleManagement::listingAllStudentsCode() {
@@ -410,7 +410,7 @@ void ScheduleManagement::listingAllStudentsCode() {
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 
 }
 void ScheduleManagement::listingAllStudentsName(){
@@ -424,7 +424,7 @@ void ScheduleManagement::listingAllStudentsName(){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingStudentsInYear(){
     cout << "Pretende ver os alunos de que ano curricular? (1/2/3): ";
@@ -454,7 +454,7 @@ void ScheduleManagement::listingStudentsInYear(){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingStudentsByYearOfEntry(){
     cout << "Pretende ver os alunos de que ano de entrada? (2019/2020): ";
@@ -481,7 +481,7 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingStudentsInClass() {
     cout << "Pretende ver os alunos de que turma? (Ex: 1LEIC13/2LEIC01/3LEIC06): ";
@@ -494,10 +494,19 @@ void ScheduleManagement::listingStudentsInClass() {
             if(j.get_classCode()==_class && j.get_ucCode()==_uc){
                 cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
                 count++;
+                break;
             }
         }
     }
     if(count==0){cout<<"There are no students who attend this class";}
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") menuOperations(*this);
+    else terminate(*this);
 }
 void ScheduleManagement::push_request(Request r) {
     requests.push(r);
@@ -591,7 +600,7 @@ void ScheduleManagement::listingStudentsWithNUCs(){
     for (Student student : auxStudents){
         count = student.get_classPerUC().size();
         if (count >= n){
-            cout << student.get_studentName() << "\n";
+            cout << student.get_studentName() << "-" << student.get_studentCode() << "\n";
         }
     }
     cout << "\nDeseja realizar outra operação? (Y/N)? ";
@@ -601,7 +610,7 @@ void ScheduleManagement::listingStudentsWithNUCs(){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
     if (order == "1") {
@@ -629,7 +638,7 @@ void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 
 }
 void ScheduleManagement::listingUCsByYear(){
@@ -659,7 +668,7 @@ void ScheduleManagement::listingUCsByYear(){
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 
 }
 
@@ -702,7 +711,7 @@ void ScheduleManagement::listingUcsPerStudent() {
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 void ScheduleManagement::listingUcsByClass() {
     cout << "Introduza a turma (Ex: 1LEIC01): ";
@@ -723,6 +732,6 @@ void ScheduleManagement::listingUcsByClass() {
         cin >> answer;
     }
     if (answer == "Y" || answer == "y") menuOperations(*this);
-    else return;
+    else terminate(*this);
 }
 

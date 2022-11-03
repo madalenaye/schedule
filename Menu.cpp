@@ -33,7 +33,6 @@ void createMenu(){
 //types of operations
 void menuOperations(ScheduleManagement manager){
     while(!manager.get_requests().empty()){manager.doRequest();}
-
     cout << setw(42) << "O que deseja fazer hoje?" << endl;
     printf("\n");
     cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa\n";
@@ -51,7 +50,10 @@ void menuOperations(ScheduleManagement manager){
     modifyOptions(manager);
     }
         // end program
-    else return;
+    else {
+        terminate(manager);
+        //
+    }
 }
 //listing options
 void listingOptions(ScheduleManagement manager){
@@ -180,10 +182,80 @@ void modifyOptions(ScheduleManagement manager){
             cin >> answer;
         }
         if (answer == "Y" || answer == "y") menuOperations(manager);
-        else return;
+        else terminate(manager);
 
     }
+    else if (type == "2"){
+        cout << "Introduza o número up do estudante que deseja adicionar (Ex:202025487): ";
+        long int up; cin >> up;
+        cout << "Em que unidade curricular? (Ex: L.EIC002): ";
+        string uc; cin >> uc;
+        cout << "E a que turma? (Ex: 1LEIC08): ";
+        string _class; cin >> _class;
+        Request r(ADD, up,uc,_class, "");
+        manager.push_request(r);
+        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        string answer; cin >> answer;
+        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+            cout << "Input inválido, tente novamente: ";
+            cin >> answer;
+        }
+        if (answer == "Y" || answer == "y") menuOperations(manager);
+        else terminate(manager);
 
+    }
+    else if (type == "3"){
+        cout << "Introduza o número up do estudante cuja turma/UC deseja alterar (Ex:202025487): ";
+        long int up; cin >> up;
+        cout << "Em que unidade curricular? (Ex: L.EIC002): ";
+        string uc; cin >> uc;
+        cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC08): ";
+        string _class; cin >> _class;
+        cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
+        string new_class; cin >> new_class;
+        Request r(CHANGE_CLASS, up,uc,_class, new_class);
+        manager.push_request(r);
+        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        string answer; cin >> answer;
+        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+            cout << "Input inválido, tente novamente: ";
+            cin >> answer;
+        }
+        if (answer == "Y" || answer == "y") menuOperations(manager);
+        else terminate(manager);
+    }
+    else if (type == "4"){
+        cout << "Introduza o número up do estudante cujas turmas/UCs deseja alterar (Ex:202025487): ";
+        long int up; cin >> up;
+        cout << "Quantas turmas/UCs pretende alterar?: ";
+        int n; cin >> n;
+        for(int i = 1; i <= n; i++){
+            cout << i << "ª alteração: \n";
+            cout << "Em que unidade curricular? (Ex: L.EIC002): ";
+            string uc;
+            cin >> uc;
+            cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC08): ";
+            string _class;
+            cin >> _class;
+            cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
+            string new_class;
+            cin >> new_class;
+            Request r(CHANGE_CLASS, up, uc, _class, new_class);
+            manager.push_request(r);
+        }
+        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        string answer; cin >> answer;
+        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+            cout << "Input inválido, tente novamente: ";
+            cin >> answer;
+        }
+        if (answer == "Y" || answer == "y") menuOperations(manager);
+        else terminate(manager);
+    }
+
+}
+void terminate(ScheduleManagement manager){
+    while(!manager.get_requests().empty()){manager.doRequest();}
 }
 // end menu
 void endMenu(){
