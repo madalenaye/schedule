@@ -10,18 +10,6 @@
 using namespace std;
 
 
-// functors
-struct find_by_studentName{
-    find_by_studentName(string n) : name(n) {}
-
-    bool operator()(Student student) const{
-        return student.get_studentName() == name;
-    }
-
-private:
-    string name;
-};
-
 // for later implementation
 void listingOptions();
 void modifyOptions();
@@ -29,6 +17,7 @@ void menuOperations();
 void listClasses();
 void listStudents();
 void listUCs();
+void listSchedule();
 //creating menu
 void createMenu(){
     printf("\n");
@@ -75,7 +64,7 @@ void listingOptions(){
         }
         if (type == "1"){listClasses();}
         else if (type == "2"){listStudents();}
-        else if (type == "3"){}
+        else if (type == "3"){listSchedule();}
         else if (type == "4"){listUCs();}
         else{
             printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations();}
@@ -152,6 +141,27 @@ void listUCs(){
         case 6: listingOptions(); break;
     }
 }
+void listSchedule(){
+    cout << "\nSelecione o modo de listagem do horário:\n";
+    cout << "1. Por aluno\n" << "2. Por turma\n" << "3. Por UC\n" << "4. Voltar\n";
+    cout << "\nOpção: ";
+    string mode;
+    cin >> mode;
+    // input error
+    while (!(mode == "1" || mode == "2" || mode == "3" || mode == "4")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> mode;
+    }
+    ScheduleManagement manager;
+    manager.readClasses();
+    manager.readStudents();
+    switch (stoi(mode)){
+        case 1: manager.listingStudentSchedule(); break;
+        case 2: manager.listingClassSchedule(); break;
+        case 3: manager.listingUcSchedule(); break;
+        case 4: listingOptions(); break;
+    }
+}
 void modifyOptions(){
     cout << "\nSelecione a alteração que pretende fazer:\n";
     cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";
@@ -171,15 +181,4 @@ void endMenu(){
     printf("\033[46m=============================================================\033[0m\t\t");
 }
 
-/*
-ScheduleManagement manager;
-manager.readClasses();
-manager.readStudents();
-manager.readClassesPerUC();
-set<Student> students = manager.get_students();
 
-
-auto it = find_if(students.begin(), students.end(), find_by_studentName("Ludovico"));
-cout << (*it).get_studentCode();
-printf("\n");
-*/

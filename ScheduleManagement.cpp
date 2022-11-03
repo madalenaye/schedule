@@ -39,8 +39,8 @@ void ScheduleManagement::readClasses(){
     ifstream inFile;
 
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
 
     getline(inFile,line);
@@ -82,10 +82,9 @@ void ScheduleManagement::readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     //Reading the first line with actual data
     getline(inFile,line);
@@ -93,7 +92,7 @@ void ScheduleManagement::readStudents(){
     getline(is,stCode,',');
     getline(is,stName,',');
     getline(is,ucCode,',');
-    getline(is,classCode,'\r');
+    getline(is,classCode,',');
     string prevStCode=stCode;
     list<ClassPerUC> cpu;
     cpu.push_back(ClassPerUC(ucCode,classCode));
@@ -180,8 +179,6 @@ void ScheduleManagement::listingClassPerYear() {
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
-
-
 void ScheduleManagement::listingClasses(string order){
 
     if (order == "1") {
@@ -254,40 +251,101 @@ int weekDayToNum(string weekday){
     if (weekday == "Friday") return 5;
     return 0;
 }
-void ScheduleManagement::listingStudentSchedule(string studentCode) const{
-    struct find_by_studentCode{
-        find_by_studentCode(long int code) : code(code) {}
+// functors
+struct find_by_studentCode{
+    find_by_studentCode(long int code) : code(code) {}
 
-        bool operator()(Student student) const{
-            return student.get_studentCode() == code;
-        }
+    bool operator()(Student student) const{
+        return student.get_studentCode() == code;
+    }
 
-    private:
-        long int code;
-    };
-    auto student1 = std::find_if(students.begin(),students.end(),find_by_studentCode(stoul(studentCode)));
-    vector<pair<ClassPerUC,Slot>> aux;
-    for (ClassPerUC cpu: (*student1).get_classPerUC()) {
-        for (Lecture lecture: schedule) {
-            if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
-                for (Slot slot: lecture.get_Slot()){
-                aux.emplace_back(ClassPerUC(cpu.get_ucCode(),cpu.get_classCode()),slot);}
+private:
+    long int code;
+};
+struct find_by_studentName{
+    find_by_studentName(string n) : name(n) {}
+
+    bool operator()(Student student) const{
+        return student.get_studentName() == name;
+    }
+
+private:
+    string name;
+};
+void ScheduleManagement::listingStudentSchedule() const{
+    cout << "Escolha o modo de pesquisa de horário por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
+    cout << "\nOpção: ";
+    string mode; cin >> mode;
+    while (!(mode == "1" || mode == "2")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> mode;
+    }
+    if (mode == "1") {
+        cout << "Introduza o número UP (Ex: 202041977): ";
+        long int up; cin >> up;
+        auto result = find_if(students.begin(), students.end(), find_by_studentCode(up));
+        vector<pair<ClassPerUC, Slot>> aux;
+        for (ClassPerUC cpu: (*result).get_classPerUC()) {
+            for (Lecture lecture: schedule) {
+                if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
+                    for (Slot slot: lecture.get_Slot()) {
+                        aux.emplace_back(ClassPerUC(cpu.get_ucCode(), cpu.get_classCode()), slot);
+                    }
+                }
             }
         }
+        std::sort(aux.begin(), aux.end(), [](pair<ClassPerUC, Slot> a, pair<ClassPerUC, Slot> b) {
+            return weekDayToNum(a.second.get_WeekDay()) < weekDayToNum(b.second.get_WeekDay()) ||
+                   (weekDayToNum(a.second.get_WeekDay()) == weekDayToNum(b.second.get_WeekDay()) &&
+                    a.second.get_StartHour() < b.second.get_StartHour());
+        });
+        for (auto it = aux.begin(); it < aux.end(); it++) {
+            cout << it->second.get_WeekDay() << endl;
+            cout << it->first.get_ucCode() << " , " << it->first.get_classCode() << " , " << it->second.get_StartHour()
+                 << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
+        }
     }
-    std::sort(aux.begin(),aux.end(),[](pair<ClassPerUC,Slot> a, pair<ClassPerUC,Slot> b){
-        return weekDayToNum(a.second.get_WeekDay()) < weekDayToNum(b.second.get_WeekDay()) || (weekDayToNum(a.second.get_WeekDay()) == weekDayToNum(b.second.get_WeekDay()) && a.second.get_StartHour() < b.second.get_StartHour());
-    });
-    for (auto it = aux.begin();it < aux.end();it++){
-        cout << it->second.get_WeekDay() << endl;
-        cout << it->first.get_ucCode() << " , " << it->first.get_classCode() << " , " << it->second.get_StartHour() << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
+    else {
+        cout << "Introduza o nome do aluno: ";
+        string name; cin >> name;
+        auto result = find_if(students.begin(), students.end(), find_by_studentName(name));
+        vector<pair<ClassPerUC, Slot>> aux;
+        for (ClassPerUC cpu: (*result).get_classPerUC()) {
+            for (Lecture lecture: schedule) {
+                if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
+                    for (Slot slot: lecture.get_Slot()) {
+                        aux.emplace_back(ClassPerUC(cpu.get_ucCode(), cpu.get_classCode()), slot);
+                    }
+                }
+            }
+        }
+        std::sort(aux.begin(), aux.end(), [](pair<ClassPerUC, Slot> a, pair<ClassPerUC, Slot> b) {
+            return weekDayToNum(a.second.get_WeekDay()) < weekDayToNum(b.second.get_WeekDay()) ||
+                   (weekDayToNum(a.second.get_WeekDay()) == weekDayToNum(b.second.get_WeekDay()) &&
+                    a.second.get_StartHour() < b.second.get_StartHour());
+        });
+        for (auto it = aux.begin(); it < aux.end(); it++) {
+            cout << it->second.get_WeekDay() << endl;
+            cout << it->first.get_ucCode() << ", " << it->first.get_classCode() << ", " << it->second.get_StartHour()
+                 << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
+        }
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
-void ScheduleManagement::listingClassSchedule(string cl) {
-    cout << "The class " << cl << " has the following schedule." << endl;
+void ScheduleManagement::listingClassSchedule() {
+    cout << "Deseja ver o horário de que turma? (Ex: 1LEIC07): ";
+    string _class; cin >> _class;
+    cout << "A turma " << _class << " tem o seguinte horário:" << endl;
     vector<pair<string,Slot> >aux;
     for (Lecture lecture : schedule){
-        if (lecture.get_classCode() == cl){
+        if (lecture.get_classCode() == _class){
             for (Slot slot: lecture.get_Slot()){
                 aux.emplace_back(lecture.get_ucCode(),slot);
             }
@@ -298,16 +356,26 @@ void ScheduleManagement::listingClassSchedule(string cl) {
     ;});
     for (auto it = aux.begin();it < aux.end();it++){
         cout << it->second.get_WeekDay() << endl;
-        cout << it->first << " , "  << it->second.get_StartHour() << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
+        cout << it->first << ", "  << it->second.get_StartHour() << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
-void ScheduleManagement::listingUcSchedule(string uc) {
-    cout << "The UC " << uc << " has the following schedule." << endl;
+void ScheduleManagement::listingUcSchedule() {
+    cout << "Deseja ver o horário de que unidade curricular? (Ex: L.EIC003): ";
+    string uc; cin >> uc;
+    cout << "A UC " << uc << " tem o seguinte horário:" << endl;
     vector<pair<string,Slot>> aux;
     for (Lecture lecture : schedule){
         if (lecture.get_ucCode() == uc){
             for (Slot slot: lecture.get_Slot()) {
-                aux.emplace_back(uc,slot);
+                aux.emplace_back(lecture.get_classCode(),slot);
             }
         }
     }
@@ -316,8 +384,16 @@ void ScheduleManagement::listingUcSchedule(string uc) {
         ;});
     for (auto it = aux.begin();it < aux.end();it++){
         cout << it->second.get_WeekDay() << endl;
-        cout << it->first << " , "  << it->second.get_StartHour() << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
+        cout << it->first << ", "  << it->second.get_StartHour() << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
     }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y") createMenu();
+    else return;
 }
 //listing of students
 void ScheduleManagement::listingAllStudentsCode() {
@@ -510,6 +586,8 @@ void ScheduleManagement::listingUCsByYear(){
     else return;
 
 }
+
+
 void ScheduleManagement::listingUcsPerStudent() {
     cout << "Escolha o modo de pesquisa de UCs por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
     cout << "Opção: ";
@@ -521,31 +599,25 @@ void ScheduleManagement::listingUcsPerStudent() {
     if (mode == "1"){
         cout << "Introduza o número UP (Ex: 202041977): ";
         long int up; cin >> up;
-        for (Student it: students){
-            if (it.get_studentCode() == up){
-                cout << up << ": ";
-                for (auto i: it.get_classPerUC()){
+        auto result = find_if(students.begin(), students.end(), find_by_studentCode(up));
+        cout << up << ": ";
+        for (auto i: (*result).get_classPerUC()){
                     cout << i.get_ucCode() << ",";
                 }
-                cout<<'\b';  //Cursor moves 1 position backwards
-                cout<<" ";
-            }
-
-        }
+        cout<<'\b';  //Cursor moves 1 position backwards
+        cout<<" ";
     }
     else{
         cout << "Introduza o nome do aluno: ";
         string name; cin >> name;
-        for (Student student : students){
-            if (student.get_studentName() == name){
-                cout << name << ": ";
-                for (auto it: student.get_classPerUC()){
-                    cout << it.get_ucCode() << ",";
-                }
-                cout<<'\b';  //Cursor moves 1 position backwards
-                cout<<" ";
-            }
+        auto result = find_if(students.begin(), students.end(), find_by_studentName(name));
+        cout << name << ": ";
+        for (auto it: (*result).get_classPerUC()){
+            cout << it.get_ucCode() << ",";
         }
+        cout<<'\b';  //Cursor moves 1 position backwards
+        cout<<" ";
+
     }
     cout << "\nDeseja realizar outra operação? (Y/N)? ";
     string answer; cin >> answer;
