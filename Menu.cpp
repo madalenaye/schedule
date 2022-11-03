@@ -23,8 +23,8 @@ void createMenu(){
     printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
     printf("\n");
     printf("\n");
-    cout << setw(53) << "Bem-vind@ ao melhor gestor de horários! \n";
-    cout<< setw(43) << "Que ficheiro deseja1 ler?\n";
+    cout << setw(54) << "Bem-vind@ ao melhor gestor de horários! \n";
+    cout<< setw(43) << "Que ficheiro deseja ler?\n";
     cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(32) << "2. Ficheiro atualizado\n";
     printf("\n  Opção: ");
     char c; cin >> c;
@@ -41,7 +41,7 @@ void createMenu(){
 
 //types of operations
 void menuOperations(ScheduleManagement manager){
-    cout << setw(42) << "O que deseja fazer hoje?" << endl;
+    cout << setw(41) << "O que deseja fazer hoje?" << endl;
     printf("\n");
     cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa\n";
     printf("\n  Opção: ");
