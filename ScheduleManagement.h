@@ -7,6 +7,7 @@
 
 #include "Student.h"
 #include "Lecture.h"
+#include "Request.h"
 #include <set>
 #include <vector>
 class ScheduleManagement{
@@ -38,6 +39,8 @@ public:
     void listingStudentsInYear(char year);
     void listingStudentsByYearOfEntry(int year);
     void listingStudentsInClass(string _uc,string _class);
+    //requests
+    void removeStudent(long code, string _uc, string _cc);
 
 
 private:

@@ -13,6 +13,8 @@
 #include <algorithm>
 #include "Slot.cpp"
 #include "Menu.h"
+using namespace std;
+
 ScheduleManagement::ScheduleManagement() {
     students={};
     schedule={};
@@ -286,4 +288,24 @@ void ScheduleManagement::listingStudentsInClass(std::string _uc, std::string _cl
         }
     }
     if(count==0){cout<<"There are no students who attend this class";}
+}
+
+void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
+    Student s;
+    s.set_studentCode(code);
+    const set<Student>::iterator &it = students.find(s);
+    s.set_studentName(it->get_studentName());
+    list<ClassPerUC> cpu;
+
+    for(auto i: it->get_classPerUC()){
+        if(i.get_ucCode()!=_uc && i.get_classCode()!=_class){
+            cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
+        }
+    }
+    students.erase(it);
+    s.set_ClassPerUC(cpu);
+    students.insert(s);
+    auxStudents.clear();
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
