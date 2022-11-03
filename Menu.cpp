@@ -20,7 +20,13 @@ void createMenu(){
     cout<< setw(43) << "Que ficheiro deseja ler?\n";
     cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(32) << "2. Ficheiro atualizado\n";
     printf("\n  Opção: ");
-    char c; cin >> c;
+    string option; cin >> option;
+    // input error
+    while (!(option == "1" || option == "2" )){
+        cout << "  Input inválido, tente novamente: ";
+        cin >> option;
+    }
+    char c = option[0];
     // file versions
     string filename;
     if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
