@@ -3,5 +3,4 @@
 //
 void createMenu();
 void createListingModes();
-
 void endMenu();

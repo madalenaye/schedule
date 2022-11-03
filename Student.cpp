@@ -4,6 +4,7 @@
 
 #include <algorithm>
 #include "Student.h"
+//constructors
 Student::Student() {
     studentCode = 0;
     studentName = "";
@@ -13,6 +14,7 @@ Student::Student(long int stc, string stn, list<ClassPerUC> cpu){
     studentName = stn;
     this->cpu = cpu;
 }
+//getters and setters
 int Student::get_studentCode() const {return studentCode;}
 string Student::get_studentName() const {return studentName;}
 list<ClassPerUC> Student::get_classPerUC() const {return cpu;}
