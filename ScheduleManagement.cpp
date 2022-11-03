@@ -41,8 +41,8 @@ void ScheduleManagement::readClasses(){
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
 
-    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -56,7 +56,7 @@ void ScheduleManagement::readClasses(){
         string line2;
         ifstream inFile2;
         //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
-        inFile2.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
@@ -85,8 +85,8 @@ void ScheduleManagement::readStudents(){
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
 
-    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     //Reading the first line with actual data
@@ -134,9 +134,9 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string ucCode, classCode;
     ifstream inFile;
     
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     vector<ClassPerUC> classes;
@@ -304,8 +304,8 @@ void ScheduleManagement::listingStudentSchedule() const{
         });
         for (auto it = aux.begin(); it < aux.end(); it++) {
             cout << it->second.get_WeekDay() << endl;
-            cout << it->first.get_ucCode() << " , " << it->first.get_classCode() << " , " << it->second.get_StartHour()
-                 << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
+            cout << it->first.get_ucCode() << ", " << it->first.get_classCode() << ", " << it->second.get_StartHour()
+                 << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
         }
     }
     else {
