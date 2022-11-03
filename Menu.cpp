@@ -28,7 +28,7 @@ void createMenu(){
     menuOperations();
 }
 
-//types of listings
+//types of operations
 void menuOperations(){
     cout << setw(42) << "O que deseja fazer hoje?" << endl;
     printf("\n");
@@ -49,7 +49,6 @@ void menuOperations(){
         // end program
     else return;
 }
-
 //listing options
 void listingOptions(){
         cout << "\nSelecione o tipo de listagem:\n";
@@ -162,6 +161,7 @@ void listSchedule(){
         case 4: listingOptions(); break;
     }
 }
+// modification options
 void modifyOptions(){
     cout << "\nSelecione a alteração que pretende fazer:\n";
     cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";

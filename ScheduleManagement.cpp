@@ -30,8 +30,8 @@ set<Student> ScheduleManagement::get_students() const {return students;}
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
 void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
-//read files
 
+//read files
 void ScheduleManagement::readClasses(){
 
     string line;
