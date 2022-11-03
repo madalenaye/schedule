@@ -7,6 +7,7 @@
 #include "ScheduleManagement.h"
 #include <unistd.h>
 #include <algorithm>
+#include <fstream>
 #include "Request.h"
 #include <vector>
 using namespace std;
@@ -23,9 +24,17 @@ void createMenu(){
     printf("\n");
     printf("\n");
     cout << setw(53) << "Bem-vind@ ao melhor gestor de horários! \n";
+    cout<<"Que ficheiro deseja ler?"<<endl;
+    cout<<"1. Ficheiro inicial"<<endl;
+    cout<<"2. Ficheiro atualizado"<<endl;
+    char c; cin >> c;
+    string filename;
+    if(c=='1') filename="/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv";
+    else filename="/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/new_students_classes.csv";
+
     ScheduleManagement manager;
     manager.readClasses();
-    manager.readStudents();
+    manager.readStudents(filename);
     vector<ClassPerUC> v = manager.readClassesPerUC();
     menuOperations(manager);
 }
@@ -256,6 +265,15 @@ void modifyOptions(ScheduleManagement manager){
 }
 void terminate(ScheduleManagement manager){
     while(!manager.get_requests().empty()){manager.doRequest();}
+    ofstream file;
+    file.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/new_students_classes.csv");
+    file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
+    for(auto i: manager.get_students()){
+        for(auto j: i.get_classPerUC()){
+            file<<i.get_studentCode()<<","<<i.get_studentName()<<","<<j.get_ucCode()<<","<<j.get_classCode()<<endl;
+        }
+    }
+
 }
 // end menu
 void endMenu(){
