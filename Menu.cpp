@@ -5,17 +5,10 @@
 #include <iomanip>
 #include "Menu.h"
 #include "ScheduleManagement.h"
-#include <unistd.h>
 #include <algorithm>
 #include <fstream>
 #include "Request.h"
-#include <vector>
 using namespace std;
-
-//manager
-
-
-// for later implementation
 
 //creating menu
 void createMenu(){
