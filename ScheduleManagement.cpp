@@ -553,7 +553,7 @@ void ScheduleManagement::changeStudentclass(long code, string _uc, string _class
     list<ClassPerUC> cpu;
 
     for(auto i: it->get_classPerUC()){
-        if(i.get_ucCode()!=_uc && i.get_classCode()!=_class){
+        if(i.get_ucCode()!=_uc || i.get_classCode()!=_class){
             cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
         }else if(studentsPerClass(_uc,new_class)<30){
             cpu.push_back(ClassPerUC(_uc,new_class));
