@@ -28,6 +28,7 @@ ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
 set<Student> ScheduleManagement::get_students() {return students;}
 vector<Student> ScheduleManagement::get_auxStudents() {return auxStudents;}
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
+queue<Request> ScheduleManagement::get_requests(){return requests;}
 //setter
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
 void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
@@ -290,6 +291,10 @@ void ScheduleManagement::listingStudentsInClass(std::string _uc, std::string _cl
     if(count==0){cout<<"There are no students who attend this class";}
 }
 
+void ScheduleManagement::push_request(Request r) {
+    requests.push(r);
+}
+
 void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
     Student s;
     s.set_studentCode(code);
@@ -308,4 +313,13 @@ void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
     auxStudents.clear();
     for(auto it: students){auxStudents.push_back(it);}
     std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+}
+
+void ScheduleManagement::doRequest(){
+    Request req;
+    req=requests.front();
+    requests.pop();
+    if(req.getType()==REMOVE){
+        removeStudent(req.getStudentCode(),req.getUc(),req.getClass());
+    }
 }

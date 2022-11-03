@@ -19,6 +19,7 @@ public:
     set<Student> get_students();
     vector<Student> get_auxStudents();
     vector<Lecture> get_schedule();
+    queue<Request> get_requests();
     //setters
     void set_students(set<Student> stu);
     void set_auxStudents(vector<Student> stu);
@@ -41,12 +42,14 @@ public:
     void listingStudentsInClass(string _uc,string _class);
     //requests
     void removeStudent(long code, string _uc, string _cc);
-
+    void push_request(Request r);
+    void doRequest();
 
 private:
     set<Student> students;
     vector<Student> auxStudents;
     vector<Lecture> schedule;
+    queue<Request> requests;
 };
 
 #endif //SCHEDULE_SCHEDULEMANAGEMENT_H
