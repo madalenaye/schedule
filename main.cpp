@@ -4,9 +4,8 @@
 #include <iostream>
 using namespace std;
 int main(){
-    //createMenu();
-
-    ScheduleManagement manager;
+    createMenu();
+    /*ScheduleManagement manager;
     manager.readStudents();
     manager.listingStudentsInClass();
     cout<<manager.studentsPerClass("L.EIC002","1LEIC08")<<endl;
@@ -24,6 +23,6 @@ int main(){
     manager.listingStudentsInClass();
     manager.doRequest();
     cout<<manager.studentsPerClass("L.EIC002","1LEIC08")<<endl;
-    manager.listingStudentsInClass();
-    //endMenu();
+    manager.listingStudentsInClass();*/
+    endMenu();
 }
