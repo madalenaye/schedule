@@ -95,7 +95,7 @@ void listClasses(){
     manager.readClasses();
     manager.readStudents();
     manager.readClassesPerUC();
-    manager.listingStudentSchedule("202071557");
+    manager.listingUcSchedule("L.EIC021");
     switch (stoi(mode)){
         case 1: manager.listingClasses(mode); break;
         case 2: manager.listingClasses(mode); break;

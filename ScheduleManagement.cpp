@@ -170,8 +170,21 @@ void ScheduleManagement::listingClassPerYear() {
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
-bool cmp(Slot a, Slot b){
-
+int weekDayToNum(string weekday){
+    if (weekday =="Monday"){
+        return 1;
+    }
+    if (weekday =="Tuesday"){
+        return 2;
+    }
+    if (weekday =="Wednesday"){
+        return 3;
+    }
+    if (weekday =="Thursday"){
+        return 4;
+    }
+    if (weekday == "Friday") return 5;
+    return 0;
 }
 void ScheduleManagement::listingStudentSchedule(string studentCode) const{
     struct find_by_studentCode{
@@ -185,50 +198,57 @@ void ScheduleManagement::listingStudentSchedule(string studentCode) const{
         long int code;
     };
     auto student1 = std::find_if(students.begin(),students.end(),find_by_studentCode(stoul(studentCode)));
-    list<Lecture> studentschedule;
-    Lecture lectureaux;
-    list<Slot> newSlotList;
+    vector<pair<ClassPerUC,Slot>> aux;
     for (ClassPerUC cpu: (*student1).get_classPerUC()) {
         for (Lecture lecture: schedule) {
             if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
-                lectureaux.set_ucCode(cpu.get_ucCode());
-                lectureaux.set_classCode(cpu.get_classCode());
-                for (Slot slot: lecture.get_Slot()) {
-                    newSlotList.push_back(slot);
-                }
+                for (Slot slot: lecture.get_Slot()){
+                aux.emplace_back(ClassPerUC(cpu.get_ucCode(),cpu.get_classCode()),slot);}
             }
-            newSlotList.sort(cmp);
-            lectureaux.set_Slot(newSlotList);
-            studentschedule.push_back(lectureaux);
-            newSlotList.clear();
         }
     }
-    bool compare(Slot slot1,Slot slot2){
-
+    std::sort(aux.begin(),aux.end(),[](pair<ClassPerUC,Slot> a, pair<ClassPerUC,Slot> b){
+        return weekDayToNum(a.second.get_WeekDay()) < weekDayToNum(b.second.get_WeekDay()) || (weekDayToNum(a.second.get_WeekDay()) == weekDayToNum(b.second.get_WeekDay()) && a.second.get_StartHour() < b.second.get_StartHour());
+    });
+    for (auto it = aux.begin();it < aux.end();it++){
+        cout << it->second.get_WeekDay() << endl;
+        cout << it->first.get_ucCode() << " , " << it->first.get_classCode() << " , " << it->second.get_StartHour() << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
     }
 }
 void ScheduleManagement::listingClassSchedule(string cl) {
     cout << "The class " << cl << " has the following schedule." << endl;
+    vector<pair<string,Slot> >aux;
     for (Lecture lecture : schedule){
         if (lecture.get_classCode() == cl){
-            for (Slot slot: lecture.get_Slot()) {
-                cout << lecture.get_ucCode() << ':' << slot.get_WeekDay() << '-'
-                     << slot.get_StartHour() << '-' << slot.get_Duration() << '-' << slot.get_Type()
-                     << endl;
+            for (Slot slot: lecture.get_Slot()){
+                aux.emplace_back(lecture.get_ucCode(),slot);
             }
         }
+    }
+    std::sort(aux.begin(),aux.end(),[](pair<string,Slot> a ,pair<string,Slot> b){
+        return weekDayToNum(a.second.get_WeekDay()) < weekDayToNum(b.second.get_WeekDay()) || (weekDayToNum(a.second.get_WeekDay()) == weekDayToNum(b.second.get_WeekDay()) && a.second.get_StartHour() < b.second.get_StartHour());
+    ;});
+    for (auto it = aux.begin();it < aux.end();it++){
+        cout << it->second.get_WeekDay() << endl;
+        cout << it->first << " , "  << it->second.get_StartHour() << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
     }
 }
 void ScheduleManagement::listingUcSchedule(string uc) {
     cout << "The UC " << uc << " has the following schedule." << endl;
+    vector<pair<string,Slot>> aux;
     for (Lecture lecture : schedule){
         if (lecture.get_ucCode() == uc){
             for (Slot slot: lecture.get_Slot()) {
-                cout << lecture.get_classCode() << ':' << slot.get_WeekDay() << '-'
-                     << slot.get_StartHour() << '-' << slot.get_Duration() << '-' << slot.get_Type()
-                     << endl;
+                aux.emplace_back(uc,slot);
             }
         }
+    }
+    std::sort(aux.begin(),aux.end(),[](pair<string,Slot> a ,pair<string,Slot> b){
+        return weekDayToNum(a.second.get_WeekDay()) < weekDayToNum(b.second.get_WeekDay()) || (weekDayToNum(a.second.get_WeekDay()) == weekDayToNum(b.second.get_WeekDay()) && a.second.get_StartHour() < b.second.get_StartHour());
+        ;});
+    for (auto it = aux.begin();it < aux.end();it++){
+        cout << it->second.get_WeekDay() << endl;
+        cout << it->first << " , "  << it->second.get_StartHour() << " , " << it->second.get_Duration() << " , " << it->second.get_Type() << endl;
     }
 }
 
