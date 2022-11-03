@@ -32,10 +32,9 @@ public:
     void listingClasses(string order);
     void listingClassesPerUC(vector<ClassPerUC> v);
     //listing schedule
-    //void listingStudentSchedule(string studentCode);
-    void listingClassSchedule(string cl);
-    void listingUcSchedule(string uc);
-    void listingStudentSchedule(string studentCode) const;
+    void listingClassSchedule();
+    void listingUcSchedule();
+    void listingStudentSchedule() const;
     //listing students
     void listingAllStudentsCode();
     void listingAllStudentsName();
