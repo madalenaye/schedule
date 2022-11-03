@@ -37,9 +37,9 @@ void ScheduleManagement::readClasses(){
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
 
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -82,9 +82,9 @@ void ScheduleManagement::readStudents(){
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
 
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
 
     getline(inFile,line);
     //Reading the first line with actual data
@@ -125,8 +125,8 @@ void ScheduleManagement::readClassesPerUC(){
     ifstream inFile;
     
     //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     vector<ClassPerUC> classes;
@@ -170,7 +170,9 @@ void ScheduleManagement::listingClassPerYear() {
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
+bool cmp(Slot a, Slot b){
 
+}
 void ScheduleManagement::listingStudentSchedule(string studentCode) const{
     struct find_by_studentCode{
         find_by_studentCode(long int code) : code(code) {}
@@ -183,16 +185,26 @@ void ScheduleManagement::listingStudentSchedule(string studentCode) const{
         long int code;
     };
     auto student1 = std::find_if(students.begin(),students.end(),find_by_studentCode(stoul(studentCode)));
+    list<Lecture> studentschedule;
+    Lecture lectureaux;
+    list<Slot> newSlotList;
     for (ClassPerUC cpu: (*student1).get_classPerUC()) {
         for (Lecture lecture: schedule) {
             if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
+                lectureaux.set_ucCode(cpu.get_ucCode());
+                lectureaux.set_classCode(cpu.get_classCode());
                 for (Slot slot: lecture.get_Slot()) {
-                    cout << cpu.get_ucCode() << '-' << cpu.get_classCode() << ':' << slot.get_WeekDay() << '-'
-                         << slot.get_StartHour() << '-' << slot.get_Duration() << '-' << slot.get_Type()
-                         << endl;
+                    newSlotList.push_back(slot);
                 }
             }
+            newSlotList.sort(cmp);
+            lectureaux.set_Slot(newSlotList);
+            studentschedule.push_back(lectureaux);
+            newSlotList.clear();
         }
+    }
+    bool compare(Slot slot1,Slot slot2){
+
     }
 }
 void ScheduleManagement::listingClassSchedule(string cl) {
