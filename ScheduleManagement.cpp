@@ -81,11 +81,9 @@ void ScheduleManagement::readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
-
     getline(inFile,line);
     //Reading the first line with actual data
     getline(inFile,line);
@@ -324,7 +322,7 @@ void ScheduleManagement::listingStudentsInYear(){
     char year = y[0];
     for(auto i:auxStudents){
         for(auto j:i.get_classPerUC()) {
-            if ((int)j.get_classCode()[0] == year) {
+            if (j.get_classCode()[0] == year) {
                 cout << i.get_studentCode() << "-" << i.get_studentName()<<endl;
                 count++;
                 break;
