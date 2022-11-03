@@ -26,13 +26,11 @@ void createMenu(){
     ScheduleManagement manager;
     manager.readClasses();
     manager.readStudents();
-    vector<ClassPerUC> v = manager.readClassesPerUC();
     menuOperations(manager);
 }
 
 //types of operations
 void menuOperations(ScheduleManagement manager){
-    while(!manager.get_requests().empty()){manager.doRequest();}
     cout << setw(42) << "O que deseja fazer hoje?" << endl;
     printf("\n");
     cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa\n";
@@ -155,7 +153,7 @@ void listSchedule(ScheduleManagement manager){
 }
 // modification options
 void modifyOptions(ScheduleManagement manager){
-    cout << "\nSelecione a alteração que pretende fazer:\n";
+    cout << "\nSelecione a alteração que pretende realizar: \n";
     cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";
     cout << "\nOpção: ";
     string type;
@@ -175,13 +173,20 @@ void modifyOptions(ScheduleManagement manager){
         Request r(REMOVE, up,uc,_class, "");
         manager.push_request(r);
 
-        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        cout << "\nDeseja realizar outra operação (Y/N)? ";
+        cout << "(Nota: as modificações, caso aceites, só serão feitas ao final do dia) ";
         string answer; cin >> answer;
         while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y") menuOperations(manager);
+        if (answer == "Y" || answer == "y"){
+            printf("\n");
+            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\n");
+            printf("\n");
+            menuOperations(manager);
+        }
         else terminate(manager);
 
     }
@@ -200,7 +205,13 @@ void modifyOptions(ScheduleManagement manager){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y") menuOperations(manager);
+        if (answer == "Y" || answer == "y"){
+            printf("\n");
+            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\n");
+            printf("\n");
+            menuOperations(manager);
+        }
         else terminate(manager);
 
     }
@@ -221,7 +232,13 @@ void modifyOptions(ScheduleManagement manager){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y") menuOperations(manager);
+        if (answer == "Y" || answer == "y"){
+            printf("\n");
+            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\n");
+            printf("\n");
+            menuOperations(manager);
+        }
         else terminate(manager);
     }
     else if (type == "4"){
@@ -249,12 +266,27 @@ void modifyOptions(ScheduleManagement manager){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y") menuOperations(manager);
+        if (answer == "Y" || answer == "y") {
+            printf("\n");
+            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\n");
+            printf("\n");
+            menuOperations(manager);
+        }
         else terminate(manager);
+    }
+
+    else {
+        printf("\n");
+        printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+        printf("\n");
+        printf("\n");
+        menuOperations(manager);
     }
 
 }
 void terminate(ScheduleManagement manager){
+
     while(!manager.get_requests().empty()){manager.doRequest();}
 }
 // end menu
