@@ -1,15 +1,14 @@
-#include <iostream>
-#include <iomanip>
-#include <string>
-#include "ScheduleManagement.h"
-#include "Menu.h"
 
+#include "Menu.h"
+#include "ScheduleManagement.h"
+#include <iostream>
+using namespace std;
 int main(){
     //createMenu();
 
     ScheduleManagement manager;
     manager.readStudents();
-    manager.listingStudentsInClass("L.EIC002","1LEIC08");
+    manager.listingStudentsInClass();
     cout<<manager.studentsPerClass("L.EIC002","1LEIC08")<<endl;
     Request r1(REMOVE,202025487,"L.EIC002","1LEIC08","");
     Request r2 (ADD,202025487,"L.EIC002","1LEIC08","");
@@ -19,23 +18,12 @@ int main(){
     manager.push_request(r3);
     manager.doRequest();
     cout<<manager.studentsPerClass("L.EIC002","1LEIC08")<<endl;
-    manager.listingStudentsInClass("L.EIC002","1LEIC08");
+    manager.listingStudentsInClass();
     manager.doRequest();
     cout<<manager.studentsPerClass("L.EIC002","1LEIC08")<<endl;
-    manager.listingStudentsInClass("L.EIC002","1LEIC08");
+    manager.listingStudentsInClass();
     manager.doRequest();
     cout<<manager.studentsPerClass("L.EIC002","1LEIC08")<<endl;
-    manager.listingStudentsInClass("L.EIC002","1LEIC08");
-
-    //manager.removeStudent(202025487,"L.EIC002","1LEIC08");
-    //cout<<"====================================="<<endl;
-    //manager.listingStudentsInClass("L.EIC002","1LEIC08");
-    //manager.listingClassPerYear((char)year[0]);
-    //manager.listingClassSchedule("1LEIC01");
-    //manager.listingStudentSchedule("202071557");
-    //manager.listingUcSchedule("L.EIC003");
-    /*
-    manager.listingClasses("1");*/
-
+    manager.listingStudentsInClass();
     //endMenu();
 }
