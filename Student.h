@@ -4,6 +4,7 @@
 #ifndef PROJETOAED_STUDENTCLASSES_H
 #define PROJETOAED_STUDENTCLASSES_H
 
+#include <queue>
 #include <string>
 #include "ClassPerUC.h"
 #include <list>
@@ -30,6 +31,11 @@ public:
     {
         return (studentCode < P.get_studentCode());
     }
+
+    bool operator==(const Student &rhs) const;
+
+    bool operator!=(const Student &rhs) const;
+
 private:
     long int studentCode;
     string studentName;

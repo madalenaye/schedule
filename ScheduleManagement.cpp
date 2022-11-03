@@ -13,6 +13,8 @@
 #include <algorithm>
 #include "Slot.h"
 #include "Menu.h"
+using namespace std;
+
 
 //constructors
 ScheduleManagement::ScheduleManagement() {
@@ -25,6 +27,7 @@ ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
 }
 //getters
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
+queue<Request> ScheduleManagement::get_requests(){return requests;}
 set<Student> ScheduleManagement::get_students() const {return students;}
 //setters
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
@@ -42,7 +45,6 @@ void ScheduleManagement::readClasses(){
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
-
     getline(inFile,line);
     Lecture lecture;
     list<Slot> slots;
@@ -53,8 +55,8 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
-        //inFile2.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/Utilizador/Desktop/naoseringa/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
@@ -82,9 +84,10 @@ void ScheduleManagement::readStudents(){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
+
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
     getline(inFile,line);
     //Reading the first line with actual data
     getline(inFile,line);
@@ -132,7 +135,7 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     ifstream inFile;
     
     inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");"L.EIC010
+    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -423,7 +426,6 @@ void ScheduleManagement::listingAllStudentsName(){
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
-
 void ScheduleManagement::listingStudentsInYear(){
     cout << "Pretende ver os alunos de que ano curricular? (1/2/3): ";
     string y; cin >> y;
@@ -481,7 +483,6 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
-
 void ScheduleManagement::listingStudentsInClass() {
     cout << "Pretende ver os alunos de que turma? (Ex: 1LEIC13/2LEIC01/3LEIC06): ";
     string _class; cin >> _class;
@@ -496,16 +497,91 @@ void ScheduleManagement::listingStudentsInClass() {
             }
         }
     }
-    if(count==0){cout<<"Não há estudantes que estão nesta turma e nesta unidade curricular";}
-    else cout << "Há " << count << " estudantes na turma desta UC";
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
-    string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
-        cout << "Input inválido, tente novamente: ";
-        cin >> answer;
+    if(count==0){cout<<"There are no students who attend this class";}
+}
+void ScheduleManagement::push_request(Request r) {
+    requests.push(r);
+}
+void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
+    Student s;
+    s.set_studentCode(code);
+    const set<Student>::iterator &it = students.find(s);
+    s.set_studentName(it->get_studentName());
+    list<ClassPerUC> cpu;
+
+    for(auto i: it->get_classPerUC()){
+        if(i.get_ucCode()!=_uc && i.get_classCode()!=_class){
+            cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
+        }
     }
-    if (answer == "Y" || answer == "y") createMenu();
-    else return;
+    students.erase(it);
+    s.set_ClassPerUC(cpu);
+    students.insert(s);
+    auxStudents.clear();
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+}
+void ScheduleManagement::addStudent(long code, std::string _uc, std::string _cc) {
+    Student s;
+    s.set_studentCode(code);
+    const set<Student>::iterator &it = students.find(s);
+    s.set_studentName(it->get_studentName());
+    list<ClassPerUC> cpu=it->get_classPerUC();
+    if(studentsPerClass(_uc,_cc)<30)cpu.push_back(ClassPerUC(_uc,_cc));
+
+    students.erase(it);
+    s.set_ClassPerUC(cpu);
+    students.insert(s);
+    auxStudents.clear();
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+}
+void ScheduleManagement::changeStudentclass(long code, string _uc, string _class, string new_class) {
+    Student s;
+    s.set_studentCode(code);
+    const set<Student>::iterator &it = students.find(s);
+    s.set_studentName(it->get_studentName());
+    list<ClassPerUC> cpu;
+
+    for(auto i: it->get_classPerUC()){
+        if(i.get_ucCode()!=_uc && i.get_classCode()!=_class){
+            cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
+        }else if(studentsPerClass(_uc,new_class)<30){
+            cpu.push_back(ClassPerUC(_uc,new_class));
+        }
+    }
+
+    students.erase(it);
+    s.set_ClassPerUC(cpu);
+    students.insert(s);
+    auxStudents.clear();
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+}
+void ScheduleManagement::doRequest(){
+    Request req;
+    req=requests.front();
+    requests.pop();
+    if(req.getType()==REMOVE){
+        removeStudent(req.getStudentCode(),req.getUc(),req.getClass());
+    }
+    if(req.getType()==ADD){
+        addStudent(req.getStudentCode(),req.getUc(),req.getClass());
+    }
+    if(req.getType()==CHANGE_CLASS){
+        changeStudentclass(req.getStudentCode(),req.getUc(),req.getClass(),req.getNewClass());
+    }
+}
+int ScheduleManagement::studentsPerClass(string u, string c) {
+    int count=0;
+    for(auto i: students){
+        for(auto j: i.get_classPerUC()){
+            if(j.get_classCode() == c && j.get_ucCode()== u){
+                count++;
+            }
+        }
+    }
+    return count;
 }
 void ScheduleManagement::listingStudentsWithNUCs(){
     cout << "Estudantes com mais de quantas UCs? ";
@@ -649,14 +725,4 @@ void ScheduleManagement::listingUcsByClass() {
     if (answer == "Y" || answer == "y") createMenu();
     else return;
 }
-int ScheduleManagement::studentsPerClass(string u, string c) {
-    int count=0;
-    for(auto i: students){
-        for(auto j: i.get_classPerUC()){
-            if(j.get_classCode() == c && j.get_ucCode()== u){
-                count++;
-            }
-        }
-    }
-    return count;
-}
+

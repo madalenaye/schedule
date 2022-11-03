@@ -18,6 +18,15 @@ Student::Student(long int stc, string stn, list<ClassPerUC> cpu){
 int Student::get_studentCode() const {return studentCode;}
 string Student::get_studentName() const {return studentName;}
 list<ClassPerUC> Student::get_classPerUC() const {return cpu;}
+
 void Student::set_studentCode(long int stc){studentCode = stc;}
 void Student::set_studentName(string stn){studentName = stn;}
 void Student::set_ClassPerUC(list<ClassPerUC> cpu) {this->cpu= cpu;}
+
+bool Student::operator==(const Student &rhs) const {
+    return studentCode == rhs.studentCode;
+}
+
+bool Student::operator!=(const Student &rhs) const {
+    return !(rhs == *this);
+}
