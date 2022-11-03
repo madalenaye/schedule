@@ -91,10 +91,15 @@ void ScheduleManagement::readStudents(){
     getline(is,stCode,',');
     getline(is,stName,',');
     getline(is,ucCode,',');
-    getline(is,classCode,',');
+    getline(is,classCode,'\r');
     string prevStCode=stCode;
     list<ClassPerUC> cpu;
+    cpu.push_back(ClassPerUC(ucCode,classCode));
     Student st_class;
+    st_class.set_ClassPerUC(cpu);
+    st_class.set_studentCode(stoul(prevStCode));
+    st_class.set_studentName(stName);
+    students.insert(st_class);
     while(getline(inFile,line)){
         stringstream is(line);
         getline(is,stCode,',');
@@ -112,6 +117,11 @@ void ScheduleManagement::readStudents(){
         cpu.push_back(ClassPerUC(ucCode,classCode));
 
     }
+    cpu.push_back(ClassPerUC(ucCode,classCode));
+    st_class.set_ClassPerUC(cpu);
+    st_class.set_studentCode(stoul(prevStCode));
+    st_class.set_studentName(stName);
+    students.insert(st_class);
     for(auto it: students){auxStudents.push_back(it);}
     std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
@@ -382,6 +392,7 @@ void ScheduleManagement::listingStudentsInClass() {
         }
     }
     if(count==0){cout<<"Não há estudantes que estão nesta turma e nesta unidade curricular";}
+    else cout << "Há " << count << " estudantes na turma desta UC";
     cout << "\nDeseja realizar outra operação? (Y/N)? ";
     string answer; cin >> answer;
     while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
@@ -536,4 +547,15 @@ void ScheduleManagement::listingUcsByClass() {
     }
     if (answer == "Y" || answer == "y") createMenu();
     else return;
+}
+int ScheduleManagement::studentsPerClass(string u, string c) {
+    int count=0;
+    for(auto i: students){
+        for(auto j: i.get_classPerUC()){
+            if(j.get_classCode() == c && j.get_ucCode()== u){
+                count++;
+            }
+        }
+    }
+    return count;
 }

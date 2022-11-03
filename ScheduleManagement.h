@@ -46,6 +46,8 @@ public:
     void listingUCsByYear();
     void listingUcsPerStudent();
     void listingUcsByClass();
+    // number of students per class
+    int studentsPerClass(string u, string c);
 
 
 private:
