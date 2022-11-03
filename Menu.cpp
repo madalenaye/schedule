@@ -7,17 +7,15 @@
 #include "ScheduleManagement.h"
 #include <unistd.h>
 #include <algorithm>
+#include "Request.h"
+#include <vector>
 using namespace std;
+
+//manager
 
 
 // for later implementation
-void listingOptions();
-void modifyOptions();
-void menuOperations();
-void listClasses();
-void listStudents();
-void listUCs();
-void listSchedule();
+
 //creating menu
 void createMenu(){
     printf("\n");
@@ -25,11 +23,17 @@ void createMenu(){
     printf("\n");
     printf("\n");
     cout << setw(53) << "Bem-vind@ ao melhor gestor de horários! \n";
-    menuOperations();
+    ScheduleManagement manager;
+    manager.readClasses();
+    manager.readStudents();
+    vector<ClassPerUC> v = manager.readClassesPerUC();
+    menuOperations(manager);
 }
 
 //types of operations
-void menuOperations(){
+void menuOperations(ScheduleManagement manager){
+    while(!manager.get_requests().empty()){manager.doRequest();}
+
     cout << setw(42) << "O que deseja fazer hoje?" << endl;
     printf("\n");
     cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa\n";
@@ -42,15 +46,15 @@ void menuOperations(){
         cout << "  Input inválido, tente novamente: ";
         cin >> option;
     }
-    if (option == "1") listingOptions();
+    if (option == "1") listingOptions(manager);
     else if (option == "2"){
-    modifyOptions();
+    modifyOptions(manager);
     }
         // end program
     else return;
 }
 //listing options
-void listingOptions(){
+void listingOptions(ScheduleManagement manager){
         cout << "\nSelecione o tipo de listagem:\n";
         cout << "1. Listagem de turmas\n" << "2. Listagem de alunos\n" << "3. Listagem de horário\n" << "4. Listagem de unidades currriculares\n" << "5. Voltar\n";
         cout << "\nOpção: ";
@@ -61,14 +65,14 @@ void listingOptions(){
             cout << "Input inválido, tente novamente: ";
             cin >> type;
         }
-        if (type == "1"){listClasses();}
-        else if (type == "2"){listStudents();}
-        else if (type == "3"){listSchedule();}
-        else if (type == "4"){listUCs();}
+        if (type == "1"){listClasses(manager);}
+        else if (type == "2"){listStudents(manager);}
+        else if (type == "3"){listSchedule(manager);}
+        else if (type == "4"){listUCs(manager);}
         else{
-            printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations();}
+            printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations(manager);}
 }
-void listClasses(){
+void listClasses(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem de turmas:\n";
     cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por UC\n" << "5. Voltar\n";
     cout << "\nOpção: ";
@@ -80,19 +84,15 @@ void listClasses(){
         cout << "Input inválido, tente novamente: ";
         cin >> mode;
     }
-    ScheduleManagement manager;
-    manager.readClasses();
-    manager.readStudents();
-    vector<ClassPerUC> v = manager.readClassesPerUC();
     switch (stoi(mode)){
         case 1: manager.listingClasses(mode); break;
         case 2: manager.listingClasses(mode); break;
         case 3: manager.listingClassPerYear(); break;
-        case 4: manager.listingClassesPerUC(v); break;
-        case 5: listingOptions(); break;
+        case 4: manager.listingClassesPerUC(manager.readClassesPerUC()); break;
+        case 5: listingOptions(manager); break;
     }
 }
-void listStudents(){
+void listStudents(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem de alunos:\n";
     cout << "1. Ordem alfabética\n" << "2. Por número de estudante\n" << "3. Por ano de entrada\n" << "4. Por ano curricular\n" << "5. Por turma\n" << "6. Alunos com mais de n UC's\n" << "7. Voltar";
     cout << "\nOpção: ";
@@ -103,9 +103,6 @@ void listStudents(){
         cout << "Input inválido, tente novamente: ";
         cin >> mode;
     }
-    ScheduleManagement manager;
-    manager.readClasses();
-    manager.readStudents();
     switch (stoi(mode)){
         case 1: manager.listingAllStudentsName(); break;
         case 2: manager.listingAllStudentsCode(); break;
@@ -113,10 +110,10 @@ void listStudents(){
         case 4: manager.listingStudentsInYear(); break;
         case 5: manager.listingStudentsInClass(); break;
         case 6: manager.listingStudentsWithNUCs(); break;
-        case 7: listingOptions(); break;
+        case 7: listingOptions(manager); break;
     }
 }
-void listUCs(){
+void listUCs(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem de unidades curriculares:\n";
     cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por aluno\n" << "5. Por turma\n" << "6. Voltar";
     cout << "\nOpção: ";
@@ -127,20 +124,16 @@ void listUCs(){
         cout << "Input inválido, tente novamente: ";
         cin >> mode;
     }
-    ScheduleManagement manager;
-    manager.readClasses();
-    manager.readStudents();
-    vector<ClassPerUC> v = manager.readClassesPerUC();
     switch (stoi(mode)){
-        case 1: manager.listingAllUCs("1", v); break;
-        case 2: manager.listingAllUCs("2", v); break;
+        case 1: manager.listingAllUCs("1", manager.readClassesPerUC()); break;
+        case 2: manager.listingAllUCs("2", manager.readClassesPerUC()); break;
         case 3: manager.listingUCsByYear(); break;
         case 4: manager.listingUcsPerStudent(); break;
         case 5: manager.listingUcsByClass(); break;
-        case 6: listingOptions(); break;
+        case 6: listingOptions(manager); break;
     }
 }
-void listSchedule(){
+void listSchedule(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem do horário:\n";
     cout << "1. Por aluno\n" << "2. Por turma\n" << "3. Por UC\n" << "4. Voltar\n";
     cout << "\nOpção: ";
@@ -151,18 +144,15 @@ void listSchedule(){
         cout << "Input inválido, tente novamente: ";
         cin >> mode;
     }
-    ScheduleManagement manager;
-    manager.readClasses();
-    manager.readStudents();
     switch (stoi(mode)){
         case 1: manager.listingStudentSchedule(); break;
         case 2: manager.listingClassSchedule(); break;
         case 3: manager.listingUcSchedule(); break;
-        case 4: listingOptions(); break;
+        case 4: listingOptions(manager); break;
     }
 }
 // modification options
-void modifyOptions(){
+void modifyOptions(ScheduleManagement manager){
     cout << "\nSelecione a alteração que pretende fazer:\n";
     cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";
     cout << "\nOpção: ";
@@ -172,6 +162,26 @@ void modifyOptions(){
     while (!(type == "1" || type == "2" || type == "3" || type == "4" || type == "5")){
         cout << "Input inválido, tente novamente: ";
         cin >> type;
+    }
+    if (type == "1"){
+        cout << "Introduza o número up do estudante que deseja remover (Ex:202025487): ";
+        long int up; cin >> up;
+        cout << "Em que unidade curricular? (Ex: L.EIC002): ";
+        string uc; cin >> uc;
+        cout << "E a turma? (Ex: 1LEIC08): ";
+        string _class; cin >> _class;
+        Request r(REMOVE, up,uc,_class, "");
+        manager.push_request(r);
+
+        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        string answer; cin >> answer;
+        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+            cout << "Input inválido, tente novamente: ";
+            cin >> answer;
+        }
+        if (answer == "Y" || answer == "y") menuOperations(manager);
+        else return;
+
     }
 
 }
