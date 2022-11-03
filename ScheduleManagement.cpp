@@ -315,6 +315,46 @@ void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
     std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
 
+void ScheduleManagement::addStudent(long code, std::string _uc, std::string _cc) {
+    Student s;
+    s.set_studentCode(code);
+    const set<Student>::iterator &it = students.find(s);
+    s.set_studentName(it->get_studentName());
+    list<ClassPerUC> cpu=it->get_classPerUC();
+    if(studentsPerClass(_uc,_cc)<30)cpu.push_back(ClassPerUC(_uc,_cc));
+
+    students.erase(it);
+    s.set_ClassPerUC(cpu);
+    students.insert(s);
+    auxStudents.clear();
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+}
+
+void ScheduleManagement::changeStudentclass(long code, string _uc, string _class, string new_class) {
+    Student s;
+    s.set_studentCode(code);
+    const set<Student>::iterator &it = students.find(s);
+    s.set_studentName(it->get_studentName());
+    list<ClassPerUC> cpu;
+
+    for(auto i: it->get_classPerUC()){
+        if(i.get_ucCode()!=_uc && i.get_classCode()!=_class){
+            cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
+        }else if(studentsPerClass(_uc,new_class)<30){
+            cpu.push_back(ClassPerUC(_uc,new_class));
+        }
+    }
+
+    students.erase(it);
+    s.set_ClassPerUC(cpu);
+    students.insert(s);
+    auxStudents.clear();
+    for(auto it: students){auxStudents.push_back(it);}
+    std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
+}
+
+
 void ScheduleManagement::doRequest(){
     Request req;
     req=requests.front();
@@ -322,4 +362,23 @@ void ScheduleManagement::doRequest(){
     if(req.getType()==REMOVE){
         removeStudent(req.getStudentCode(),req.getUc(),req.getClass());
     }
+    if(req.getType()==ADD){
+        addStudent(req.getStudentCode(),req.getUc(),req.getClass());
+    }
+    if(req.getType()==CHANGE_CLASS){
+        changeStudentclass(req.getStudentCode(),req.getUc(),req.getClass(),req.getNewClass());
+    }
+}
+
+int ScheduleManagement::studentsPerClass(string uc, string _class) {
+    int count = 0;
+    for (auto student : students){
+        for (auto it: student.get_classPerUC()){
+            if (it.get_ucCode() == uc && it.get_classCode() == _class){
+                count++;
+            }
+        }
+    }
+    if(count==0){cout<<"Não há estudantes que estão nesta turma e nesta unidade curricular";}
+    return count;
 }

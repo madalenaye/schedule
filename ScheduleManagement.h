@@ -42,8 +42,12 @@ public:
     void listingStudentsInClass(string _uc,string _class);
     //requests
     void removeStudent(long code, string _uc, string _cc);
+    void addStudent(long code, string _uc, string _cc);
+    void changeStudentclass(long code, string _uc, string _class,string new_class);
     void push_request(Request r);
     void doRequest();
+    //counters
+    int studentsPerClass(string _uc,string _class);
 
 private:
     set<Student> students;
