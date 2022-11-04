@@ -19,6 +19,7 @@ public:
     set<Student> get_students() const;
     vector<Lecture> get_schedule();
     queue<Request> get_requests();
+    vector<Request> get_invalidRequests();
     //setters
     void set_students(set<Student> stu);
     void set_auxStudents(vector<Student> stu);
@@ -53,6 +54,7 @@ public:
     void changeStudentclass(long code, string _uc, string _class,string new_class);
     void push_request(Request r);
     void doRequest();
+    void pushInvalidRequest(Request r);
     //counters
     int studentsPerClass(string _uc,string _class);
     bool compatibleClass(Student stu,string uc, string cc);
@@ -61,6 +63,7 @@ private:
     vector<Student> auxStudents;
     vector<Lecture> schedule;
     queue<Request> requests;
+    vector<Request> invalid_requests;
 };
 
 #endif //SCHEDULE_SCHEDULEMANAGEMENT_H
