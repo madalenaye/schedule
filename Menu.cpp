@@ -11,6 +11,9 @@
 using namespace std;
 
 //creating menu
+/**
+ * Inicialização do menu e do manager. Lendo de seguida os ficheiros.
+ */
 void createMenu(){
     printf("\n");
     printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
@@ -29,8 +32,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
-    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv";
+    else filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -39,6 +42,11 @@ void createMenu(){
 }
 
 //types of operations
+/**
+ * Menu que permite escolher a operação a realizar.
+ * Complexidade: O(n) , n-> user input.
+ * @param manager objeto geral que contém toda a informação
+ */
 void menuOperations(ScheduleManagement manager){
     cout << setw(41) << "O que deseja fazer hoje?" << endl;
     printf("\n");
@@ -63,6 +71,10 @@ void menuOperations(ScheduleManagement manager){
     }
 }
 //listing options
+/**
+ * Faz a listagem de opções que um utilizador tem para uma certa operação.
+ * @param manager
+ */
 void listingOptions(ScheduleManagement manager){
         cout << "\nSelecione o tipo de listagem:\n";
         cout << "1. Listagem de turmas\n" << "2. Listagem de alunos\n" << "3. Listagem de horário\n" << "4. Listagem de unidades currriculares\n" << "5. Voltar\n";
@@ -81,6 +93,10 @@ void listingOptions(ScheduleManagement manager){
         else{
             printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations(manager);}
 }
+/**
+ * Permite o output da listagem das turmas com um critério em específico.
+ * @param manager
+ */
 void listClasses(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem de turmas:\n";
     cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por UC\n" << "5. Voltar\n";
@@ -101,6 +117,10 @@ void listClasses(ScheduleManagement manager){
         case 5: listingOptions(manager); break;
     }
 }
+/**
+ * Permite a listagem dos estudantes com um critério específico.
+ * @param manager
+ */
 void listStudents(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem de alunos:\n";
     cout << "1. Ordem alfabética\n" << "2. Por número de estudante\n" << "3. Por ano de entrada\n" << "4. Por ano curricular\n" << "5. Por turma\n" << "6. Alunos com mais de n UC's\n" << "7. Voltar";
@@ -122,6 +142,10 @@ void listStudents(ScheduleManagement manager){
         case 7: listingOptions(manager); break;
     }
 }
+/**
+ * Listagem das unidades curriculares a partir de um critério específico.
+ * @param manager
+ */
 void listUCs(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem de unidades curriculares:\n";
     cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por aluno\n" << "5. Por turma\n" << "6. Voltar";
@@ -142,6 +166,11 @@ void listUCs(ScheduleManagement manager){
         case 6: listingOptions(manager); break;
     }
 }
+
+/**
+ * Permite a listagem de um hórario que o utilizador desejar.
+ * @param manager
+ */
 void listSchedule(ScheduleManagement manager){
     cout << "\nSelecione o modo de listagem do horário:\n";
     cout << "1. Por aluno\n" << "2. Por turma\n" << "3. Por UC\n" << "4. Voltar\n";
@@ -161,6 +190,10 @@ void listSchedule(ScheduleManagement manager){
     }
 }
 //functor
+/**
+ * Struct para usar para procurar no set a partir de um código de estudante.
+ * Complexidade: O(1).
+ */
 struct find_by_studentCode{
     find_by_studentCode(long int code) : code(code) {}
 
@@ -172,6 +205,11 @@ private:
     long int code;
 };
 // modification options
+/**
+ * Permite ao utilizador escolher o que alterar.
+ * Complexidade: O(log(n)) , n-> tamanho do set de estudantes.
+ * @param manager
+ */
 void modifyOptions(ScheduleManagement manager){
     cout << "\nSelecione a alteração que pretende realizar: \n";
     cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";
@@ -217,9 +255,10 @@ void modifyOptions(ScheduleManagement manager){
         string uc; cin >> uc;
         cout << "E a que turma? (Ex: 1LEIC08): ";
         string _class; cin >> _class;
+
         Request r(ADD, up,uc,_class, "");
-        auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
-        if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+
+        if(manager.compatibleClass(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
         else{
             manager.pushInvalidRequest(r);
         }
@@ -249,8 +288,8 @@ void modifyOptions(ScheduleManagement manager){
         cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
         string new_class; cin >> new_class;
         Request r(CHANGE_CLASS, up,uc,_class, new_class);
-        auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
-        if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+
+        if(manager.compatibleClass(up,uc,new_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
         else{
             manager.pushInvalidRequest(r);
         }
@@ -283,8 +322,8 @@ void modifyOptions(ScheduleManagement manager){
             cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
             string new_class; cin >> new_class;
             Request r(CHANGE_CLASS, up,uc,_class, new_class);
-            auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
-            if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+            //auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
+            if(manager.compatibleClass(up,uc,new_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
             else{
                 manager.pushInvalidRequest(r);
             }
@@ -314,25 +353,34 @@ void modifyOptions(ScheduleManagement manager){
     }
 
 }
+/**
+ * Termina o program, criando um novo ficheiro com a informação atualizada com base nos pedidos feitos.
+ * Complexidade: O(m*l), m-> tamanho do set de estudantes , l-> tamanho da lista de turmas por UC.
+ * @param manager
+ */
 void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
             file<<i.get_studentCode()<<","<<i.get_studentName()<<","<<j.get_ucCode()<<","<<j.get_classCode()<<endl;
         }
     }
-    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
+    file.close();
+    invalid.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<endl;
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<endl;
     }
-
+    invalid.close();
 }
 // end menu
+/**
+ * Termina o programa de forma mais estética.
+ */
 void endMenu(){
     printf("\n");
     printf("\033[46m=============================================================\033[0m\t\t");

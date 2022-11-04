@@ -2,7 +2,14 @@
 // Created by Utilizador on 03/11/2022.
 //
 #include "Request.h"
-
+/**
+ * Construtor parametrizado dos pedidos.
+ * @param t
+ * @param sc
+ * @param uc
+ * @param c
+ * @param nc
+ */
 Request::Request(RequestType t, long sc, std::string uc, std::string c,std::string nc) {
     type=t;
     studentCode=sc;
@@ -10,7 +17,9 @@ Request::Request(RequestType t, long sc, std::string uc, std::string c,std::stri
     _class=c;
     new_class=nc;
 }
-
+/**
+ * Construtor pré-definido dos pedidos.
+ */
 Request::Request() {
     type=REMOVE;
     studentCode=0;
