@@ -6,7 +6,7 @@
 #define SCHEDULE_REQUEST_H
 #include <string>
 using namespace std;
-enum RequestType {REMOVE,ADD,CHANGE_CLASS,CHANGE_CLASSES};
+enum RequestType {REMOVE,ADD,CHANGE_CLASS};
 class Request{
     public:
         Request();
