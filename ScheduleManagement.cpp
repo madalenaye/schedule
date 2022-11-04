@@ -92,8 +92,8 @@ void ScheduleManagement::readClasses(){
     ifstream inFile;
 
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -105,9 +105,9 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
-        //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
         while (getline(inFile2,line2)){
@@ -118,7 +118,7 @@ void ScheduleManagement::readClasses(){
             getline(os,weekday,',');
             getline(os,startHour,',');
             getline(os,duration,',');
-            getline(os,type,',');
+            getline(os,type,'\r');
             if ( uc == ucCode && cc == classCode ){
                 slots.push_back(Slot(weekday,stod(startHour),stod(duration),type));
             }
@@ -128,7 +128,9 @@ void ScheduleManagement::readClasses(){
         lecture.set_Slot(slots);
         schedule.push_back(lecture);
         slots.clear();
+        inFile2.close();
     }
+    inFile.close();
 }
 /**
  * Lê o ficheiro "students_classes.csv" e guarda os elementos em diferentes atributos da classe Student
@@ -180,6 +182,7 @@ void ScheduleManagement::readStudents(string filename){
     st_class.set_ClassPerUC(cpu);
     st_class.set_studentCode(stoul(prevStCode));
     st_class.set_studentName(stName);
+    inFile.close();
     students.insert(st_class);
     for(auto it: students){auxStudents.push_back(it);}
     std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
@@ -194,8 +197,8 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string ucCode, classCode;
     ifstream inFile;
     
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -209,6 +212,7 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
         uc_class.set_classCode(classCode);
         classes.push_back(uc_class);
     }
+    inFile.close();
     return classes;
 }
 
@@ -736,7 +740,7 @@ void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
  * @param _uc  unidade curricular
  * @param _cc  turma para a qual pretende entrar
  */
-void ScheduleManagement::addStudent(long code, std::string _uc, std::string _cc) {
+void ScheduleManagement::addStudent(long code, string _uc, string _cc) {
     Student s;
     s.set_studentCode(code);
     const set<Student>::iterator &it = students.find(s);
@@ -982,41 +986,47 @@ void ScheduleManagement::listingUcsByClass() {
  * @param cc turma em que o estudante se deseja mudar para.
  * @return é verdadeiro caso seja possível fazer a mudança.
  */
-bool ScheduleManagement::compatibleClass(Student stu,string uc, string cc){
-    list<Slot> newClass;
-    vector<pair<ClassPerUC,Slot>> allStudentSlots;
-    list<ClassPerUC> cpu;
-    for (ClassPerUC c: (*this).readClassesPerUC()) {
+bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
+    auto student = find_if(students.begin(), students.end(), find_by_studentCode(up));
+    Student x = *student;
+    list<Slot> newClass= {};
+    vector<pair<ClassPerUC,Slot>> allStudentSlots= {};
+    list<ClassPerUC> cpu= {};
+    for (ClassPerUC c: readClassesPerUC()) {
         if (uc == c.get_ucCode()) {
             cpu.push_back(c);
         }
     }
+
     cpu.sort([this](const ClassPerUC a,const ClassPerUC b){
         return  studentsPerClass(a.get_ucCode(),a.get_classCode()) < studentsPerClass(b.get_ucCode(),b.get_classCode());
     });
 
-    if (abs(studentsPerClass((cpu.back()).get_ucCode(),(cpu.back()).get_classCode()) - studentsPerClass((cpu.front()).get_ucCode(),(cpu.front()).get_classCode()) >= 4) ){
+    if (abs(studentsPerClass((cpu.back()).get_ucCode(),(cpu.back()).get_classCode()) - studentsPerClass((cpu.front()).get_ucCode(),(cpu.front()).get_classCode())) >= 4 ){
         return false;
     }
+
     for (Lecture lecture: schedule){
         if (lecture.get_ucCode() == uc && lecture.get_classCode()== cc) {
             newClass= lecture.get_Slot();
             break;
         }
     }
-    for (ClassPerUC cpu1: stu.get_classPerUC()){
+
+    for (ClassPerUC cpu1: x.get_classPerUC()){
         for (Lecture le: schedule){
             if (le.get_ucCode() == cpu1.get_ucCode() && le.get_classCode() == cpu1.get_classCode()){
                 for (Slot slot: le.get_Slot()){
                     allStudentSlots.emplace_back(cpu1,slot);
                 }
-            }
+            } //-> todas as aulas do estudante
         }
     }
-    for (auto it= allStudentSlots.begin();it != allStudentSlots.end();it++){
-        for (auto it2 = newClass.begin();it2 != newClass.end();it2++){
-            if (it->first.get_ucCode() != uc){
-                if (it->second.get_WeekDay() == (*it2).get_WeekDay() &&
+
+    for (auto it= allStudentSlots.begin();it != allStudentSlots.end();it++){ //percorrer todas as aulas do estudante
+        for (auto it2 = newClass.begin();it2 != newClass.end();it2++){       //percorrer todas as aulas da turma a adicionar
+            if (it->first.get_ucCode() != uc){                              //se não forem da mesma uc?
+                if (it->second.get_WeekDay() == (*it2).get_WeekDay() &&         //se ocorrerem ao mesmo tempo, então é falso?
                     (it->second.get_StartHour() <= (*it2).get_StartHour() && (*it2).get_StartHour() <= it->second.get_StartHour()+it->second.get_Duration() ||
                      (*it2).get_StartHour() <= it->second.get_StartHour() &&  it->second.get_StartHour() <= (*it2).get_StartHour()+ (*it2).get_Duration()) &&
                     ((((*it2).get_Type()!="T") && (it->second.get_Type()!="T")))){
