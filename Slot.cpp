@@ -3,13 +3,22 @@
 //
 
 #include "Slot.h"
-
+/**
+ * Construtor pré-definido dos slots.
+ */
 Slot::Slot(){
     weekday="";
     startHour=0.0;
     duration=0.0;
     type="";
 }
+/**
+ * Construtor parametrizado dos slots.
+ * @param wd
+ * @param sh
+ * @param d
+ * @param tp
+ */
 Slot::Slot(string wd,double sh,double d,string tp){
     weekday=wd;
     startHour=sh;

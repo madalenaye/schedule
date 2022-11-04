@@ -3,11 +3,20 @@
 //
 
 #include "Lecture.h"
-
+/**
+ * Construtor pré-definido das aulas.
+ */
 Lecture::Lecture() {
     ucCode = "";
     classCode = "";
+    slots= {};
 }
+/**
+ * Construtor parametrizado do conjunto de aulas de uma unidade curricular.
+ * @param uc
+ * @param cc
+ * @param slt
+ */
 Lecture::Lecture(string uc, string cc, list<Slot> slt){
     ucCode= uc;
     classCode = cc;
