@@ -41,8 +41,8 @@ void ScheduleManagement::readClasses(){
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
 
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -134,9 +134,9 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string ucCode, classCode;
     ifstream inFile;
     
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     vector<ClassPerUC> classes;
@@ -541,6 +541,30 @@ void ScheduleManagement::listingStudentsInClass() {
     }
     else terminate(*this);
 }
+void ScheduleManagement::listingStudentsWithNUCs(){
+    cout << "Estudantes com mais de quantas UCs? ";
+    int n; cin >> n;
+    int count = 0;
+
+    for (Student student : auxStudents){
+        count = student.get_classPerUC().size();
+        if (count >= n){
+            cout << student.get_studentName() << "-" << student.get_studentCode() << "\n";
+        }
+    }
+    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    string answer; cin >> answer;
+    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "Y" || answer == "y"){
+        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+        menuOperations(*this);
+    }
+    else terminate(*this);
+}
+//student request
 void ScheduleManagement::push_request(Request r) {
     requests.push(r);
 }
@@ -625,29 +649,7 @@ int ScheduleManagement::studentsPerClass(string u, string c) {
     }
     return count;
 }
-void ScheduleManagement::listingStudentsWithNUCs(){
-    cout << "Estudantes com mais de quantas UCs? ";
-    int n; cin >> n;
-    int count = 0;
-
-    for (Student student : auxStudents){
-        count = student.get_classPerUC().size();
-        if (count >= n){
-            cout << student.get_studentName() << "-" << student.get_studentCode() << "\n";
-        }
-    }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
-    string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
-        cout << "Input inválido, tente novamente: ";
-        cin >> answer;
-    }
-    if (answer == "Y" || answer == "y"){
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
-        menuOperations(*this);
-    }
-    else terminate(*this);
-}
+//listing ucs
 void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
     if (order == "1") {
         set<string> ucs;
@@ -713,8 +715,6 @@ void ScheduleManagement::listingUCsByYear(){
     else terminate(*this);
 
 }
-
-
 void ScheduleManagement::listingUcsPerStudent() {
     cout << "Escolha o modo de pesquisa de UCs por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
     cout << "Opção: ";
