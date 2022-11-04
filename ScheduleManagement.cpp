@@ -105,8 +105,8 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
-        inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;

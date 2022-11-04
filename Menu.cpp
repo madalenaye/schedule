@@ -286,7 +286,7 @@ void modifyOptions(ScheduleManagement manager){
         string _class; cin >> _class;
         cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
         string new_class; cin >> new_class;
-        Request r(CHANGE_CLASS, up,uc,_class, "");
+        Request r(CHANGE_CLASS, up,uc,_class, new_class);
         auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
         if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
         else{
@@ -320,7 +320,7 @@ void modifyOptions(ScheduleManagement manager){
             string _class; cin >> _class;
             cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
             string new_class; cin >> new_class;
-            Request r(CHANGE_CLASS, up,uc,_class, "");
+            Request r(CHANGE_CLASS, up,uc,_class, new_class);
             auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
             if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
             else{
@@ -369,7 +369,7 @@ void terminate(ScheduleManagement manager){
         }
     }
     invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
-    invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<"NewClassCode"<<endl;
+    invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<endl;
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<endl;
     }
