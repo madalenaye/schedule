@@ -160,6 +160,17 @@ void listSchedule(ScheduleManagement manager){
         case 4: listingOptions(manager); break;
     }
 }
+//functor
+struct find_by_studentCode{
+    find_by_studentCode(long int code) : code(code) {}
+
+    bool operator()(Student student) const{
+        return student.get_studentCode() == code;
+    }
+
+private:
+    long int code;
+};
 // modification options
 void modifyOptions(ScheduleManagement manager){
     cout << "\nSelecione a alteração que pretende realizar: \n";
@@ -207,7 +218,11 @@ void modifyOptions(ScheduleManagement manager){
         cout << "E a que turma? (Ex: 1LEIC08): ";
         string _class; cin >> _class;
         Request r(ADD, up,uc,_class, "");
-        manager.push_request(r);
+        auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
+        if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+        else{
+            manager.pushInvalidRequest(r);
+        }
         cout << "\nDeseja realizar outra operação? (Y/N)? ";
         string answer; cin >> answer;
         while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
@@ -233,8 +248,12 @@ void modifyOptions(ScheduleManagement manager){
         string _class; cin >> _class;
         cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
         string new_class; cin >> new_class;
-        Request r(CHANGE_CLASS, up,uc,_class, new_class);
-        manager.push_request(r);
+        Request r(CHANGE_CLASS, up,uc,_class, "");
+        auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
+        if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+        else{
+            manager.pushInvalidRequest(r);
+        }
         cout << "\nDeseja realizar outra operação? (Y/N)? ";
         string answer; cin >> answer;
         while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
@@ -258,16 +277,17 @@ void modifyOptions(ScheduleManagement manager){
         for(int i = 1; i <= n; i++){
             cout << i << "ª alteração: \n";
             cout << "Em que unidade curricular? (Ex: L.EIC002): ";
-            string uc;
-            cin >> uc;
+            string uc; cin >> uc;
             cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC08): ";
-            string _class;
-            cin >> _class;
+            string _class; cin >> _class;
             cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
-            string new_class;
-            cin >> new_class;
-            Request r(CHANGE_CLASS, up, uc, _class, new_class);
-            manager.push_request(r);
+            string new_class; cin >> new_class;
+            Request r(CHANGE_CLASS, up,uc,_class, "");
+            auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
+            if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+            else{
+                manager.pushInvalidRequest(r);
+            }
         }
         cout << "\nDeseja realizar outra operação? (Y/N)? ";
         string answer; cin >> answer;
