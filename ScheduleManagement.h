@@ -57,7 +57,7 @@ public:
     void pushInvalidRequest(Request r);
     //counters
     int studentsPerClass(string _uc,string _class);
-    bool compatibleClass(Student stu,string uc, string cc);
+    bool compatibleClass(long int up,string uc, string cc);
 private:
     set<Student> students;
     vector<Student> auxStudents;

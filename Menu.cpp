@@ -32,8 +32,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
-    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv";
+    else filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -255,9 +255,10 @@ void modifyOptions(ScheduleManagement manager){
         string uc; cin >> uc;
         cout << "E a que turma? (Ex: 1LEIC08): ";
         string _class; cin >> _class;
+
         Request r(ADD, up,uc,_class, "");
-        auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
-        if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+
+        if(manager.compatibleClass(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
         else{
             manager.pushInvalidRequest(r);
         }
@@ -287,8 +288,8 @@ void modifyOptions(ScheduleManagement manager){
         cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
         string new_class; cin >> new_class;
         Request r(CHANGE_CLASS, up,uc,_class, new_class);
-        auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
-        if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+
+        if(manager.compatibleClass(up,uc,new_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
         else{
             manager.pushInvalidRequest(r);
         }
@@ -321,8 +322,8 @@ void modifyOptions(ScheduleManagement manager){
             cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
             string new_class; cin >> new_class;
             Request r(CHANGE_CLASS, up,uc,_class, new_class);
-            auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
-            if(manager.compatibleClass(*student,uc,_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+            //auto student = find_if(manager.get_students().begin(), manager.get_students().end(), find_by_studentCode(up));
+            if(manager.compatibleClass(up,uc,new_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
             else{
                 manager.pushInvalidRequest(r);
             }
@@ -361,19 +362,20 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
             file<<i.get_studentCode()<<","<<i.get_studentName()<<","<<j.get_ucCode()<<","<<j.get_classCode()<<endl;
         }
     }
-    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
+    file.close();
+    invalid.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<endl;
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<endl;
     }
-
+    invalid.close();
 }
 // end menu
 /**
