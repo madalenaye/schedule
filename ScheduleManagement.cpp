@@ -17,24 +17,66 @@ using namespace std;
 
 
 //constructors
+/**
+ * Construtor default
+ */
 ScheduleManagement::ScheduleManagement(){
     students={};
     schedule={};
 }
+/**
+ * Construtor parametrizado
+ * @param stu - set de estudantes
+ * @param sch - vetor com horário de turmas/UCs
+ */
 ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
     students = stu;
     schedule = sch;
 }
 //getters
+/**
+ * Obtém o horário das turmas por UC
+ * Complexidade: O(1)
+ * @return vetor do horário das turmas por cada cadeira
+ */
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
+/**
+ * Obtém uma fila para processar os pedidos
+ * Complexidade: O(1)
+ * @return
+ */
 queue<Request> ScheduleManagement::get_requests(){return requests;}
+/**
+ * Obtém os estudantes
+ * Complexidade: O(1)
+ * @return set com estudantes
+ */
 set<Student> ScheduleManagement::get_students() const {return students;}
 //setters
+/**
+ * Define o horário das turmas/UCs com o parâmetro sch
+ * Complexidade: O(1)
+ * @param sch
+ */
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
+/**
+ * Define o set de estudantes com o parâmetro stu
+ * Complexidade: O(1)
+ * @param stu
+ */
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
+/**
+ * Define um vetor auxiliar de estudantes com o parâmetro stu
+ * Complexidade: O(1)
+ * @param stu
+ */
 void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
 
 //read files
+/**
+ * Lê o ficheiro "classes.csv" e guarda os elementos em diferentes atributos da classe Lecture
+ * Complexidade: O(n*m), n->ler o ficheiro "classes_per_uc.csv", m->ler o ficheiro "classes.csv"
+ */
 void ScheduleManagement::readClasses(){
 
     string line;
@@ -80,6 +122,11 @@ void ScheduleManagement::readClasses(){
         slots.clear();
     }
 }
+/**
+ * Lê o ficheiro "students_classes.csv" e guarda os elementos em diferentes atributos da classe Student
+ * Complexidade: O(n*m^2*log(m)), n->ler o ficheiro e guardar, m->criar e dar sort ao vetor auxiliar de estudantes
+ * @param filename determina se é para ler o ficheiro inicial ou o atualizado depois das alterações
+ */
 void ScheduleManagement::readStudents(string filename){
     string line;
     string stCode, stName, ucCode, classCode;
@@ -95,7 +142,7 @@ void ScheduleManagement::readStudents(string filename){
     getline(is,stCode,',');
     getline(is,stName,',');
     getline(is,ucCode,',');
-    getline(is,classCode,',');
+    getline(is,classCode,'\r');
     string prevStCode=stCode;
     list<ClassPerUC> cpu;
     cpu.push_back(ClassPerUC(ucCode,classCode));
@@ -129,6 +176,11 @@ void ScheduleManagement::readStudents(string filename){
     for(auto it: students){auxStudents.push_back(it);}
     std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
+/**
+ * Lê o ficheiro "classes_per_uc.csv" e guarda os elementos num vetor
+ * Complexidade: O(n)
+ * @return um vetor com objetos pertencentes à classe ClassPerUC
+ */
 vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string line;
     string ucCode, classCode;
@@ -153,6 +205,10 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
 }
 
 //listings of classes
+/**
+ * Faz a listagem das turmas por cada ano curricular
+ * Complexidade: O(m), m->número de vezes que o utilizador repete o input
+ */
 void ScheduleManagement::listingClassPerYear() {
     cout << "Pretende ver as turmas de que ano? (1/2/3): ";
     string y; cin >> y;
@@ -782,4 +838,49 @@ void ScheduleManagement::listingUcsByClass() {
     }
     else terminate(*this);
 }
+bool ScheduleManagement::compatibleClass(Student stu,string uc, string cc){
+    list<Slot> newClass;
+    vector<pair<ClassPerUC,Slot>> allStudentSlots;
+    list<ClassPerUC> cpu;
+    for (ClassPerUC c: (*this).readClassesPerUC()) {
+        if (uc == c.get_ucCode()) {
+            cpu.push_back(c);
+        }
+    }
+    cpu.sort([this](const ClassPerUC a,const ClassPerUC b){
+        return  studentsPerClass(a.get_ucCode(),a.get_classCode()) < studentsPerClass(b.get_ucCode(),b.get_classCode());
+    });
 
+    if (abs(studentsPerClass((cpu.back()).get_ucCode(),(cpu.back()).get_classCode()) - studentsPerClass((cpu.front()).get_ucCode(),(cpu.front()).get_classCode()) >= 4) ){
+        return false;
+    }
+    for (Lecture lecture: schedule){
+        if (lecture.get_ucCode() == uc && lecture.get_classCode()== cc) {
+            newClass= lecture.get_Slot();
+            break;
+        }
+    }
+
+    for (ClassPerUC cpu: stu.get_classPerUC()){
+        for (Lecture le: schedule){
+            if (le.get_ucCode() == cpu.get_ucCode() && le.get_classCode() == cpu.get_classCode()){
+                for (Slot slot: le.get_Slot()){
+                    allStudentSlots.emplace_back(cpu,slot);
+                }
+            }
+        }
+    }
+    for (auto it= allStudentSlots.begin();it != allStudentSlots.end();it++){
+        for (auto it2 = newClass.begin();it2 != newClass.end();it2++){
+            if (it->first.get_ucCode() != uc){
+                if (it->second.get_WeekDay() == (*it2).get_WeekDay() &&
+                    (it->second.get_StartHour() <= (*it2).get_StartHour() && (*it2).get_StartHour() <= it->second.get_StartHour()+it->second.get_Duration() ||
+                     (*it2).get_StartHour() <= it->second.get_StartHour() &&  it->second.get_StartHour() <= (*it2).get_StartHour()+ (*it2).get_Duration()) &&
+                    ((((*it2).get_Type()!="T") && (it->second.get_Type()!="T")))){
+                    return false;
+                }
+            }
+        }
+    }
+    return true;
+}

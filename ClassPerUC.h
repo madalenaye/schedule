@@ -13,8 +13,8 @@ public:
     ClassPerUC();
     ClassPerUC(string uc, string cc);
     //getters
-    string get_ucCode();
-    string get_classCode();
+    string get_ucCode() const;
+    string get_classCode() const;
     //setters
     void set_ucCode(string uc);
     void set_classCode(string cc);
