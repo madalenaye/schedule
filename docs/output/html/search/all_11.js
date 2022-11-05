@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['uccode_0',['ucCode',['../class_class_per_u_c.html#a45f65f454b0492f487fd5620362f49ae',1,'ClassPerUC::ucCode()'],['../class_lecture.html#a53abacec5fbf0fb0cbfea1731cb14f92',1,'Lecture::ucCode()']]]
+  ['terminate_0',['terminate',['../_menu_8cpp.html#a78092d29048482ad4560283c50fe5998',1,'terminate(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8h.html#a78092d29048482ad4560283c50fe5998',1,'terminate(ScheduleManagement manager):&#160;Menu.cpp']]],
+  ['type_1',['type',['../class_request.html#affc001ac329251d9015065c5643cae67',1,'Request::type()'],['../class_slot.html#a2724196d075f2b8abf68e51508d9edbf',1,'Slot::type()']]]
 ];

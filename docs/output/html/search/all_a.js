@@ -1,9 +1,27 @@
 var searchData=
 [
-  ['main_0',['main',['../_c_make_c_compiler_id_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCCompilerId.c'],['../_c_make_c_x_x_compiler_id_8cpp.html#a0ddf1224851353fc92bfbff6f499fa97',1,'main(int argc, char *argv[]):&#160;CMakeCXXCompilerId.cpp'],['../main_8cpp.html#ae66f6b31b5ad750f1fe042a706a4e3d4',1,'main():&#160;main.cpp']]],
-  ['main_2ecpp_1',['main.cpp',['../main_8cpp.html',1,'']]],
-  ['menu_2ecpp_2',['Menu.cpp',['../_menu_8cpp.html',1,'']]],
-  ['menu_2eh_3',['Menu.h',['../_menu_8h.html',1,'']]],
-  ['menuoperations_4',['menuOperations',['../_menu_8cpp.html#a4039b962d246e410bbc2004b175c894f',1,'menuOperations(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8h.html#a4039b962d246e410bbc2004b175c894f',1,'menuOperations(ScheduleManagement manager):&#160;Menu.cpp']]],
-  ['modifyoptions_5',['modifyOptions',['../_menu_8cpp.html#a3e701502a76779fec357be67af2cbb51',1,'modifyOptions(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8h.html#a3e701502a76779fec357be67af2cbb51',1,'modifyOptions(ScheduleManagement manager):&#160;Menu.cpp']]]
+  ['lecture_0',['Lecture',['../class_lecture.html',1,'Lecture'],['../class_lecture.html#a3b30e3ae722f1ebaeeb1d93d6c7b3913',1,'Lecture::Lecture()'],['../class_lecture.html#a48a17c9ac18f205aa0dc7dd2a1998733',1,'Lecture::Lecture(string uc, string cc, list&lt; Slot &gt; slt)']]],
+  ['lecture_2ecpp_1',['Lecture.cpp',['../_lecture_8cpp.html',1,'']]],
+  ['lecture_2eh_2',['Lecture.h',['../_lecture_8h.html',1,'']]],
+  ['listclasses_3',['listClasses',['../_menu_8h.html#a0b9aa47b604d323d1c8e81e2be0744f1',1,'listClasses(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8cpp.html#a0b9aa47b604d323d1c8e81e2be0744f1',1,'listClasses(ScheduleManagement manager):&#160;Menu.cpp']]],
+  ['listingallstudentscode_4',['listingAllStudentsCode',['../class_schedule_management.html#a43ed16974522ab0ca4e4e752bbc05b6a',1,'ScheduleManagement']]],
+  ['listingallstudentsname_5',['listingAllStudentsName',['../class_schedule_management.html#a4a1588cf55c02d780312d66cc6510442',1,'ScheduleManagement']]],
+  ['listingallucs_6',['listingAllUCs',['../class_schedule_management.html#afdd10ff098f9b78919513bf9eceb8e00',1,'ScheduleManagement']]],
+  ['listingclasses_7',['listingClasses',['../class_schedule_management.html#a12f5be9e7e73a0dfcaaf5432546c5781',1,'ScheduleManagement']]],
+  ['listingclassesperuc_8',['listingClassesPerUC',['../class_schedule_management.html#ad8c51a8db1c9092953483919dc77af8d',1,'ScheduleManagement']]],
+  ['listingclassperyear_9',['listingClassPerYear',['../class_schedule_management.html#adac19b757911e3fcdd3a179e62bef108',1,'ScheduleManagement']]],
+  ['listingclassschedule_10',['listingClassSchedule',['../class_schedule_management.html#aaa4ad4cc9532dbb283ba316361deaddb',1,'ScheduleManagement']]],
+  ['listingoptions_11',['listingOptions',['../_menu_8h.html#a065aae29f107f098624ca926be617057',1,'listingOptions(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8cpp.html#a065aae29f107f098624ca926be617057',1,'listingOptions(ScheduleManagement manager):&#160;Menu.cpp']]],
+  ['listingstudentsbyyearofentry_12',['listingStudentsByYearOfEntry',['../class_schedule_management.html#ac01f46f06e72d776a5cc64a4ce714ed3',1,'ScheduleManagement']]],
+  ['listingstudentschedule_13',['listingStudentSchedule',['../class_schedule_management.html#ae86598a57f8af528fbac4ef8b49a46a4',1,'ScheduleManagement']]],
+  ['listingstudentsinclass_14',['listingStudentsInClass',['../class_schedule_management.html#ad893a0951c652061381a60716a567ea7',1,'ScheduleManagement']]],
+  ['listingstudentsinyear_15',['listingStudentsInYear',['../class_schedule_management.html#a719c6385793d6cdee40b46db35517505',1,'ScheduleManagement']]],
+  ['listingstudentswithnucs_16',['listingStudentsWithNUCs',['../class_schedule_management.html#ae712a18bf292baff759287687e7ce795',1,'ScheduleManagement']]],
+  ['listingucsbyclass_17',['listingUcsByClass',['../class_schedule_management.html#a23b50907f7caa596d669859968992d60',1,'ScheduleManagement']]],
+  ['listingucsbyyear_18',['listingUCsByYear',['../class_schedule_management.html#aa611bee6a99d3c5672c1c5fc9e1b00f9',1,'ScheduleManagement']]],
+  ['listingucschedule_19',['listingUcSchedule',['../class_schedule_management.html#a8670e3f54c08de1606558abc58c5f7da',1,'ScheduleManagement']]],
+  ['listingucsperstudent_20',['listingUcsPerStudent',['../class_schedule_management.html#aabb77cd8f72141811b70a635650126eb',1,'ScheduleManagement']]],
+  ['listschedule_21',['listSchedule',['../_menu_8cpp.html#adc43fe590fdc4b43d5e001afc008b936',1,'listSchedule(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8h.html#adc43fe590fdc4b43d5e001afc008b936',1,'listSchedule(ScheduleManagement manager):&#160;Menu.cpp']]],
+  ['liststudents_22',['listStudents',['../_menu_8cpp.html#a832c94b69449ec1f45548410b711627a',1,'listStudents(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8h.html#a832c94b69449ec1f45548410b711627a',1,'listStudents(ScheduleManagement manager):&#160;Menu.cpp']]],
+  ['listucs_23',['listUCs',['../_menu_8cpp.html#a64c71c5edd34f6801af63be3c9ce7fd0',1,'listUCs(ScheduleManagement manager):&#160;Menu.cpp'],['../_menu_8h.html#a64c71c5edd34f6801af63be3c9ce7fd0',1,'listUCs(ScheduleManagement manager):&#160;Menu.cpp']]]
 ];

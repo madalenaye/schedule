@@ -32,8 +32,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv";
-    else filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
+    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -365,7 +365,7 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
@@ -373,7 +373,7 @@ void terminate(ScheduleManagement manager){
         }
     }
     file.close();
-    invalid.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/invalid_requests.csv");
+    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<endl;
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<endl;
