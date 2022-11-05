@@ -241,14 +241,14 @@ void ScheduleManagement::listingClassPerYear() {
         cout<<it<<endl;
     }
     cout<<"Há "<< classes.size()<<" turmas no "<<year <<"º ano";
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -278,14 +278,14 @@ void ScheduleManagement::listingClasses(string order){
             cout << it << endl;
         }
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -309,16 +309,16 @@ void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
     if (uc == "001") uni = "UP" + uc;
     else uni = "L.EIC0" + uc;
     for (auto it: v){
-        if (it.get_ucCode() == uni){ cout << it.get_classCode() << "\n";}
+        if (it.get_ucCode() == uni){ cout << it.get_classCode() << endl;}
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -381,7 +381,7 @@ private:
  * Complexidade: O(n*m*k), n->tamanho do vetor cpu do estudante *result, m-> tamanho do vetor lecture, k->tamanho da lista de slots
  */
 void ScheduleManagement::listingStudentSchedule() const{
-    cout << "Escolha o modo de pesquisa de horário por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
+    cout << "Escolha o modo de pesquisa de horário por estudante: \n" << "1. Número UP\n" << "2. Nome" << endl;
     cout << "\nOpção: ";
     string mode; cin >> mode;
     while (!(mode == "1" || mode == "2")){
@@ -438,14 +438,14 @@ void ScheduleManagement::listingStudentSchedule() const{
                  << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
         }
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n"); cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -473,14 +473,14 @@ void ScheduleManagement::listingClassSchedule() {
         cout << it->second.get_WeekDay() << endl;
         cout << it->first << ", "  << it->second.get_StartHour() << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -508,14 +508,14 @@ void ScheduleManagement::listingUcSchedule() {
         cout << it->second.get_WeekDay() << endl;
         cout << it->first << ", "  << it->second.get_StartHour() << ", " << it->second.get_Duration() << ", " << it->second.get_Type() << endl;
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -529,14 +529,14 @@ void ScheduleManagement::listingAllStudentsCode() {
     for(auto i:students){
         cout<<i.get_studentCode()<<" - "<<i.get_studentName()<<endl;
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -550,14 +550,14 @@ void ScheduleManagement::listingAllStudentsName(){
     for(auto i:auxStudents){
         cout<<i.get_studentName()<<"-"<<i.get_studentCode()<<endl;
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -587,15 +587,15 @@ void ScheduleManagement::listingStudentsInYear(){
             }
         }
     }
-    cout << "Há " << count << " alunos neste ano.\n";
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "Há " << count << " alunos neste ano." << endl;
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -622,13 +622,13 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
         }
     }
     if(count==0) cout << "Não há estudantes que entraram neste ano.";
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
+    if (answer == "S" || answer == "s") {
         printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
         menuOperations(*this);
     }
@@ -654,14 +654,14 @@ void ScheduleManagement::listingStudentsInClass() {
         }
     }
     if(count==0){cout<<"Não há estudantes nesta turma e nesta unidade curricular";}
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -679,17 +679,17 @@ void ScheduleManagement::listingStudentsWithNUCs(){
     for (Student student : auxStudents){
         count = student.get_classPerUC().size();
         if (count >= n){
-            cout << student.get_studentName() << "-" << student.get_studentCode() << "\n";
+            cout << student.get_studentName() << "-" << student.get_studentCode() << endl;
         }
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y"){
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s"){
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -843,14 +843,14 @@ void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
             cout << it << endl;
         }
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -880,14 +880,14 @@ void ScheduleManagement::listingUCsByYear(){
         cout<<it<<endl;
     }
     cout<<"Há "<< UCs.size()<<" UCs no "<<year <<"º ano";
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -899,8 +899,8 @@ void ScheduleManagement::listingUCsByYear(){
  * Complexidade: O(n) n-> tamanho da lista cpu do estudante *result.
  */
 void ScheduleManagement::listingUcsPerStudent() {
-    cout << "Escolha o modo de pesquisa de UCs por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
-    cout << "Opção: ";
+    cout << "Escolha o modo de pesquisa de UCs por estudante: \n" << "1. Número UP\n" << "2. Nome" << endl;
+    cout << "\nOpção: ";
     string mode; cin >> mode;
     while (!(mode == "1" || mode == "2")){
         cout << "Input inválido, tente novamente: ";
@@ -929,14 +929,14 @@ void ScheduleManagement::listingUcsPerStudent() {
         cout<<" ";
 
     }
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
@@ -957,14 +957,14 @@ void ScheduleManagement::listingUcsByClass() {
     }
     cout<<'\b';  //Cursor moves 1 position backwards
     cout<<" ";
-    cout << "\nDeseja realizar outra operação? (Y/N)? ";
+    cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
-    while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
         cin >> answer;
     }
-    if (answer == "Y" || answer == "y") {
-        printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");printf("\n");
+    if (answer == "S" || answer == "s") {
+        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
         menuOperations(*this);
     }
     else terminate(*this);
