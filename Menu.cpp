@@ -19,8 +19,8 @@ void createMenu(){
     printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
     cout << endl;
     cout << endl;
-    cout << setw(54) << "Bem-vind@ ao melhor gestor de horários!" << endl;
-    cout<< setw(43) << "Que ficheiro deseja ler?" << endl;
+    cout << setw(51) << "Bem-vind@ ao melhor gestor de horários!" << endl;
+    cout<< setw(41) << "Que ficheiro deseja ler?" << endl;
     cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(32) << "2. Ficheiro atualizado" << endl;
     printf("\n  Opção: ");
     string option; cin >> option;
@@ -230,9 +230,9 @@ void modifyOptions(ScheduleManagement manager){
         string _class; cin >> _class;
         Request r(REMOVE, up,uc,_class, "");
         manager.push_request(r);
-
+        cout << endl;
+        cout << "Pedido realizado com sucesso!" << endl;
         cout << "\nDeseja realizar outra operação (S/N)? ";
-        cout << "(Nota: as modificações, caso aceites, só serão feitas ao final do dia) ";
         string answer; cin >> answer;
         while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
             cout << "Input inválido, tente novamente: ";
