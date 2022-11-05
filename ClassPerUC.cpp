@@ -15,9 +15,8 @@ ClassPerUC::ClassPerUC() {
  * @param cc
  */
 ClassPerUC::ClassPerUC(std::string uc, std::string cc) {ucCode=uc;classCode=cc;}
-string ClassPerUC::get_ucCode() const{return ucCode;}
-string ClassPerUC::get_classCode() const{return classCode;}
+string ClassPerUC::get_ucCode() {return ucCode;}
+string ClassPerUC::get_classCode() {return classCode;}
 //setters
 void ClassPerUC::set_ucCode(string uc){ucCode=uc;}
 void ClassPerUC::set_classCode(string cc){classCode=cc;}
-

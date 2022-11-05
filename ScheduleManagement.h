@@ -35,7 +35,7 @@ public:
     //listing schedule
     void listingClassSchedule();
     void listingUcSchedule();
-    void listingStudentSchedule() const;
+    void listingStudentSchedule() ;
     //listing students
     void listingAllStudentsCode();
     void listingAllStudentsName();
