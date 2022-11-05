@@ -1049,6 +1049,14 @@ bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
 void ScheduleManagement::pushInvalidRequest(Request r){
     invalid_requests.push_back(r);
 }
+/**
+ * Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular
+ * e se já tem uma turma associada
+ * Complexidade: 0(n), n-> tamanho da lista de Turmas do estudante s.
+ * @param up
+ * @param uc
+ * @return true se não estiver inscrito na unidade curricular.
+ */
 bool ScheduleManagement::isAlreadyInThisUc(long int up,string uc){
     Student s;
     s.set_studentCode(up);
