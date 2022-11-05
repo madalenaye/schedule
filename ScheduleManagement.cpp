@@ -18,7 +18,7 @@ using namespace std;
 
 //constructors
 /**
- * Construtor default
+ * Construtor default.
  */
 ScheduleManagement::ScheduleManagement(){
     students={};
@@ -27,9 +27,9 @@ ScheduleManagement::ScheduleManagement(){
     requests={};
 }
 /**
- * Construtor parametrizado
- * @param stu - set de estudantes
- * @param sch - vetor com horário de turmas/UCs
+ * Construtor parametrizado.
+ * @param stu - set de estudantes.
+ * @param sch - vetor com horário de turmas/UCs.
  */
 ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
     students = stu;
@@ -37,44 +37,44 @@ ScheduleManagement::ScheduleManagement(set<Student> stu, vector<Lecture> sch){
 }
 //getters
 /**
- * Obtém o horário das turmas por UC
+ * Obtém o horário das turmas por UC.
  * Complexidade: O(1)
- * @return vetor do horário das turmas por cada cadeira
+ * @return vetor do horário das turmas por cada cadeira.
  */
 vector<Lecture> ScheduleManagement::get_schedule() {return schedule;}
 /**
- * Obtém uma fila para processar os pedidos
+ * Obtém uma fila para processar os pedidos.
  * Complexidade: O(1)
- * @return
+ * @return vetor com horários.
  */
 queue<Request> ScheduleManagement::get_requests(){return requests;}
 /**
- * Obtém os estudantes
+ * Obtém os estudantes.
  * Complexidade: O(1)
- * @return set com estudantes
+ * @return set com estudantes.
  */
 set<Student> ScheduleManagement::get_students() const {return students;}
 /**
- * Obtém o vetor de pedidos inválidos
+ * Obtém o vetor de pedidos inválidos.
  * Complexidade: O(1)
- * @return vetor com pedidos inválidos
+ * @return vetor com pedidos inválidos.
  */
 vector<Request> ScheduleManagement::get_invalidRequests() {return invalid_requests;}
 //setters
 /**
- * Define o horário das turmas/UCs com o parâmetro sch
+ * Define o horário das turmas/UCs com o parâmetro sch.
  * Complexidade: O(1)
  * @param sch
  */
 void ScheduleManagement::set_schedule(vector<Lecture> sch) {schedule=sch;}
 /**
- * Define o set de estudantes com o parâmetro stu
+ * Define o set de estudantes com o parâmetro stu.
  * Complexidade: O(1)
  * @param stu
  */
 void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
 /**
- * Define um vetor auxiliar de estudantes com o parâmetro stu
+ * Define um vetor auxiliar de estudantes com o parâmetro stu.
  * Complexidade: O(1)
  * @param stu
  */
@@ -82,7 +82,7 @@ void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
 
 //read files
 /**
- * Lê o ficheiro "classes.csv" e guarda os elementos em diferentes atributos da classe Lecture
+ * Lê o ficheiro "classes.csv" e guarda os elementos em diferentes atributos da classe Lecture.
  * Complexidade: O(n*m), n->ler o ficheiro "classes_per_uc.csv", m->ler o ficheiro "classes.csv"
  */
 void ScheduleManagement::readClasses(){
@@ -133,9 +133,9 @@ void ScheduleManagement::readClasses(){
     inFile.close();
 }
 /**
- * Lê o ficheiro "students_classes.csv" e guarda os elementos em diferentes atributos da classe Student
- * Complexidade: O(nlog(m)*m^2*log(m)), n->ler o ficheiro e guardar, m->criar e dar sort ao vetor auxiliar de estudantes
- * @param filename determina se é para ler o ficheiro inicial ou o atualizado depois das alterações
+ * Lê o ficheiro "students_classes.csv" e guarda os elementos em diferentes atributos da classe Student.
+ * Complexidade: O(n), n->tamanho do set de estudantes.
+ * @param filename determina se é para ler o ficheiro inicial ou o atualizado depois das alterações.
  */
 void ScheduleManagement::readStudents(string filename){
     string line;
@@ -188,9 +188,9 @@ void ScheduleManagement::readStudents(string filename){
     std::sort(auxStudents.begin(), auxStudents.end(),[](Student a, Student b){return a.get_studentName()<b.get_studentName();});
 }
 /**
- * Lê o ficheiro "classes_per_uc.csv" e guarda os elementos num vetor
- * Complexidade: O(n)
- * @return um vetor com objetos pertencentes à classe ClassPerUC
+ * Lê o ficheiro "classes_per_uc.csv" e guarda os elementos num vetor.
+ * Complexidade: O(n), n-> tamanho do ficheiro "class_per_uc.csv".
+ * @return um vetor com objetos pertencentes à classe ClassPerUC.
  */
 vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string line;
@@ -218,8 +218,8 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
 
 //listings of classes
 /**
- * Faz a listagem das turmas por cada ano curricular
- * Complexidade: O(nlog(n)), nlog(n)->obtém o class code das turmas de um certo ano
+ * Faz a listagem das turmas por cada ano curricular.
+ * Complexidade: O(n), n->tamanho do vetor schedule.
  */
 void ScheduleManagement::listingClassPerYear() {
     cout << "Pretende ver as turmas de que ano? (1/2/3): ";
@@ -254,9 +254,9 @@ void ScheduleManagement::listingClassPerYear() {
     else terminate(*this);
 }
 /**
- * Lista as turmas segundo ordem crescente ou decrescente
- * @param order define a ordem a listar as turmas
- * Complexidade: O(nlog(n)+mlog(n)), m->corre o vetor schedule, n->faz ordenação do set turmas
+ * Lista as turmas segundo ordem crescente ou decrescente.
+ * @param order define a ordem a listar as turmas.
+ * Complexidade: O(n), n-> corre o vetor lecture.
  */
 void ScheduleManagement::listingClasses(string order){
 
@@ -293,7 +293,7 @@ void ScheduleManagement::listingClasses(string order){
 }
 /**
  * Lista as turmas por cada unidade curricular
- * Complexidade: O(n+m), n->user input, m->output das turmas de uma cadeira especifica
+ * Complexidade: O(n), n-> tamanho do vetor v.
  * @param v vetor de todas as unidades curriculares com as respetivas turmas
  */
 void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
@@ -326,10 +326,10 @@ void ScheduleManagement::listingClassesPerUC(vector<ClassPerUC> v){
 }
 //listing of schedule
 /**
- * Converte os dias da semana em números inteiros
+ * Converte os dias da semana em números inteiros.
  * Complexidade: O(1)
- * @param weekday dia da semana
- * @return número inteiro
+ * @param weekday dia da semana.
+ * @return número inteiro.
  */
 int weekDayToNum(string weekday){
     if (weekday =="Monday"){
@@ -349,8 +349,8 @@ int weekDayToNum(string weekday){
 }
 // functors
 /**
- * Encontrar um estudante do set de estudantes pelo seu atributo "studentCode"
- * Complexidade: O(1)
+ * Encontrar um estudante do set de estudantes pelo seu atributo "studentCode".
+ * Complexidade: O(1).
  */
 struct find_by_studentCode{
     find_by_studentCode(long int code) : code(code) {}
@@ -363,7 +363,7 @@ private:
     long int code;
 };
 /**
- * Encontrar do set de estudantes pelo seu atributo "studentName"
+ * Encontrar do set de estudantes pelo seu atributo "studentName".
  * Complexidade: O(1)
  */
 struct find_by_studentName{
@@ -377,9 +377,8 @@ private:
     string name;
 };
 /**
- * Listagem do horário por cada estudante
- * Complexidade: O(n*m*k*p), n->corre a lista de turmas por UC, m->corre o vetor lecture, k->corre a lista de slots,
- * p->guarda o par(classPerUC,slot) num vetor e dá sort com base na data e hora
+ * Listagem do horário por cada estudante.
+ * Complexidade: O(n*m*k), n->tamanho do vetor cpu do estudante *result, m-> tamanho do vetor lecture, k->tamanho da lista de slots
  */
 void ScheduleManagement::listingStudentSchedule() const{
     cout << "Escolha o modo de pesquisa de horário por estudante: \n" << "1. Número UP\n" << "2. Nome" << endl;
@@ -453,8 +452,7 @@ void ScheduleManagement::listingStudentSchedule() const{
 }
 /**
  * Listagem do horário de cada turma
- * Complexidade: O(n*m*p), n->corre o schedule, m->corre os slots, p->colocar o par(uc_code, slot) no vetor auxiliar e
- * dar sort com base na data e hora
+ * Complexidade: O(n*m), n->tamanho do vetor schedule, m->tamanho da lista de slots
  */
 void ScheduleManagement::listingClassSchedule() {
     cout << "Deseja ver o horário de que turma? (Ex: 1LEIC07): ";
@@ -488,8 +486,8 @@ void ScheduleManagement::listingClassSchedule() {
     else terminate(*this);
 }
 /**
- * Complexidade: O(n*m*p), n->corre o schedule, m->corre os slots, p->colocar o par(class_code, slot) no vetor auxiliar e
- * dar sort com base na data e hora, j->output na consola, k->user input
+ * Listagem do horário de uma cadeira.
+ * Complexidade: O(n*m), n->tamanho do vetor schedule, m->tamanho da lista Slot de uma lectures
  */
 void ScheduleManagement::listingUcSchedule() {
     cout << "Deseja ver o horário de que unidade curricular? (Ex: L.EIC003): ";
@@ -525,7 +523,7 @@ void ScheduleManagement::listingUcSchedule() {
 //listing of students
 /**
  * Listagem de todos os estudantes por número up.
- * Complexidade:O(n+m) , n-> output dos atributos código estudante e nome por ordem crescente de código de estudante, m-> user input
+ * Complexidade:O(n) , n-> tamanho do set students
  */
 void ScheduleManagement::listingAllStudentsCode() {
     for(auto i:students){
@@ -546,7 +544,7 @@ void ScheduleManagement::listingAllStudentsCode() {
 }
 /**
  * Listagem dos estudantes em função do nome.
- * Complexidade: O(n+m) ,n-> output dos atributos nome e código de estudante por ordem alfabética.
+ * Complexidade: O(n) ,n-> tamanho do vetor auxStudents
  */
 void ScheduleManagement::listingAllStudentsName(){
     for(auto i:auxStudents){
@@ -566,7 +564,7 @@ void ScheduleManagement::listingAllStudentsName(){
 }
 /**
  * Listagem dos estudantes em função do ano curricular.
- * Complicado: O(n+m*p) , n-> user input , m-> itera sobre o vetor auxStudents , p-> itera sobre a lista de ClassPerUc
+ * Complicado: O(n*m) , n-> tamanho do vetor auxStudents , m-> tamanho da lista j
  * e dá output aos estudantes de um respetivo ano.
  */
 void ScheduleManagement::listingStudentsInYear(){
@@ -604,7 +602,7 @@ void ScheduleManagement::listingStudentsInYear(){
 }
 /**
  * Listagem dos estudantes com base no ano de entrada na faculdade.
- * Complexidade: O(n+m) , n-> user input ,  m-> itera sobre o set students que permite o output dos estudantes.
+ * Complexidade: O(n), n-> tamanho do vetor de estudantes
  */
 void ScheduleManagement::listingStudentsByYearOfEntry(){
     cout << "Pretende ver os alunos de que ano de entrada? (2019/2020): ";
@@ -638,8 +636,7 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
 }
 /**
  * Listagem dos estudantes de uma turma.
- * Complexidade: O(n*m +p) , n-> itera sobre o vetor auxiliar de estudantes , m-> itera sobre uma lista de ClassPerUc de
- * modo a conseguir obter o output dos estudantes.
+ * Complexidade: O(n*m) , n-> tamanho do vetor auxiliar de estudantes , m-> tamanho da lista<ClassPerUc> do estudante i.
  */
 void ScheduleManagement::listingStudentsInClass() {
     cout << "Pretende ver os alunos de que turma? (Ex: 1LEIC13/2LEIC01/3LEIC06): ";
@@ -672,8 +669,7 @@ void ScheduleManagement::listingStudentsInClass() {
 /**
  * Listagem dos estudantes com mais inscrições em unidades curriculares com base no input mínimo de unidades curriculares
  * desejado.
- * Complexidade: O(n+m) , n-> itera sobre o vetor auxStudents possibilitando a obtenção do número de unidades curriculares de cada estudante,
- * n-> user input.
+ * Complexidade: O(n) , n-> tamanho do vetor auxStudents
  */
 void ScheduleManagement::listingStudentsWithNUCs(){
     cout << "Estudantes com mais de quantas UCs? ";
@@ -709,7 +705,7 @@ void ScheduleManagement::push_request(Request r) {
 }
 /**
  * Remove o estudante de uma turma de uma determinada UC
- * Complexidade: nlog(n), n->tamanho do set/número de estudantes
+ * Complexidade: 0(nlog(n)), n->tamanho do set/número de estudantes
  * @param code código up do estudante
  * @param _uc unidade curricular
  * @param _class turma da qual pretende sair
@@ -757,7 +753,7 @@ void ScheduleManagement::addStudent(long code, string _uc, string _cc) {
 }
 /**
  * Muda o estudante de turma a uma determinada cadeira
- * Complexidade: O(nlog(n))
+ * Complexidade: O(nlog(n)) ,n -> tamanho do vetor auxStudents
  * @param code código up do estudante
  * @param _uc unidade curricular
  * @param _class turma para a qual quer sair
@@ -824,8 +820,7 @@ int ScheduleManagement::studentsPerClass(string u, string c) {
 //listing ucs
 /**
  * Listagem de todas as unidades curriculares (ordem crescente ou decrescente, a definir pelo utilizador)
- * Complexidade: O(n*log(m)+m+p) , n-> itera sobre o vetor ClassPerUc, m-> inserção do código da unidade curricular no set de strings ucs,
- * l -> itera sobre o set de strings e dá output às mesmas , p ->user input.
+ * Complexidade: O(n*log(m)) , n-> tamanho do vetor ClassPerUc, m-> tamanho do set ucs.
  * @param order caso seja 1 , organiza por ordem crescente senão organiza de forma descrescente.
  * @param v  vetor de ClassPerUc para iterar sobre.
  */
@@ -863,8 +858,7 @@ void ScheduleManagement::listingAllUCs(string order, vector<ClassPerUC> v){
 }
 /**
  * Listagem de todas as unidades curriculares com base no ano em que estas são lecionadas.
- * Complexidade: O(n+m*log(p)) , n-> user input , m-> itera sobre o schedule para permitir distinguir os anos,
- * p-> insere num set de strings as unidades curriculares que pertencem ao ano desejado.
+ * Complexidade: O(n*log(m)) , n-> tamannho do vetor schedule , m-> tamanh0 do set UCs
  */
 void ScheduleManagement::listingUCsByYear(){
     cout << "Pretende ver as UCs de que ano? (1/2/3): ";
@@ -902,8 +896,7 @@ void ScheduleManagement::listingUCsByYear(){
 /**
  * Listagem das unidades curriculares de um estudante, a partir do código do estudante ou nome do estudante (a definir
  * pelo utilizador).
- * Complexidade: O(n+log(m)+m) , n -> user input , m-> procura o estudante com base no código de estudante ou nome e
- * itera sobre este para obter as unidades curriculares em que se encontra escrito.
+ * Complexidade: O(n) n-> tamanho da lista cpu do estudante *result.
  */
 void ScheduleManagement::listingUcsPerStudent() {
     cout << "Escolha o modo de pesquisa de UCs por estudante: \n" << "1. Número UP\n" << "2. Nome" << endl;
@@ -950,8 +943,7 @@ void ScheduleManagement::listingUcsPerStudent() {
 }
 /**
  * Listagem das unidades curriculares com base na turma.
- * Complexidade: O(n+m+p), n-> leitura do ficheiro "classes_per_uc.csv" , m -> itera sobre o vetor resultante da leitura para
- * dar output às unidades curriculares, p-> user input.
+ * Complexidade: O(n), n-> tamanho do vetor v.
  */
 void ScheduleManagement::listingUcsByClass() {
     cout << "Introduza a turma (Ex: 1LEIC01): ";
@@ -979,8 +971,8 @@ void ScheduleManagement::listingUcsByClass() {
 }
 /**
  * Verifica se é possível fazer a mudanção ou adição de turma.
- * Complexidade= O(n*m*k²), n -> itera sobre a lista de ClassPerUc do estudante, m-> itera sobre o schedule para obter o horário da turma
- * para o qual o estudante pretende se mudar, k-> obtém o horário dessa turma e coloca-o num vetor
+ * Complexidade= O(n*m*k), n -> tamanho da lista cpu do estudante x, m-> tamanho do vetor schedule, k-> tamanho da lista slot
+ * do objeto lecture.
  * @param stu estudante em questão.
  * @param uc cadeira em que deseja mudar de turma.
  * @param cc turma em que o estudante se deseja mudar para.
