@@ -257,8 +257,8 @@ void modifyOptions(ScheduleManagement manager){
         string _class; cin >> _class;
 
         Request r(ADD, up,uc,_class, "");
-
-        if(manager.compatibleClass(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+        if(manager.isAlreadyInThisUc(up,uc) && manager.compatibleClass(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30)
+            {manager.push_request(r);}
         else{
             manager.pushInvalidRequest(r);
         }

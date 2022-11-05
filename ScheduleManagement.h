@@ -58,6 +58,7 @@ public:
     //counters
     int studentsPerClass(string _uc,string _class);
     bool compatibleClass(long int up,string uc, string cc);
+    bool isAlreadyInThisUc(long int up,string uc);
 private:
     set<Student> students;
     vector<Student> auxStudents;

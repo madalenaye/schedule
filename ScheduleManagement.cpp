@@ -752,7 +752,7 @@ void ScheduleManagement::addStudent(long code, string _uc, string _cc) {
     Student es = *it;
     s.set_studentName(es.get_studentName());
     list<ClassPerUC> cpu=es.get_classPerUC();
-    if(studentsPerClass(_uc,_cc)<30)cpu.push_back(ClassPerUC(_uc,_cc));
+    if(studentsPerClass(_uc,_cc)<30 && isAlreadyInThisUc(code,_uc))cpu.push_back(ClassPerUC(_uc,_cc));
 
     students.erase(it);
     s.set_ClassPerUC(cpu);
@@ -1001,7 +1001,6 @@ bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
             cpu.push_back(c);
         }
     }
-
     cpu.sort([this]( ClassPerUC a, ClassPerUC b){
         return  studentsPerClass(a.get_ucCode(),a.get_classCode()) < studentsPerClass(b.get_ucCode(),b.get_classCode());
     });
@@ -1049,4 +1048,15 @@ bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
  */
 void ScheduleManagement::pushInvalidRequest(Request r){
     invalid_requests.push_back(r);
+}
+bool ScheduleManagement::isAlreadyInThisUc(long int up,string uc){
+    Student s;
+    s.set_studentCode(up);
+    const set<Student>::iterator &it = students.find(s);
+    Student es = *it;
+    s.set_ClassPerUC(es.get_classPerUC());
+    for (ClassPerUC i:s.get_classPerUC()){
+        if (i.get_ucCode() == uc){return false;}
+    }
+    return true;
 }
