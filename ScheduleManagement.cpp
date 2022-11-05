@@ -92,8 +92,8 @@ void ScheduleManagement::readClasses(){
     ifstream inFile;
 
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -105,9 +105,9 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
-        //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
         while (getline(inFile2,line2)){
@@ -197,8 +197,8 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string ucCode, classCode;
     ifstream inFile;
     
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -355,7 +355,7 @@ int weekDayToNum(string weekday){
 struct find_by_studentCode{
     find_by_studentCode(long int code) : code(code) {}
 
-    bool operator()(Student student) const{
+    bool operator()(Student student) {
         return student.get_studentCode() == code;
     }
 
@@ -369,7 +369,7 @@ private:
 struct find_by_studentName{
     find_by_studentName(string n) : name(n) {}
 
-    bool operator()(Student student) const{
+    bool operator()(Student student) {
         return student.get_studentName() == name;
     }
 
@@ -380,8 +380,10 @@ private:
  * Listagem do horário por cada estudante.
  * Complexidade: O(n*m*k), n->tamanho do vetor cpu do estudante *result, m-> tamanho do vetor lecture, k->tamanho da lista de slots
  */
-void ScheduleManagement::listingStudentSchedule() const{
-    cout << "Escolha o modo de pesquisa de horário por estudante: \n" << "1. Número UP\n" << "2. Nome" << endl;
+
+void ScheduleManagement::listingStudentSchedule(){
+    cout << "Escolha o modo de pesquisa de horário por estudante: \n" << "1. Número UP\n" << "2. Nome\n";
+
     cout << "\nOpção: ";
     string mode; cin >> mode;
     while (!(mode == "1" || mode == "2")){
@@ -393,7 +395,8 @@ void ScheduleManagement::listingStudentSchedule() const{
         long int up; cin >> up;
         auto result = find_if(students.begin(), students.end(), find_by_studentCode(up));
         vector<pair<ClassPerUC, Slot>> aux;
-        for (ClassPerUC cpu: (*result).get_classPerUC()) {
+        Student es = (*result);
+        for (ClassPerUC cpu: es.get_classPerUC()) {
             for (Lecture lecture: schedule) {
                 if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
                     for (Slot slot: lecture.get_Slot()) {
@@ -418,7 +421,8 @@ void ScheduleManagement::listingStudentSchedule() const{
         string name; cin >> name;
         auto result = find_if(students.begin(), students.end(), find_by_studentName(name));
         vector<pair<ClassPerUC, Slot>> aux;
-        for (ClassPerUC cpu: (*result).get_classPerUC()) {
+        Student es = (*result);
+        for (ClassPerUC cpu: es.get_classPerUC()) {
             for (Lecture lecture: schedule) {
                 if (cpu.get_ucCode() == lecture.get_ucCode() && cpu.get_classCode() == lecture.get_classCode()) {
                     for (Slot slot: lecture.get_Slot()) {
@@ -615,6 +619,7 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
     }
     int year = stoi(y);
     int count=0;
+
     for(auto i:students){
         if((int)(i.get_studentCode()/100000)==year){
             cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
@@ -640,15 +645,15 @@ void ScheduleManagement::listingStudentsByYearOfEntry(){
  */
 void ScheduleManagement::listingStudentsInClass() {
     cout << "Pretende ver os alunos de que turma? (Ex: 1LEIC13/2LEIC01/3LEIC06): ";
-    string _class; cin >> _class;
+    string _class;
+    cin >> _class;
     cout << "De que unidade curricular? (Ex: L.EIC003): ";
     string _uc; cin >> _uc;
     int count=0;
-
-    for(auto i:auxStudents){
-        for(auto j: i.get_classPerUC()){
-            if(j.get_classCode()==_class && j.get_ucCode()==_uc){
-                cout<<i.get_studentCode()<<"-"<<i.get_studentName()<<endl;
+    for(auto i:auxStudents) {
+        for (auto j: i.get_classPerUC()) {
+            if (j.get_classCode() == _class && j.get_ucCode() == _uc) {
+                cout << i.get_studentCode() << "-" << i.get_studentName() << endl;
                 count++;
                 break;
             }
@@ -660,10 +665,12 @@ void ScheduleManagement::listingStudentsInClass() {
     string answer; cin >> answer;
     while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
         cout << "Input inválido, tente novamente: ";
-        cin >> answer;
-    }
+            cout << "Input inválido, tente novamente: ";
+            cin >> answer;
+        }
+
     if (answer == "S" || answer == "s") {
-        cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << endl;
+        cout <<'\n';printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << '\n';
         menuOperations(*this);
     }
     else terminate(*this);
@@ -716,10 +723,11 @@ void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
     Student s;
     s.set_studentCode(code);
     const set<Student>::iterator &it = students.find(s);
-    s.set_studentName(it->get_studentName());
+    Student es = (*it);
+    s.set_studentName(es.get_studentName());
     list<ClassPerUC> cpu;
 
-    for(auto i: it->get_classPerUC()){
+    for(auto i: es.get_classPerUC()){
         if(i.get_ucCode()!=_uc && i.get_classCode()!=_class){
             cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
         }
@@ -742,9 +750,10 @@ void ScheduleManagement::addStudent(long code, string _uc, string _cc) {
     Student s;
     s.set_studentCode(code);
     const set<Student>::iterator &it = students.find(s);
-    s.set_studentName(it->get_studentName());
-    list<ClassPerUC> cpu=it->get_classPerUC();
-    if(studentsPerClass(_uc,_cc)<30)cpu.push_back(ClassPerUC(_uc,_cc));
+    Student es = *it;
+    s.set_studentName(es.get_studentName());
+    list<ClassPerUC> cpu=es.get_classPerUC();
+    if(studentsPerClass(_uc,_cc)<30 && isAlreadyInThisUc(code,_uc))cpu.push_back(ClassPerUC(_uc,_cc));
 
     students.erase(it);
     s.set_ClassPerUC(cpu);
@@ -765,10 +774,11 @@ void ScheduleManagement::changeStudentclass(long code, string _uc, string _class
     Student s;
     s.set_studentCode(code);
     const set<Student>::iterator &it = students.find(s);
-    s.set_studentName(it->get_studentName());
+    Student es = *it;
+    s.set_studentName(es.get_studentName());
     list<ClassPerUC> cpu;
 
-    for(auto i: it->get_classPerUC()){
+    for(auto i: es.get_classPerUC()){
         if(i.get_ucCode()!=_uc || i.get_classCode()!=_class){
             cpu.push_back(ClassPerUC(i.get_ucCode(),i.get_classCode()));
         }else if(studentsPerClass(_uc,new_class)<30){
@@ -893,7 +903,6 @@ void ScheduleManagement::listingUCsByYear(){
         menuOperations(*this);
     }
     else terminate(*this);
-
 }
 /**
  * Listagem das unidades curriculares de um estudante, a partir do código do estudante ou nome do estudante (a definir
@@ -920,7 +929,8 @@ void ScheduleManagement::listingUcsPerStudent() {
         }
         auto result = find_if(students.begin(), students.end(), find_by_studentCode(up));
         cout << up << ": ";
-        for (auto i: (*result).get_classPerUC()){
+        Student es = (*result);
+        for (auto i: es.get_classPerUC()){
                     cout << i.get_ucCode() << ",";
                 }
         cout<<'\b';  //Cursor moves 1 position backwards
@@ -937,7 +947,8 @@ void ScheduleManagement::listingUcsPerStudent() {
         }
         auto result = find_if(students.begin(), students.end(), find_by_studentName(name));
         cout << name << ": ";
-        for (auto it: (*result).get_classPerUC()){
+        Student es = (*result);
+        for (auto it: es.get_classPerUC()){
             cout << it.get_ucCode() << ",";
         }
         cout<<'\b';  //Cursor moves 1 position backwards
@@ -1004,8 +1015,7 @@ bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
             cpu.push_back(c);
         }
     }
-
-    cpu.sort([this](const ClassPerUC a,const ClassPerUC b){
+    cpu.sort([this]( ClassPerUC a, ClassPerUC b){
         return  studentsPerClass(a.get_ucCode(),a.get_classCode()) < studentsPerClass(b.get_ucCode(),b.get_classCode());
     });
 
@@ -1052,4 +1062,23 @@ bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
  */
 void ScheduleManagement::pushInvalidRequest(Request r){
     invalid_requests.push_back(r);
+}
+/**
+ * Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular
+ * e se já tem uma turma associada
+ * Complexidade: 0(n), n-> tamanho da lista de Turmas do estudante s.
+ * @param up
+ * @param uc
+ * @return true se não estiver inscrito na unidade curricular.
+ */
+bool ScheduleManagement::isAlreadyInThisUc(long int up,string uc){
+    Student s;
+    s.set_studentCode(up);
+    const set<Student>::iterator &it = students.find(s);
+    Student es = *it;
+    s.set_ClassPerUC(es.get_classPerUC());
+    for (ClassPerUC i:s.get_classPerUC()){
+        if (i.get_ucCode() == uc){return false;}
+    }
+    return true;
 }

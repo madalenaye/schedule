@@ -25,9 +25,9 @@ Student::Student(long int stc, string stn, list<ClassPerUC> cpu){
     this->cpu = cpu;
 }
 //getters and setters
-int Student::get_studentCode() const {return studentCode;}
-string Student::get_studentName() const {return studentName;}
-list<ClassPerUC> Student::get_classPerUC() const {return cpu;}
+int Student::get_studentCode()  {return studentCode;}
+string Student::get_studentName()  {return studentName;}
+list<ClassPerUC> Student::get_classPerUC()  {return cpu;}
 
 void Student::set_studentCode(long int stc){studentCode = stc;}
 void Student::set_studentName(string stn){studentName = stn;}
@@ -37,7 +37,7 @@ void Student::set_ClassPerUC(list<ClassPerUC> cpu) {this->cpu= cpu;}
  * @param rhs
  * @return true caso o código do estudante seja o mesmo.
  */
-bool Student::operator==(const Student &rhs) const {
+bool Student::operator==(Student rhs) {
     return studentCode == rhs.studentCode;
 }
 /**
@@ -45,6 +45,7 @@ bool Student::operator==(const Student &rhs) const {
  * @param rhs
  * @return  false caso o estudante seja o mesmo.
  */
-bool Student::operator!=(const Student &rhs) const {
-    return !(rhs == *this);
+bool Student::operator!=(Student rhs) {
+    return studentCode != rhs.studentCode;
+
 }

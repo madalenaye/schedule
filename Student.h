@@ -19,9 +19,9 @@ public:
     Student();
     Student(long int stc , string stn, list<ClassPerUC> cpu);
     //getters
-    int get_studentCode() const;
-    string get_studentName() const;
-    list<ClassPerUC> get_classPerUC() const;
+    int get_studentCode() ;
+    string get_studentName() ;
+    list<ClassPerUC> get_classPerUC() ;
     //setters
     void set_studentCode(long int stc);
     void set_studentName(string stn);
@@ -32,9 +32,10 @@ public:
         return (studentCode < P.get_studentCode());
     }
 
-    bool operator==(const Student &rhs) const;
+    bool operator==(Student rhs);
 
-    bool operator!=(const Student &rhs) const;
+    bool operator!=(Student rhs);
+
 
 private:
     long int studentCode;
