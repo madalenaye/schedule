@@ -94,12 +94,16 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:adaa36076dafc3d2291de5525fbad1edb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:aa2161b5de79cf2caef7cb49dcda1c794"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_request.html">Request</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#aa2161b5de79cf2caef7cb49dcda1c794">get_invalidRequests</a> ()</td></tr>
 <tr class="separator:aa2161b5de79cf2caef7cb49dcda1c794"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a8185cbf7c063e258390ae9f8ad89b0cf"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a8185cbf7c063e258390ae9f8ad89b0cf">get_cap</a> ()</td></tr>
+<tr class="separator:a8185cbf7c063e258390ae9f8ad89b0cf"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a9abb84e73b5bf97bf313c19478682c78"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a9abb84e73b5bf97bf313c19478682c78">set_students</a> (set&lt; <a class="el" href="class_student.html">Student</a> &gt; stu)</td></tr>
 <tr class="separator:a9abb84e73b5bf97bf313c19478682c78"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0c2eceb1ef41e41e25b335cdeb8e6994"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a0c2eceb1ef41e41e25b335cdeb8e6994">set_auxStudents</a> (vector&lt; <a class="el" href="class_student.html">Student</a> &gt; stu)</td></tr>
 <tr class="separator:a0c2eceb1ef41e41e25b335cdeb8e6994"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a720cd9ef816be72b9329e48ffaab00e4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a720cd9ef816be72b9329e48ffaab00e4">set_schedule</a> (vector&lt; <a class="el" href="class_lecture.html">Lecture</a> &gt; sch)</td></tr>
 <tr class="separator:a720cd9ef816be72b9329e48ffaab00e4"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a35e3d21ed0c93960cc176ebfd2be4898"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a35e3d21ed0c93960cc176ebfd2be4898">set_cap</a> (int c)</td></tr>
+<tr class="separator:a35e3d21ed0c93960cc176ebfd2be4898"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2c92b8d639a2d3b5d8de7852ad1c8728"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a2c92b8d639a2d3b5d8de7852ad1c8728">readClasses</a> ()</td></tr>
 <tr class="separator:a2c92b8d639a2d3b5d8de7852ad1c8728"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a7654588340f0d3f1979abfbd2eff4930"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a7654588340f0d3f1979abfbd2eff4930">readStudents</a> (string filename)</td></tr>
@@ -152,10 +156,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a24099136f052de96358ad8520baf03ee"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a2f2175d56ade5b9fd5e16f7932ebe60b"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a2f2175d56ade5b9fd5e16f7932ebe60b">studentsPerClass</a> (string _uc, string _class)</td></tr>
 <tr class="separator:a2f2175d56ade5b9fd5e16f7932ebe60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a3fbd2cfff16a5f64fea4b8232a4c8167"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a3fbd2cfff16a5f64fea4b8232a4c8167">compatibleClass</a> (long int up, string uc, string cc)</td></tr>
-<tr class="separator:a3fbd2cfff16a5f64fea4b8232a4c8167"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aac3e7f1f7eb3123830a43804426760e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#aac3e7f1f7eb3123830a43804426760e5">isAlreadyInThisUc</a> (long int up, string uc)</td></tr>
-<tr class="separator:aac3e7f1f7eb3123830a43804426760e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a682d349ad670d0d36dff8bc7574120a1"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a682d349ad670d0d36dff8bc7574120a1">compatibleClassUnbalance</a> (string uc, string cc)</td></tr>
+<tr class="separator:a682d349ad670d0d36dff8bc7574120a1"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a49fbf67d846dddb23a9f40f70babbdc8"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a49fbf67d846dddb23a9f40f70babbdc8">isNotAlreadyInThisUc</a> (long int up, string uc)</td></tr>
+<tr class="separator:a49fbf67d846dddb23a9f40f70babbdc8"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a1e755654db65540fe102c204f4670968"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a1e755654db65540fe102c204f4670968">compatibleClassSchedule</a> (long int up, string uc, string cc)</td></tr>
+<tr class="separator:a1e755654db65540fe102c204f4670968"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:ad40929730428f3374e0e7d580a43172e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#ad40929730428f3374e0e7d580a43172e">binary_search</a> (string name)</td></tr>
 <tr class="separator:ad40929730428f3374e0e7d580a43172e"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a75f8bf3110e40d2a8c6d32499f8f1f88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a75f8bf3110e40d2a8c6d32499f8f1f88">print_exitOptions</a> ()</td></tr>
@@ -173,6 +179,8 @@ Private Attributes</h2></td></tr>
 <tr class="separator:a838e1e1829b8ab972b3c3afa9588b06b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:af234dcd4b5d9f05c06af30b373328ae9"><td class="memItemLeft" align="right" valign="top">vector&lt; <a class="el" href="class_request.html">Request</a> &gt;&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#af234dcd4b5d9f05c06af30b373328ae9">invalid_requests</a></td></tr>
 <tr class="separator:af234dcd4b5d9f05c06af30b373328ae9"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7d4125fbde05e73bfeb921100f2ce69f"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a7d4125fbde05e73bfeb921100f2ce69f">cap</a></td></tr>
+<tr class="separator:a7d4125fbde05e73bfeb921100f2ce69f"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Constructor &amp; Destructor Documentation</h2>
 <a id="a9f4a93cce79dbd37dc3e12b1751c2269" name="a9f4a93cce79dbd37dc3e12b1751c2269"></a>
@@ -345,14 +353,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="a3fbd2cfff16a5f64fea4b8232a4c8167" name="a3fbd2cfff16a5f64fea4b8232a4c8167"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a3fbd2cfff16a5f64fea4b8232a4c8167">&#9670;&#160;</a></span>compatibleClass()</h2>
+<a id="a1e755654db65540fe102c204f4670968" name="a1e755654db65540fe102c204f4670968"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a1e755654db65540fe102c204f4670968">&#9670;&#160;</a></span>compatibleClassSchedule()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool ScheduleManagement::compatibleClass </td>
+          <td class="memname">bool ScheduleManagement::compatibleClassSchedule </td>
           <td>(</td>
           <td class="paramtype">long int&#160;</td>
           <td class="paramname"><em>up</em>, </td>
@@ -376,7 +384,44 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Verifica se é possível fazer a mudanção ou adição de turma. Complexidade= O(n*m*k), n -&gt; tamanho da lista cpu do estudante x, m-&gt; tamanho do vetor schedule, k-&gt; tamanho da lista slot do objeto lecture. </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Verifica se um estudante tem um horário compatível com a nova turma/uc que deseja adicionar. Complexidade: O(n*m*p) , n-&gt; tamanho da lista x.get_classPerUc(), m-&gt; tamanho do vetor schedule , p-&gt; tamanho da lista le.get_Slots(). </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">up</td><td></td></tr>
+    <tr><td class="paramname">uc</td><td></td></tr>
+    <tr><td class="paramname">cc</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd></dd></dl>
+
+</div>
+</div>
+<a id="a682d349ad670d0d36dff8bc7574120a1" name="a682d349ad670d0d36dff8bc7574120a1"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a682d349ad670d0d36dff8bc7574120a1">&#9670;&#160;</a></span>compatibleClassUnbalance()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ScheduleManagement::compatibleClassUnbalance </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>uc</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>cc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Verifica se é possível fazer a mudanção ou adição de turma com base no tamanho das turmas de uma UC. Complexidade= O(n*log(n)), n -&gt; tamanho da lista cpu. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stu</td><td>estudante em questão. </td></tr>
     <tr><td class="paramname">uc</td><td>cadeira em que deseja mudar de turma. </td></tr>
@@ -403,6 +448,24 @@ Private Attributes</h2></td></tr>
       </table>
 </div><div class="memdoc">
 <p >Realizar os pedidos Complexidade: O(1) </p>
+
+</div>
+</div>
+<a id="a8185cbf7c063e258390ae9f8ad89b0cf" name="a8185cbf7c063e258390ae9f8ad89b0cf"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a8185cbf7c063e258390ae9f8ad89b0cf">&#9670;&#160;</a></span>get_cap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ScheduleManagement::get_cap </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Obtém a capacidade máxima de estudantes de uma turma/UC </p><dl class="section return"><dt>Returns</dt><dd>variável cap </dd></dl>
 
 </div>
 </div>
@@ -478,14 +541,14 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
-<a id="aac3e7f1f7eb3123830a43804426760e5" name="aac3e7f1f7eb3123830a43804426760e5"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aac3e7f1f7eb3123830a43804426760e5">&#9670;&#160;</a></span>isAlreadyInThisUc()</h2>
+<a id="a49fbf67d846dddb23a9f40f70babbdc8" name="a49fbf67d846dddb23a9f40f70babbdc8"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a49fbf67d846dddb23a9f40f70babbdc8">&#9670;&#160;</a></span>isNotAlreadyInThisUc()</h2>
 
 <div class="memitem">
 <div class="memproto">
       <table class="memname">
         <tr>
-          <td class="memname">bool ScheduleManagement::isAlreadyInThisUc </td>
+          <td class="memname">bool ScheduleManagement::isNotAlreadyInThisUc </td>
           <td>(</td>
           <td class="paramtype">long int&#160;</td>
           <td class="paramname"><em>up</em>, </td>
@@ -503,7 +566,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular e se já tem uma turma associada Complexidade: 0(n), n-&gt; tamanho da lista de Turmas do estudante s. </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular e se já tem uma turma associada Complexidade: 0(n), n-&gt; tamanho da lista de turmas do estudante s. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">up</td><td></td></tr>
     <tr><td class="paramname">uc</td><td></td></tr>
@@ -1022,6 +1085,30 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="a35e3d21ed0c93960cc176ebfd2be4898" name="a35e3d21ed0c93960cc176ebfd2be4898"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a35e3d21ed0c93960cc176ebfd2be4898">&#9670;&#160;</a></span>set_cap()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScheduleManagement::set_cap </td>
+          <td>(</td>
+          <td class="paramtype">int&#160;</td>
+          <td class="paramname"><em>c</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Define o cap com um valor c </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">c</td><td>um novo valor para a capacidade máxima de estudantes por turma/UC </td></tr>
+  </table>
+  </dd>
+</dl>
+
+</div>
+</div>
 <a id="a720cd9ef816be72b9329e48ffaab00e4" name="a720cd9ef816be72b9329e48ffaab00e4"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a720cd9ef816be72b9329e48ffaab00e4">&#9670;&#160;</a></span>set_schedule()</h2>
 
@@ -1118,6 +1205,28 @@ Private Attributes</h2></td></tr>
       <table class="memname">
         <tr>
           <td class="memname">vector&lt;<a class="el" href="class_student.html">Student</a>&gt; ScheduleManagement::auxStudents</td>
+        </tr>
+      </table>
+  </td>
+  <td class="mlabels-right">
+<span class="mlabels"><span class="mlabel">private</span></span>  </td>
+  </tr>
+</table>
+</div><div class="memdoc">
+
+</div>
+</div>
+<a id="a7d4125fbde05e73bfeb921100f2ce69f" name="a7d4125fbde05e73bfeb921100f2ce69f"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7d4125fbde05e73bfeb921100f2ce69f">&#9670;&#160;</a></span>cap</h2>
+
+<div class="memitem">
+<div class="memproto">
+<table class="mlabels">
+  <tr>
+  <td class="mlabels-left">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ScheduleManagement::cap</td>
         </tr>
       </table>
   </td>

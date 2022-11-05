@@ -20,10 +20,12 @@ public:
     vector<Lecture> get_schedule();
     queue<Request> get_requests();
     vector<Request> get_invalidRequests();
+    int get_cap();
     //setters
     void set_students(set<Student> stu);
     void set_auxStudents(vector<Student> stu);
     void set_schedule(vector<Lecture> sch);
+    void set_cap(int c);
     //readers
     void readClasses();
     void readStudents(string filename);
@@ -71,6 +73,7 @@ private:
     vector<Lecture> schedule;
     queue<Request> requests;
     vector<Request> invalid_requests;
+    int cap;
 };
 
 #endif //SCHEDULE_SCHEDULEMANAGEMENT_H
