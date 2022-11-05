@@ -14,7 +14,7 @@
 #include "Slot.h"
 #include "Menu.h"
 using namespace std;
-
+#define INT_MAX 200
 
 //constructors
 /**
@@ -92,8 +92,8 @@ void ScheduleManagement::readClasses(){
     ifstream inFile;
 
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -105,9 +105,9 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
-        //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
         while (getline(inFile2,line2)){
@@ -197,8 +197,8 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string ucCode, classCode;
     ifstream inFile;
     
-    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
@@ -658,8 +658,8 @@ void ScheduleManagement::addStudent(long code, string _uc, string _cc) {
     Student es = *it;
     s.set_studentName(es.get_studentName());
     list<ClassPerUC> cpu=es.get_classPerUC();
-    if(studentsPerClass(_uc,_cc)<30 && isAlreadyInThisUc(code,_uc))cpu.push_back(ClassPerUC(_uc,_cc));
-
+    if(studentsPerClass(_uc,_cc)<30 && isNotAlreadyInThisUc(code,_uc))cpu.push_back(ClassPerUC(_uc,_cc));
+    cpu.sort([](ClassPerUC a, ClassPerUC b){return ((int) a.get_ucCode()[6]*10+ (int) a.get_ucCode()[7]) <((int) b.get_ucCode()[6]*10+ (int) b.get_ucCode()[7]) ;});
     students.erase(it);
     s.set_ClassPerUC(cpu);
     students.insert(s);
@@ -690,7 +690,7 @@ void ScheduleManagement::changeStudentclass(long code, string _uc, string _class
             cpu.push_back(ClassPerUC(_uc,new_class));
         }
     }
-
+    cpu.sort([](ClassPerUC a, ClassPerUC b){return ((int) a.get_ucCode()[6]*10+ (int) a.get_ucCode()[7]) <((int) b.get_ucCode()[6]*10+ (int) b.get_ucCode()[7]) ;});
     students.erase(it);
     s.set_ClassPerUC(cpu);
     students.insert(s);
@@ -867,21 +867,18 @@ void ScheduleManagement::listingUcsByClass() {
     print_exitOptions();
 }
 /**
- * Verifica se é possível fazer a mudanção ou adição de turma.
- * Complexidade= O(n*m*k), n -> tamanho da lista cpu do estudante x, m-> tamanho do vetor schedule, k-> tamanho da lista slot
- * do objeto lecture.
+ * Verifica se é possível fazer a mudanção ou adição de turma com base no tamanho das turmas de uma UC.
+ * Complexidade= O(n*log(n)), n -> tamanho da lista cpu.
  * @param stu estudante em questão.
  * @param uc cadeira em que deseja mudar de turma.
  * @param cc turma em que o estudante se deseja mudar para.
  * @return é verdadeiro caso seja possível fazer a mudança.
  */
-bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
-    auto student = find_if(students.begin(), students.end(), find_by_studentCode(up));
-    Student x = *student;
-    list<Slot> newClass= {};
-    vector<pair<ClassPerUC,Slot>> allStudentSlots= {};
+bool ScheduleManagement::compatibleClassUnbalance(string uc, string cc){
+
     list<ClassPerUC> cpu= {};
-    for (ClassPerUC c: readClassesPerUC()) {
+    vector<ClassPerUC> v = readClassesPerUC();
+    for (ClassPerUC c: v) {
         if (uc == c.get_ucCode()) {
             cpu.push_back(c);
         }
@@ -891,9 +888,34 @@ bool ScheduleManagement::compatibleClass(long int up,string uc, string cc){
     });
 
     if (abs(studentsPerClass((cpu.back()).get_ucCode(),(cpu.back()).get_classCode()) - studentsPerClass((cpu.front()).get_ucCode(),(cpu.front()).get_classCode())) >= 4 ){
+        cout << "\nExiste um desequilíbrio entre as turmas desta UC, deseja continuar o pedido?(S/N)\n ";
+        string answer;cin >> answer;
+        while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
+            cout << "Input inválido, tente novamente: ";
+            cin >> answer;
+        }
+        if (answer == "S" || answer == "s"){
+            return true;
+        }
         return false;
     }
+    return true;
 
+}
+/**
+ * Verifica se um estudante tem um horário compatível com a nova turma/uc que deseja adicionar.
+ * Complexidade: O(n*m*p) , n-> tamanho da lista x.get_classPerUc(), m-> tamanho do vetor schedule , p-> tamanho da lista
+ * le.get_Slots().
+ * @param up
+ * @param uc
+ * @param cc
+ * @return
+ */
+bool ScheduleManagement::compatibleClassSchedule(long int up,std::string uc, std::string cc) {
+    auto student = find_if(students.begin(), students.end(), find_by_studentCode(up));
+    Student x = *student;
+    list<Slot> newClass= {};
+    vector<pair<ClassPerUC,Slot>> allStudentSlots= {};
     for (Lecture lecture: schedule){
         if (lecture.get_ucCode() == uc && lecture.get_classCode()== cc) {
             newClass= lecture.get_Slot();
@@ -942,7 +964,7 @@ void ScheduleManagement::pushInvalidRequest(Request r){
  * @param uc
  * @return true se não estiver inscrito na unidade curricular.
  */
-bool ScheduleManagement::isAlreadyInThisUc(long int up, string uc){
+bool ScheduleManagement::isNotAlreadyInThisUc(long int up, string uc){
     Student s;
     s.set_studentCode(up);
     const set<Student>::iterator &it = students.find(s);
