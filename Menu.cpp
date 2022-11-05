@@ -15,13 +15,13 @@ using namespace std;
  * Inicialização do menu e do manager. Lendo de seguida os ficheiros.
  */
 void createMenu(){
-    printf("\n");
+    cout << endl;
     printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-    printf("\n");
-    printf("\n");
-    cout << setw(54) << "Bem-vind@ ao melhor gestor de horários! \n";
-    cout<< setw(43) << "Que ficheiro deseja ler?\n";
-    cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(32) << "2. Ficheiro atualizado\n";
+    cout << endl;
+    cout << endl;
+    cout << setw(51) << "Bem-vind@ ao melhor gestor de horários!" << endl;
+    cout<< setw(41) << "Que ficheiro deseja ler?" << endl;
+    cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(32) << "2. Ficheiro atualizado" << endl;
     printf("\n  Opção: ");
     string option; cin >> option;
     // input error
@@ -49,8 +49,8 @@ void createMenu(){
  */
 void menuOperations(ScheduleManagement manager){
     cout << setw(41) << "O que deseja fazer hoje?" << endl;
-    printf("\n");
-    cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa\n";
+    cout << endl;
+    cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa" << endl;
     printf("\n  Opção: ");
     // prompting for operation
     string option;
@@ -76,8 +76,8 @@ void menuOperations(ScheduleManagement manager){
  * @param manager
  */
 void listingOptions(ScheduleManagement manager){
-        cout << "\nSelecione o tipo de listagem:\n";
-        cout << "1. Listagem de turmas\n" << "2. Listagem de alunos\n" << "3. Listagem de horário\n" << "4. Listagem de unidades currriculares\n" << "5. Voltar\n";
+        cout << "\nSelecione o tipo de listagem: " << endl;
+        cout << "1. Listagem de turmas\n" << "2. Listagem de alunos\n" << "3. Listagem de horário\n" << "4. Listagem de unidades currriculares\n" << "5. Voltar" << endl;
         cout << "\nOpção: ";
         string type;
         cin >> type;
@@ -91,15 +91,15 @@ void listingOptions(ScheduleManagement manager){
         else if (type == "3"){listSchedule(manager);}
         else if (type == "4"){listUCs(manager);}
         else{
-            printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations(manager);}
+            cout << endl;printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << endl; menuOperations(manager);}
 }
 /**
  * Permite o output da listagem das turmas com um critério em específico.
  * @param manager
  */
 void listClasses(ScheduleManagement manager){
-    cout << "\nSelecione o modo de listagem de turmas:\n";
-    cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por UC\n" << "5. Voltar\n";
+    cout << "\nSelecione o modo de listagem de turmas:" << endl;
+    cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por UC\n" << "5. Voltar" << endl;
     cout << "\nOpção: ";
     string mode;
     cin >> mode;
@@ -122,8 +122,8 @@ void listClasses(ScheduleManagement manager){
  * @param manager
  */
 void listStudents(ScheduleManagement manager){
-    cout << "\nSelecione o modo de listagem de alunos:\n";
-    cout << "1. Ordem alfabética\n" << "2. Por número de estudante\n" << "3. Por ano de entrada\n" << "4. Por ano curricular\n" << "5. Por turma\n" << "6. Alunos com mais de n UC's\n" << "7. Voltar";
+    cout << "\nSelecione o modo de listagem de alunos:" << endl;
+    cout << "1. Ordem alfabética\n" << "2. Por número de estudante\n" << "3. Por ano de entrada\n" << "4. Por ano curricular\n" << "5. Por turma\n" << "6. Alunos com mais de n UC's\n" << "7. Voltar" << endl;
     cout << "\nOpção: ";
     string mode;
     cin >> mode;
@@ -147,8 +147,8 @@ void listStudents(ScheduleManagement manager){
  * @param manager
  */
 void listUCs(ScheduleManagement manager){
-    cout << "\nSelecione o modo de listagem de unidades curriculares:\n";
-    cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por aluno\n" << "5. Por turma\n" << "6. Voltar";
+    cout << "\nSelecione o modo de listagem de unidades curriculares:" << endl;
+    cout << "1. Ordem crescente\n" << "2. Ordem decrescente\n" << "3. Por ano\n" << "4. Por aluno\n" << "5. Por turma\n" << "6. Voltar" << endl;
     cout << "\nOpção: ";
     string mode;
     cin >> mode;
@@ -172,8 +172,8 @@ void listUCs(ScheduleManagement manager){
  * @param manager
  */
 void listSchedule(ScheduleManagement manager){
-    cout << "\nSelecione o modo de listagem do horário:\n";
-    cout << "1. Por aluno\n" << "2. Por turma\n" << "3. Por UC\n" << "4. Voltar\n";
+    cout << "\nSelecione o modo de listagem do horário:" << endl;
+    cout << "1. Por aluno\n" << "2. Por turma\n" << "3. Por UC\n" << "4. Voltar" << endl;
     cout << "\nOpção: ";
     string mode;
     cin >> mode;
@@ -211,8 +211,8 @@ private:
  * @param manager
  */
 void modifyOptions(ScheduleManagement manager){
-    cout << "\nSelecione a alteração que pretende realizar: \n";
-    cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar\n";
+    cout << "\nSelecione a alteração que pretende realizar:" << endl;
+    cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar" << endl;
     cout << "\nOpção: ";
     string type;
     cin >> type;
@@ -230,19 +230,19 @@ void modifyOptions(ScheduleManagement manager){
         string _class; cin >> _class;
         Request r(REMOVE, up,uc,_class, "");
         manager.push_request(r);
-
-        cout << "\nDeseja realizar outra operação (Y/N)? ";
-        cout << "(Nota: as modificações, caso aceites, só serão feitas ao final do dia) ";
+        cout << endl;
+        cout << "Pedido realizado com sucesso!" << endl;
+        cout << "\nDeseja realizar outra operação (S/N)? ";
         string answer; cin >> answer;
-        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y"){
-            printf("\n");
+        if (answer == "S" || answer == "s"){
+            cout << endl;
             printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-            printf("\n");
-            printf("\n");
+            cout << endl;
+            cout << endl;
             menuOperations(manager);
         }
         else terminate(manager);
@@ -262,17 +262,17 @@ void modifyOptions(ScheduleManagement manager){
         else{
             manager.pushInvalidRequest(r);
         }
-        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
-        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y"){
-            printf("\n");
+        if (answer == "S" || answer == "s"){
+            cout << endl;
             printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-            printf("\n");
-            printf("\n");
+            cout << endl;
+            cout << endl;
             menuOperations(manager);
         }
         else terminate(manager);
@@ -293,17 +293,17 @@ void modifyOptions(ScheduleManagement manager){
         else{
             manager.pushInvalidRequest(r);
         }
-        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
-        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y"){
-            printf("\n");
+        if (answer == "S" || answer == "s"){
+            cout << endl;
             printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-            printf("\n");
-            printf("\n");
+            cout << endl;
+            cout << endl;
             menuOperations(manager);
         }
         else terminate(manager);
@@ -314,7 +314,7 @@ void modifyOptions(ScheduleManagement manager){
         cout << "Quantas turmas/UCs pretende alterar?: ";
         int n; cin >> n;
         for(int i = 1; i <= n; i++){
-            cout << i << "ª alteração: \n";
+            cout << i << "ª alteração: " << endl;
             cout << "Em que unidade curricular? (Ex: L.EIC002): ";
             string uc; cin >> uc;
             cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC08): ";
@@ -328,27 +328,27 @@ void modifyOptions(ScheduleManagement manager){
                 manager.pushInvalidRequest(r);
             }
         }
-        cout << "\nDeseja realizar outra operação? (Y/N)? ";
+        cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
-        while (!(answer == "Y" || answer == "N" || answer == "n" || answer == "y")){
+        while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
             cout << "Input inválido, tente novamente: ";
             cin >> answer;
         }
-        if (answer == "Y" || answer == "y") {
-            printf("\n");
+        if (answer == "S" || answer == "s") {
+            cout << endl;
             printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-            printf("\n");
-            printf("\n");
+            cout << endl;
+            cout << endl;
             menuOperations(manager);
         }
         else terminate(manager);
     }
 
     else {
-        printf("\n");
+        cout << endl;
         printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-        printf("\n");
-        printf("\n");
+        cout << endl;
+        cout << endl;
         menuOperations(manager);
     }
 
