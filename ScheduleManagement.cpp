@@ -13,8 +13,8 @@
 #include <algorithm>
 #include "Slot.h"
 #include "Menu.h"
+#include <climits>
 using namespace std;
-#define INT_MAX 200
 
 //constructors
 /**
@@ -25,6 +25,7 @@ ScheduleManagement::ScheduleManagement(){
     schedule={};
     requests={};
     invalid_requests={};
+    cap = 30;
 }
 /**
  * Construtor parametrizado.
@@ -55,6 +56,11 @@ queue<Request> ScheduleManagement::get_requests(){return requests;}
  */
 set<Student> ScheduleManagement::get_students() const {return students;}
 /**
+ * Obtém a capacidade máxima de estudantes de uma turma/UC
+ * @return variável cap
+ */
+int ScheduleManagement::get_cap(){return cap;}
+/**
  * Obtém o vetor de pedidos inválidos.
  * Complexidade: O(1)
  * @return vetor com pedidos inválidos.
@@ -79,6 +85,11 @@ void ScheduleManagement::set_students(set<Student> stu) {students=stu;}
  * @param stu
  */
 void ScheduleManagement::set_auxStudents(vector<Student> stu) {auxStudents=stu;}
+/**
+ * Define o cap com um valor c
+ * @param c um novo valor para a capacidade máxima de estudantes por turma/UC
+ */
+void ScheduleManagement::set_cap(int c){cap = c;}
 
 //read files
 /**
@@ -92,8 +103,8 @@ void ScheduleManagement::readClasses(){
     ifstream inFile;
 
     //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
+    //inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -105,9 +116,9 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
         //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
-        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        //inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
         while (getline(inFile2,line2)){
@@ -142,8 +153,6 @@ void ScheduleManagement::readStudents(string filename){
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
 
-    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/students_classes.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv");
     inFile.open(filename);
     getline(inFile,line);
     //Reading the first line with actual data
@@ -196,11 +205,7 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string line;
     string ucCode, classCode;
     ifstream inFile;
-    
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
@@ -888,7 +893,7 @@ bool ScheduleManagement::compatibleClassUnbalance(string uc, string cc){
     });
 
     if (abs(studentsPerClass((cpu.back()).get_ucCode(),(cpu.back()).get_classCode()) - studentsPerClass((cpu.front()).get_ucCode(),(cpu.front()).get_classCode())) >= 4 ){
-        cout << "\nExiste um desequilíbrio entre as turmas desta UC, deseja continuar o pedido?(S/N)\n ";
+        cout << "\nExiste um desequilíbrio entre as turmas desta UC, deseja continuar com o pedido? (S/N): ";
         string answer;cin >> answer;
         while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
             cout << "Input inválido, tente novamente: ";
@@ -933,10 +938,10 @@ bool ScheduleManagement::compatibleClassSchedule(long int up,std::string uc, std
         }
     }
 
-    for (auto it= allStudentSlots.begin();it != allStudentSlots.end();it++){ //percorrer todas as aulas do estudante
-        for (auto it2 = newClass.begin();it2 != newClass.end();it2++){       //percorrer todas as aulas da turma a adicionar
-            if (it->first.get_ucCode() != uc){                              //se não forem da mesma uc?
-                if (it->second.get_WeekDay() == (*it2).get_WeekDay() &&         //se ocorrerem ao mesmo tempo, então é falso?
+    for (auto it= allStudentSlots.begin();it != allStudentSlots.end();it++){
+        for (auto it2 = newClass.begin();it2 != newClass.end();it2++){
+            if (it->first.get_ucCode() != uc){
+                if (it->second.get_WeekDay() == (*it2).get_WeekDay() &&
                     (it->second.get_StartHour() <= (*it2).get_StartHour() && (*it2).get_StartHour() <= it->second.get_StartHour()+it->second.get_Duration() ||
                      (*it2).get_StartHour() <= it->second.get_StartHour() &&  it->second.get_StartHour() <= (*it2).get_StartHour()+ (*it2).get_Duration()) &&
                     ((((*it2).get_Type()!="T") && (it->second.get_Type()!="T")))){
@@ -959,7 +964,7 @@ void ScheduleManagement::pushInvalidRequest(Request r){
 /**
  * Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular
  * e se já tem uma turma associada
- * Complexidade: 0(n), n-> tamanho da lista de Turmas do estudante s.
+ * Complexidade: 0(n), n-> tamanho da lista de turmas do estudante s.
  * @param up
  * @param uc
  * @return true se não estiver inscrito na unidade curricular.

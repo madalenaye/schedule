@@ -8,8 +8,9 @@
 #include <algorithm>
 #include <fstream>
 #include "Request.h"
+#include <climits>
 using namespace std;
-#define INT_MAX 200
+
 //creating menu
 /**
  * Inicialização do menu e do manager. Lendo de seguida os ficheiros.
@@ -32,8 +33,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv";
-    else filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
+    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -50,13 +51,13 @@ void createMenu(){
 void menuOperations(ScheduleManagement manager){
     cout << setw(41) << "O que deseja fazer hoje?" << endl;
     cout << endl;
-    cout << setw(14) << "1. Listagens" << setw(22) << "2. Alterações" << setw(25) << "3. Sair do programa" << endl;
+    cout << setw(15) << "1. Listagens" << setw(18) << "2. Alterações" << setw(18) << "3. Definições" << setw(11) << "4. Sair" << endl;
     printf("\n  Opção: ");
     // prompting for operation
     string option;
     cin >> option;
     // input error
-    while (!(option == "1" || option == "2" || option == "3")){
+    while (!(option == "1" || option == "2" || option == "3" || option == "4")){
         cout << "  Input inválido, tente novamente: ";
         cin >> option;
     }
@@ -64,6 +65,7 @@ void menuOperations(ScheduleManagement manager){
     else if (option == "2"){
     modifyOptions(manager);
     }
+    else if (option == "3") set_definitions(manager);
         // end program
     else {
         terminate(manager);
@@ -212,7 +214,7 @@ private:
  */
 void modifyOptions(ScheduleManagement manager){
     cout << "\nSelecione a alteração que pretende realizar:" << endl;
-    cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Alterar um conjunto de turmas/UCs de um estudante\n" << "5. Voltar" << endl;
+    cout << "1. Remover um estudante\n" << "2. Adicionar um estudante\n" << "3. Alterar a turma/UC de um estudante\n" << "4. Voltar" << endl;
     cout << "\nOpção: ";
     string type;
     cin >> type;
@@ -267,7 +269,7 @@ void modifyOptions(ScheduleManagement manager){
 
     }
     else if (type == "2"){
-        cout << "Introduza o número up do estudante que deseja adicionar (Ex:202025487): ";
+        cout << "Introduza o número up do estudante que deseja adicionar (Ex:202025232): ";
         long int up; cin >> up;
         while(std::cin.fail() || to_string(up).length()!= 9 || up > 202080397 || up < 201920727) {
             cout << "Input inválido, tente novamente: ";
@@ -275,7 +277,7 @@ void modifyOptions(ScheduleManagement manager){
             cin.ignore(INT_MAX, '\n');
             cin >> up;
         }
-        cout << "Em que unidade curricular? (Ex: L.EIC002): ";
+        cout << "Em que unidade curricular? (Ex: L.EIC001): ";
         string uc; cin >> uc;
         while(uc.length()!=8 || uc[1]!='.') {
             cout << "Input inválido, tente novamente: ";
@@ -283,7 +285,7 @@ void modifyOptions(ScheduleManagement manager){
             cin.ignore(INT_MAX, '\n');
             cin >> uc;
         }
-        cout << "E a que turma? (Ex: 1LEIC08): ";
+        cout << "E a que turma? (Ex: 1LEIC05): ";
         string _class; cin >> _class;
         while(_class.length()!=7) {
             cout << "Input inválido, tente novamente: ";
@@ -294,7 +296,7 @@ void modifyOptions(ScheduleManagement manager){
         Request r(ADD, up,uc,_class, "");
         if (manager.isNotAlreadyInThisUc(up,uc)){
             if(manager.compatibleClassUnbalance(uc,_class) ){
-                if (manager.compatibleClassSchedule(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+                if (manager.compatibleClassSchedule(up,uc,_class)&& manager.studentsPerClass(uc,_class)<manager.get_cap()){manager.push_request(r);}
                 else {manager.pushInvalidRequest(r);}}
         }
         else {manager.pushInvalidRequest(r);}
@@ -318,7 +320,7 @@ void modifyOptions(ScheduleManagement manager){
 
     }
     else if (type == "3"){
-        cout << "Introduza o número up do estudante cuja turma/UC deseja alterar (Ex:202025487): ";
+        cout << "Introduza o número up do estudante cuja turma/UC deseja alterar (Ex:202025232): ";
         long int up; cin >> up;
         while(std::cin.fail() || to_string(up).length()!= 9 || up > 202080397 || up < 201920727) {
             cout << "Input inválido, tente novamente: ";
@@ -334,7 +336,7 @@ void modifyOptions(ScheduleManagement manager){
             cin.ignore(INT_MAX, '\n');
             cin >> uc;
         }
-        cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC08): ";
+        cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC05): ";
         string _class; cin >> _class;
         while(_class.length()!=7) {
             cout << "Input inválido, tente novamente: ";
@@ -342,7 +344,7 @@ void modifyOptions(ScheduleManagement manager){
             cin.ignore(INT_MAX, '\n');
             cin >> _class;
         }
-        cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
+        cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC04): ";
         string new_class; cin >> new_class;
         while(new_class.length()!=7) {
             cout << "Input inválido, tente novamente: ";
@@ -353,7 +355,7 @@ void modifyOptions(ScheduleManagement manager){
         Request r(CHANGE_CLASS, up,uc,_class, new_class);
 
             if(manager.compatibleClassUnbalance(uc,new_class) ){
-                if (manager.compatibleClassSchedule(up,uc,new_class)&& manager.studentsPerClass(uc,new_class)<30){manager.push_request(r);}
+                if (manager.compatibleClassSchedule(up,uc,new_class)&& manager.studentsPerClass(uc,new_class)<manager.get_cap()){manager.push_request(r);}
                 else {manager.pushInvalidRequest(r);}}
 
         cout << "Pedido realizado com sucesso! Um e-mail será enviado caso seja aceite ou não." << '\n';
@@ -371,72 +373,7 @@ void modifyOptions(ScheduleManagement manager){
             menuOperations(manager);
         }
         else terminate(manager);}
-    else if (type == "4"){
-        cout << "Introduza o número up do estudante cujas turmas/UCs deseja alterar (Ex:202025487): ";
-        long int up; cin >> up;
-        while(std::cin.fail() || to_string(up).length()!= 9 || up > 202080397 || up < 201920727) {
-            cout << "Input inválido, tente novamente: ";
-            cin.clear();
-            cin.ignore(INT_MAX, '\n');
-            cin >> up;
-        }
-        cout << "Quantas turmas/UCs pretende alterar?: ";
-        int n; cin >> n;
-        while(std::cin.fail()) {
-            cout << "Input inválido, tente novamente: ";
-            cin.clear();
-            cin.ignore(INT_MAX, '\n');
-            cin >> n;
-        }
-        for(int i = 1; i <= n; i++){
-            cout << i << "ª alteração: " << endl;
-            cout << "Em que unidade curricular? (Ex: L.EIC002): ";
-            string uc; cin >> uc;
-            while(uc.length()!=8 || uc[1]!='.') {
-                cout << "Input inválido, tente novamente: ";
-                cin.clear();
-                cin.ignore(INT_MAX, '\n');
-                cin >> uc;
-            }
-            cout << "Em que turma se encontrava o estudante? (Ex: 1LEIC08): ";
-            string _class; cin >> _class;
-            while(_class.length()!=7) {
-                cout << "Input inválido, tente novamente: ";
-                cin.clear();
-                cin.ignore(INT_MAX, '\n');
-                cin >> _class;
-            }
-            cout << "Para que turma o estudante pretende ir? (Ex: 1LEIC08): ";
-            string new_class; cin >> new_class;
-            while(new_class.length()!=7) {
-                cout << "Input inválido, tente novamente: ";
-                cin.clear();
-                cin.ignore(INT_MAX, '\n');
-                cin >> new_class;
-            }
-            Request r(CHANGE_CLASS, up,uc,_class, new_class);
-                if(manager.compatibleClassUnbalance(uc,new_class) ){
-                    if (manager.compatibleClassSchedule(up,uc,new_class)&& manager.studentsPerClass(uc,new_class)<30){manager.push_request(r);}
-                    else {manager.pushInvalidRequest(r);}}
-                }
 
-        cout << endl;
-        cout << "Pedidos realizados com sucesso! Um e-mail será enviado caso seja aceite ou não." << endl;
-        cout << "\nDeseja realizar outra operação? (S/N)? ";
-        string answer; cin >> answer;
-        while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
-            cout << "Input inválido, tente novamente: ";
-            cin >> answer;
-        }
-        if (answer == "S" || answer == "s") {
-            cout << endl;
-            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-            cout << endl;
-            cout << endl;
-            menuOperations(manager);
-        }
-        else terminate(manager);
-    }
 
     else {
         cout << endl;
@@ -456,7 +393,7 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
@@ -464,12 +401,37 @@ void terminate(ScheduleManagement manager){
         }
     }
     file.close();
-    invalid.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/invalid_requests.csv");
+    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<endl;
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<endl;
     }
     invalid.close();
+}
+void set_definitions(ScheduleManagement manager){
+    cout << "\nCapacidade máxima de alunos por turma numa UC: " << manager.get_cap() << endl;
+    cout << "Pretende alterar? (S/N): ";
+    string answer; cin >> answer;
+    while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
+        cout << "Input inválido, tente novamente: ";
+        cin >> answer;
+    }
+    if (answer == "S" || answer == "s") {
+        cout << "Introduza um novo valor para a capacidade: ";
+        int i; cin >> i;
+        while(std::cin.fail() || i < 0 || i > 60) {
+            cout << "Input inválido, tente novamente: ";
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cin >> i;
+        }
+        manager.set_cap(i);
+    }
+    cout << endl;
+    printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+    cout << endl;
+    cout << endl;
+    menuOperations(manager);
 }
 // end menu
 /**

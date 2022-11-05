@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['isalreadyinthisuc_0',['isAlreadyInThisUc',['../class_schedule_management.html#aac3e7f1f7eb3123830a43804426760e5',1,'ScheduleManagement']]]
+  ['isnotalreadyinthisuc_0',['isNotAlreadyInThisUc',['../class_schedule_management.html#a49fbf67d846dddb23a9f40f70babbdc8',1,'ScheduleManagement']]]
 ];
