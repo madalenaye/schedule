@@ -262,6 +262,7 @@ void modifyOptions(ScheduleManagement manager){
         else{
             manager.pushInvalidRequest(r);
         }
+        cout << "Pedido realizado com sucesso!" << endl;
         cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
         while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
@@ -293,6 +294,7 @@ void modifyOptions(ScheduleManagement manager){
         else{
             manager.pushInvalidRequest(r);
         }
+        cout << "Pedido realizado com sucesso!" << endl;
         cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
         while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
@@ -328,6 +330,7 @@ void modifyOptions(ScheduleManagement manager){
                 manager.pushInvalidRequest(r);
             }
         }
+        cout << "Pedido realizados com sucesso!" << endl;
         cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
         while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
