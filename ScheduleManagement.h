@@ -58,8 +58,9 @@ public:
     //counters
     int studentsPerClass(string _uc,string _class);
     // bool
-    bool compatibleClass(long int up,string uc, string cc);
-    bool isAlreadyInThisUc(long int up,string uc);
+    bool compatibleClassUnbalance(string uc, string cc);
+    bool isNotAlreadyInThisUc(long int up,string uc);
+    bool compatibleClassSchedule(long int up,string uc,string cc);
     //binary search
     int binary_search(string name);
     //aux

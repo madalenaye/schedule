@@ -9,7 +9,7 @@
 #include <fstream>
 #include "Request.h"
 using namespace std;
-
+#define INT_MAX 200
 //creating menu
 /**
  * Inicialização do menu e do manager. Lendo de seguida os ficheiros.
@@ -32,8 +32,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
-    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv";
+    else filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -207,7 +207,7 @@ private:
 // modification options
 /**
  * Permite ao utilizador escolher o que alterar.
- * Complexidade: O(log(n)) , n-> tamanho do set de estudantes.
+ * Complexidade: Fator dominante pertencce à função manager.compatibleClassSchedule().
  * @param manager
  */
 void modifyOptions(ScheduleManagement manager){
@@ -292,11 +292,13 @@ void modifyOptions(ScheduleManagement manager){
             cin >> _class;
         }
         Request r(ADD, up,uc,_class, "");
-        if(manager.isAlreadyInThisUc(up,uc) && manager.compatibleClass(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30)
-            {manager.push_request(r);}
-        else{
-            manager.pushInvalidRequest(r);
+        if (manager.isNotAlreadyInThisUc(up,uc)){
+            if(manager.compatibleClassUnbalance(uc,_class) ){
+                if (manager.compatibleClassSchedule(up,uc,_class)&& manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
+                else {manager.pushInvalidRequest(r);}}
         }
+        else {manager.pushInvalidRequest(r);}
+
         cout << endl;
         cout << "Pedido realizado com sucesso! Um e-mail será enviado caso seja aceite ou não." << endl;
         cout << "\nDeseja realizar outra operação? (S/N)? ";
@@ -350,11 +352,11 @@ void modifyOptions(ScheduleManagement manager){
         }
         Request r(CHANGE_CLASS, up,uc,_class, new_class);
 
-        if(manager.compatibleClass(up,uc,new_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
-        else{
-            manager.pushInvalidRequest(r);
-        }
-        cout << "Pedido realizado com sucesso! Um e-mail será enviado caso seja aceite ou não." << endl;
+            if(manager.compatibleClassUnbalance(uc,new_class) ){
+                if (manager.compatibleClassSchedule(up,uc,new_class)&& manager.studentsPerClass(uc,new_class)<30){manager.push_request(r);}
+                else {manager.pushInvalidRequest(r);}}
+
+        cout << "Pedido realizado com sucesso! Um e-mail será enviado caso seja aceite ou não." << '\n';
         cout << "\nDeseja realizar outra operação? (S/N)? ";
         string answer; cin >> answer;
         while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
@@ -368,8 +370,7 @@ void modifyOptions(ScheduleManagement manager){
             cout << endl;
             menuOperations(manager);
         }
-        else terminate(manager);
-    }
+        else terminate(manager);}
     else if (type == "4"){
         cout << "Introduza o número up do estudante cujas turmas/UCs deseja alterar (Ex:202025487): ";
         long int up; cin >> up;
@@ -414,11 +415,11 @@ void modifyOptions(ScheduleManagement manager){
                 cin >> new_class;
             }
             Request r(CHANGE_CLASS, up,uc,_class, new_class);
-            if(manager.compatibleClass(up,uc,new_class)&&manager.studentsPerClass(uc,_class)<30){manager.push_request(r);}
-            else{
-                manager.pushInvalidRequest(r);
-            }
-        }
+                if(manager.compatibleClassUnbalance(uc,new_class) ){
+                    if (manager.compatibleClassSchedule(up,uc,new_class)&& manager.studentsPerClass(uc,new_class)<30){manager.push_request(r);}
+                    else {manager.pushInvalidRequest(r);}}
+                }
+
         cout << endl;
         cout << "Pedidos realizados com sucesso! Um e-mail será enviado caso seja aceite ou não." << endl;
         cout << "\nDeseja realizar outra operação? (S/N)? ";
@@ -455,7 +456,7 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<endl;
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
@@ -463,7 +464,7 @@ void terminate(ScheduleManagement manager){
         }
     }
     file.close();
-    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
+    invalid.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<endl;
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<endl;
