@@ -116,8 +116,8 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:aaa4ad4cc9532dbb283ba316361deaddb"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a8670e3f54c08de1606558abc58c5f7da"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a8670e3f54c08de1606558abc58c5f7da">listingUcSchedule</a> ()</td></tr>
 <tr class="separator:a8670e3f54c08de1606558abc58c5f7da"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:ab52e0911d8c5b04908c9be0eb4ec642d"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#ab52e0911d8c5b04908c9be0eb4ec642d">listingStudentSchedule</a> () const</td></tr>
-<tr class="separator:ab52e0911d8c5b04908c9be0eb4ec642d"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ae86598a57f8af528fbac4ef8b49a46a4"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#ae86598a57f8af528fbac4ef8b49a46a4">listingStudentSchedule</a> ()</td></tr>
+<tr class="separator:ae86598a57f8af528fbac4ef8b49a46a4"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a43ed16974522ab0ca4e4e752bbc05b6a"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a43ed16974522ab0ca4e4e752bbc05b6a">listingAllStudentsCode</a> ()</td></tr>
 <tr class="separator:a43ed16974522ab0ca4e4e752bbc05b6a"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a4a1588cf55c02d780312d66cc6510442"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a4a1588cf55c02d780312d66cc6510442">listingAllStudentsName</a> ()</td></tr>
@@ -154,6 +154,12 @@ Public Member Functions</h2></td></tr>
 <tr class="separator:a2f2175d56ade5b9fd5e16f7932ebe60b"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a3fbd2cfff16a5f64fea4b8232a4c8167"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a3fbd2cfff16a5f64fea4b8232a4c8167">compatibleClass</a> (long int up, string uc, string cc)</td></tr>
 <tr class="separator:a3fbd2cfff16a5f64fea4b8232a4c8167"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:aac3e7f1f7eb3123830a43804426760e5"><td class="memItemLeft" align="right" valign="top">bool&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#aac3e7f1f7eb3123830a43804426760e5">isAlreadyInThisUc</a> (long int up, string uc)</td></tr>
+<tr class="separator:aac3e7f1f7eb3123830a43804426760e5"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ad40929730428f3374e0e7d580a43172e"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#ad40929730428f3374e0e7d580a43172e">binary_search</a> (string name)</td></tr>
+<tr class="separator:ad40929730428f3374e0e7d580a43172e"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a75f8bf3110e40d2a8c6d32499f8f1f88"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="class_schedule_management.html#a75f8bf3110e40d2a8c6d32499f8f1f88">print_exitOptions</a> ()</td></tr>
+<tr class="separator:a75f8bf3110e40d2a8c6d32499f8f1f88"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table><table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="pri-attribs" name="pri-attribs"></a>
 Private Attributes</h2></td></tr>
@@ -183,7 +189,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Construtor default </p>
+<p >Construtor default. </p>
 
 </div>
 </div>
@@ -212,10 +218,10 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Construtor parametrizado </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Construtor parametrizado. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">stu</td><td>- set de estudantes </td></tr>
-    <tr><td class="paramname">sch</td><td>- vetor com horário de turmas/UCs </td></tr>
+    <tr><td class="paramname">stu</td><td>- set de estudantes. </td></tr>
+    <tr><td class="paramname">sch</td><td>- vetor com horário de turmas/UCs. </td></tr>
   </table>
   </dd>
 </dl>
@@ -265,6 +271,31 @@ Private Attributes</h2></td></tr>
 
 </div>
 </div>
+<a id="ad40929730428f3374e0e7d580a43172e" name="ad40929730428f3374e0e7d580a43172e"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ad40929730428f3374e0e7d580a43172e">&#9670;&#160;</a></span>binary_search()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">int ScheduleManagement::binary_search </td>
+          <td>(</td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>name</em></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Algoritmo de pesquisa binária Complexidade: O(log(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">name</td><td>nome do estudante </td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>Index da posição do aluno no vetor </dd></dl>
+
+</div>
+</div>
 <a id="a575d5728d37c484379ee38fb65ff7676" name="a575d5728d37c484379ee38fb65ff7676"></a>
 <h2 class="memtitle"><span class="permalink"><a href="#a575d5728d37c484379ee38fb65ff7676">&#9670;&#160;</a></span>changeStudentclass()</h2>
 
@@ -302,7 +333,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Muda o estudante de turma a uma determinada cadeira Complexidade: O(nlog(n)) </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Muda o estudante de turma a uma determinada cadeira Complexidade: O(nlog(n)) ,n -&gt; tamanho do vetor auxStudents </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">code</td><td>código up do estudante </td></tr>
     <tr><td class="paramname">_uc</td><td>unidade curricular </td></tr>
@@ -345,7 +376,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Verifica se é possível fazer a mudanção ou adição de turma. Complexidade= O(n*m*k²), n -&gt; itera sobre a lista de ClassPerUc do estudante, m-&gt; itera sobre o schedule para obter o horário da turma para o qual o estudante pretende se mudar, k-&gt; obtém o horário dessa turma e coloca-o num vetor </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Verifica se é possível fazer a mudanção ou adição de turma. Complexidade= O(n*m*k), n -&gt; tamanho da lista cpu do estudante x, m-&gt; tamanho do vetor schedule, k-&gt; tamanho da lista slot do objeto lecture. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stu</td><td>estudante em questão. </td></tr>
     <tr><td class="paramname">uc</td><td>cadeira em que deseja mudar de turma. </td></tr>
@@ -389,7 +420,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtém o vetor de pedidos inválidos Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>vetor com pedidos inválidos </dd></dl>
+<p >Obtém o vetor de pedidos inválidos. Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>vetor com pedidos inválidos. </dd></dl>
 
 </div>
 </div>
@@ -407,7 +438,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtém uma fila para processar os pedidos Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd></dd></dl>
+<p >Obtém uma fila para processar os pedidos. Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>vetor com horários. </dd></dl>
 
 </div>
 </div>
@@ -425,7 +456,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtém o horário das turmas por UC Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>vetor do horário das turmas por cada cadeira </dd></dl>
+<p >Obtém o horário das turmas por UC. Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>vetor do horário das turmas por cada cadeira. </dd></dl>
 
 </div>
 </div>
@@ -443,7 +474,43 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Obtém os estudantes Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>set com estudantes </dd></dl>
+<p >Obtém os estudantes. Complexidade: O(1) </p><dl class="section return"><dt>Returns</dt><dd>set com estudantes. </dd></dl>
+
+</div>
+</div>
+<a id="aac3e7f1f7eb3123830a43804426760e5" name="aac3e7f1f7eb3123830a43804426760e5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#aac3e7f1f7eb3123830a43804426760e5">&#9670;&#160;</a></span>isAlreadyInThisUc()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">bool ScheduleManagement::isAlreadyInThisUc </td>
+          <td>(</td>
+          <td class="paramtype">long int&#160;</td>
+          <td class="paramname"><em>up</em>, </td>
+        </tr>
+        <tr>
+          <td class="paramkey"></td>
+          <td></td>
+          <td class="paramtype">string&#160;</td>
+          <td class="paramname"><em>uc</em>&#160;</td>
+        </tr>
+        <tr>
+          <td></td>
+          <td>)</td>
+          <td></td><td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
+<p >Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular e se já tem uma turma associada Complexidade: 0(n), n-&gt; tamanho da lista de Turmas do estudante s. </p><dl class="params"><dt>Parameters</dt><dd>
+  <table class="params">
+    <tr><td class="paramname">up</td><td></td></tr>
+    <tr><td class="paramname">uc</td><td></td></tr>
+  </table>
+  </dd>
+</dl>
+<dl class="section return"><dt>Returns</dt><dd>true se não estiver inscrito na unidade curricular. </dd></dl>
 
 </div>
 </div>
@@ -461,7 +528,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem de todos os estudantes por número up. Complexidade:O(n+m) , n-&gt; output dos atributos código estudante e nome por ordem crescente de código de estudante, m-&gt; user input </p>
+<p >Listagem de todos os estudantes por número up. Complexidade:O(n) , n-&gt; tamanho do set students </p>
 
 </div>
 </div>
@@ -479,7 +546,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem dos estudantes em função do nome. Complexidade: O(n+m) ,n-&gt; output dos atributos nome e código de estudante por ordem alfabética. </p>
+<p >Listagem dos estudantes em função do nome. Complexidade: O(n) ,n-&gt; tamanho do vetor auxStudents </p>
 
 </div>
 </div>
@@ -508,7 +575,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem de todas as unidades curriculares (ordem crescente ou decrescente, a definir pelo utilizador) Complexidade: O(n*log(m)+m+p) , n-&gt; itera sobre o vetor ClassPerUc, m-&gt; inserção do código da unidade curricular no set de strings ucs, l -&gt; itera sobre o set de strings e dá output às mesmas , p -&gt;user input. </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Listagem de todas as unidades curriculares (ordem crescente ou decrescente, a definir pelo utilizador) Complexidade: O(n*log(m)) , n-&gt; tamanho do vetor ClassPerUc, m-&gt; tamanho do set ucs. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">order</td><td>caso seja 1 , organiza por ordem crescente senão organiza de forma descrescente. </td></tr>
     <tr><td class="paramname">v</td><td>vetor de ClassPerUc para iterar sobre. </td></tr>
@@ -533,9 +600,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Lista as turmas segundo ordem crescente ou decrescente </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Lista as turmas segundo ordem crescente ou decrescente. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">order</td><td>define a ordem a listar as turmas Complexidade: O(nlog(n)+mlog(n)), m-&gt;corre o vetor schedule, n-&gt;faz ordenação do set turmas </td></tr>
+    <tr><td class="paramname">order</td><td>define a ordem a listar as turmas. Complexidade: O(n), n-&gt; corre o vetor lecture. </td></tr>
   </table>
   </dd>
 </dl>
@@ -557,7 +624,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Lista as turmas por cada unidade curricular Complexidade: O(n+m), n-&gt;user input, m-&gt;output das turmas de uma cadeira especifica </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Lista as turmas por cada unidade curricular Complexidade: O(n), n-&gt; tamanho do vetor v. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">v</td><td>vetor de todas as unidades curriculares com as respetivas turmas </td></tr>
   </table>
@@ -580,7 +647,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Faz a listagem das turmas por cada ano curricular Complexidade: O(nlog(n)), nlog(n)-&gt;obtém o class code das turmas de um certo ano </p>
+<p >Faz a listagem das turmas por cada ano curricular. Complexidade: O(n), n-&gt;tamanho do vetor schedule. </p>
 
 </div>
 </div>
@@ -598,7 +665,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem do horário de cada turma Complexidade: O(n*m*p), n-&gt;corre o schedule, m-&gt;corre os slots, p-&gt;colocar o par(uc_code, slot) no vetor auxiliar e dar sort com base na data e hora </p>
+<p >Listagem do horário de cada turma Complexidade: O(n*m), n-&gt;tamanho do vetor schedule, m-&gt;tamanho da lista de slots </p>
 
 </div>
 </div>
@@ -616,12 +683,12 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem dos estudantes com base no ano de entrada na faculdade. Complexidade: O(n+m) , n-&gt; user input , m-&gt; itera sobre o set students que permite o output dos estudantes. </p>
+<p >Listagem dos estudantes com base no ano de entrada na faculdade. Complexidade: O(n), n-&gt; tamanho do vetor de estudantes </p>
 
 </div>
 </div>
-<a id="ab52e0911d8c5b04908c9be0eb4ec642d" name="ab52e0911d8c5b04908c9be0eb4ec642d"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#ab52e0911d8c5b04908c9be0eb4ec642d">&#9670;&#160;</a></span>listingStudentSchedule()</h2>
+<a id="ae86598a57f8af528fbac4ef8b49a46a4" name="ae86598a57f8af528fbac4ef8b49a46a4"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ae86598a57f8af528fbac4ef8b49a46a4">&#9670;&#160;</a></span>listingStudentSchedule()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -630,11 +697,11 @@ Private Attributes</h2></td></tr>
           <td class="memname">void ScheduleManagement::listingStudentSchedule </td>
           <td>(</td>
           <td class="paramname"></td><td>)</td>
-          <td> const</td>
+          <td></td>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem do horário por cada estudante Complexidade: O(n*m*k*p), n-&gt;corre a lista de turmas por UC, m-&gt;corre o vetor lecture, k-&gt;corre a lista de slots, p-&gt;guarda o par(classPerUC,slot) num vetor e dá sort com base na data e hora </p>
+<p >Listagem do horário por cada estudante. Complexidade: O(n*m*k), n-&gt;tamanho do vetor cpu do estudante *result, m-&gt; tamanho do vetor lecture, k-&gt;tamanho da lista de slots </p>
 
 </div>
 </div>
@@ -652,7 +719,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem dos estudantes de uma turma. Complexidade: O(n*m +p) , n-&gt; itera sobre o vetor auxiliar de estudantes , m-&gt; itera sobre uma lista de ClassPerUc de modo a conseguir obter o output dos estudantes. </p>
+<p >Listagem dos estudantes de uma turma. Complexidade: O(n*m) , n-&gt; tamanho do vetor auxiliar de estudantes , m-&gt; tamanho da lista&lt;ClassPerUc&gt; do estudante i. </p>
 
 </div>
 </div>
@@ -670,7 +737,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem dos estudantes em função do ano curricular. Complicado: O(n+m*p) , n-&gt; user input , m-&gt; itera sobre o vetor auxStudents , p-&gt; itera sobre a lista de ClassPerUc e dá output aos estudantes de um respetivo ano. </p>
+<p >Listagem dos estudantes em função do ano curricular. Complicado: O(n*m) , n-&gt; tamanho do vetor auxStudents , m-&gt; tamanho da lista j e dá output aos estudantes de um respetivo ano. </p>
 
 </div>
 </div>
@@ -688,7 +755,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem dos estudantes com mais inscrições em unidades curriculares com base no input mínimo de unidades curriculares desejado. Complexidade: O(n+m) , n-&gt; itera sobre o vetor auxStudents possibilitando a obtenção do número de unidades curriculares de cada estudante, n-&gt; user input. </p>
+<p >Listagem dos estudantes com mais inscrições em unidades curriculares com base no input mínimo de unidades curriculares desejado. Complexidade: O(n) , n-&gt; tamanho do vetor auxStudents </p>
 
 </div>
 </div>
@@ -706,7 +773,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem das unidades curriculares com base na turma. Complexidade: O(n+m+p), n-&gt; leitura do ficheiro "classes_per_uc.csv" , m -&gt; itera sobre o vetor resultante da leitura para dar output às unidades curriculares, p-&gt; user input. </p>
+<p >Listagem das unidades curriculares com base na turma. Complexidade: O(n), n-&gt; tamanho do vetor v. </p>
 
 </div>
 </div>
@@ -724,7 +791,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem de todas as unidades curriculares com base no ano em que estas são lecionadas. Complexidade: O(n+m*log(p)) , n-&gt; user input , m-&gt; itera sobre o schedule para permitir distinguir os anos, p-&gt; insere num set de strings as unidades curriculares que pertencem ao ano desejado. </p>
+<p >Listagem de todas as unidades curriculares com base no ano em que estas são lecionadas. Complexidade: O(n*log(m)) , n-&gt; tamannho do vetor schedule , m-&gt; tamanh0 do set UCs </p>
 
 </div>
 </div>
@@ -742,7 +809,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Complexidade: O(n*m*p), n-&gt;corre o schedule, m-&gt;corre os slots, p-&gt;colocar o par(class_code, slot) no vetor auxiliar e dar sort com base na data e hora, j-&gt;output na consola, k-&gt;user input </p>
+<p >Listagem do horário de uma cadeira. Complexidade: O(n*m), n-&gt;tamanho do vetor schedule, m-&gt;tamanho da lista <a class="el" href="class_slot.html">Slot</a> de uma lectures </p>
 
 </div>
 </div>
@@ -760,7 +827,24 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Listagem das unidades curriculares de um estudante, a partir do código do estudante ou nome do estudante (a definir pelo utilizador). Complexidade: O(n+log(m)+m) , n -&gt; user input , m-&gt; procura o estudante com base no código de estudante ou nome e itera sobre este para obter as unidades curriculares em que se encontra escrito. </p>
+<p >Listagem das unidades curriculares de um estudante, a partir do código do estudante ou nome do estudante (a definir pelo utilizador). Complexidade: O(n) n-&gt; tamanho da lista cpu do estudante *result. </p>
+
+</div>
+</div>
+<a id="a75f8bf3110e40d2a8c6d32499f8f1f88" name="a75f8bf3110e40d2a8c6d32499f8f1f88"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a75f8bf3110e40d2a8c6d32499f8f1f88">&#9670;&#160;</a></span>print_exitOptions()</h2>
+
+<div class="memitem">
+<div class="memproto">
+      <table class="memname">
+        <tr>
+          <td class="memname">void ScheduleManagement::print_exitOptions </td>
+          <td>(</td>
+          <td class="paramname"></td><td>)</td>
+          <td></td>
+        </tr>
+      </table>
+</div><div class="memdoc">
 
 </div>
 </div>
@@ -826,7 +910,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Lê o ficheiro "classes.csv" e guarda os elementos em diferentes atributos da classe <a class="el" href="class_lecture.html">Lecture</a> Complexidade: O(n*m), n-&gt;ler o ficheiro "classes_per_uc.csv", m-&gt;ler o ficheiro "classes.csv" </p>
+<p >Lê o ficheiro "classes.csv" e guarda os elementos em diferentes atributos da classe <a class="el" href="class_lecture.html">Lecture</a>. Complexidade: O(n*m), n-&gt;ler o ficheiro "classes_per_uc.csv", m-&gt;ler o ficheiro "classes.csv" </p>
 
 </div>
 </div>
@@ -844,7 +928,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Lê o ficheiro "classes_per_uc.csv" e guarda os elementos num vetor Complexidade: O(n) </p><dl class="section return"><dt>Returns</dt><dd>um vetor com objetos pertencentes à classe <a class="el" href="class_class_per_u_c.html">ClassPerUC</a> </dd></dl>
+<p >Lê o ficheiro "classes_per_uc.csv" e guarda os elementos num vetor. Complexidade: O(n), n-&gt; tamanho do ficheiro "class_per_uc.csv". </p><dl class="section return"><dt>Returns</dt><dd>um vetor com objetos pertencentes à classe <a class="el" href="class_class_per_u_c.html">ClassPerUC</a>. </dd></dl>
 
 </div>
 </div>
@@ -863,9 +947,9 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Lê o ficheiro "students_classes.csv" e guarda os elementos em diferentes atributos da classe <a class="el" href="class_student.html">Student</a> Complexidade: O(nlog(m)*m^2*log(m)), n-&gt;ler o ficheiro e guardar, m-&gt;criar e dar sort ao vetor auxiliar de estudantes </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Lê o ficheiro "students_classes.csv" e guarda os elementos em diferentes atributos da classe <a class="el" href="class_student.html">Student</a>. Complexidade: O(n), n-&gt;tamanho do set de estudantes. </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
-    <tr><td class="paramname">filename</td><td>determina se é para ler o ficheiro inicial ou o atualizado depois das alterações </td></tr>
+    <tr><td class="paramname">filename</td><td>determina se é para ler o ficheiro inicial ou o atualizado depois das alterações. </td></tr>
   </table>
   </dd>
 </dl>
@@ -903,7 +987,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Remove o estudante de uma turma de uma determinada UC Complexidade: nlog(n), n-&gt;tamanho do set/número de estudantes </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Remove o estudante de uma turma de uma determinada UC Complexidade: 0(nlog(n)), n-&gt;tamanho do set/número de estudantes </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">code</td><td>código up do estudante </td></tr>
     <tr><td class="paramname">_uc</td><td>unidade curricular </td></tr>
@@ -929,7 +1013,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Define um vetor auxiliar de estudantes com o parâmetro stu Complexidade: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Define um vetor auxiliar de estudantes com o parâmetro stu. Complexidade: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stu</td><td></td></tr>
   </table>
@@ -953,7 +1037,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Define o horário das turmas/UCs com o parâmetro sch Complexidade: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Define o horário das turmas/UCs com o parâmetro sch. Complexidade: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">sch</td><td></td></tr>
   </table>
@@ -977,7 +1061,7 @@ Private Attributes</h2></td></tr>
         </tr>
       </table>
 </div><div class="memdoc">
-<p >Define o set de estudantes com o parâmetro stu Complexidade: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
+<p >Define o set de estudantes com o parâmetro stu. Complexidade: O(1) </p><dl class="params"><dt>Parameters</dt><dd>
   <table class="params">
     <tr><td class="paramname">stu</td><td></td></tr>
   </table>

@@ -1,4 +1,25 @@
 var searchData=
 [
-  ['weekdaytonum_0',['weekDayToNum',['../_schedule_management_8cpp.html#a182006412fb024a02ecf3dc5fef381bb',1,'ScheduleManagement.cpp']]]
+  ['schedulemanagement_0',['ScheduleManagement',['../class_schedule_management.html#a9f4a93cce79dbd37dc3e12b1751c2269',1,'ScheduleManagement::ScheduleManagement()'],['../class_schedule_management.html#a4d8de6967499c320bc1cddc41b0ce666',1,'ScheduleManagement::ScheduleManagement(set&lt; Student &gt; stu, vector&lt; Lecture &gt; sch)']]],
+  ['set_5fauxstudents_1',['set_auxStudents',['../class_schedule_management.html#a0c2eceb1ef41e41e25b335cdeb8e6994',1,'ScheduleManagement']]],
+  ['set_5fclasscode_2',['set_classCode',['../class_class_per_u_c.html#a57b59c1d797b2858b063dc6f7cc76080',1,'ClassPerUC::set_classCode()'],['../class_lecture.html#ab93a3c9039aafe6584a8ca2bc0b39273',1,'Lecture::set_classCode()']]],
+  ['set_5fclassperuc_3',['set_ClassPerUC',['../class_student.html#a2498f7f6e473659b6b1359819e4e7800',1,'Student']]],
+  ['set_5fduration_4',['set_Duration',['../class_slot.html#a8e271f28a74ccde32c2bf9a887cce3c7',1,'Slot']]],
+  ['set_5fschedule_5',['set_schedule',['../class_schedule_management.html#a720cd9ef816be72b9329e48ffaab00e4',1,'ScheduleManagement']]],
+  ['set_5fslot_6',['set_Slot',['../class_lecture.html#abf74e465fc7fa073b9e81be56df88525',1,'Lecture']]],
+  ['set_5fstarthour_7',['set_StartHour',['../class_slot.html#a361e6974e11af5c9d85176632461ac19',1,'Slot']]],
+  ['set_5fstudentcode_8',['set_studentCode',['../class_student.html#abbdc66d9c1b18b8c2dcab1d4b64f3cb9',1,'Student']]],
+  ['set_5fstudentname_9',['set_studentName',['../class_student.html#a02562cb8f7259bcdebd971398eb6a32c',1,'Student']]],
+  ['set_5fstudents_10',['set_students',['../class_schedule_management.html#a9abb84e73b5bf97bf313c19478682c78',1,'ScheduleManagement']]],
+  ['set_5ftype_11',['set_Type',['../class_slot.html#a4d8469ba0a473dd6ddaa2b0c3e104263',1,'Slot']]],
+  ['set_5fuccode_12',['set_ucCode',['../class_class_per_u_c.html#a9c02faf2acaaa74b461eea2264e50e27',1,'ClassPerUC::set_ucCode()'],['../class_lecture.html#a9d911ef1a6c1fc94c1e1bd28372cbf73',1,'Lecture::set_ucCode()']]],
+  ['set_5fweekday_13',['set_WeekDay',['../class_slot.html#ac49d7ecb14237966f0e754c0dbf09e9a',1,'Slot']]],
+  ['setclass_14',['setClass',['../class_request.html#abe63428fbba01c67da320c8cccfa067e',1,'Request']]],
+  ['setnewclass_15',['setNewClass',['../class_request.html#a1345f70d9e2ec373d68ccf717fba6ad4',1,'Request']]],
+  ['setstudentcode_16',['setStudentCode',['../class_request.html#a2ddb0f5dc683e7e5609acdc11074978d',1,'Request']]],
+  ['settype_17',['setType',['../class_request.html#a94e0f877b7c109e020a9685df139fe75',1,'Request']]],
+  ['setuc_18',['setUc',['../class_request.html#a5aa417d4cb78fe97bf193e3094f195bf',1,'Request']]],
+  ['slot_19',['Slot',['../class_slot.html#a92a49d49328f84e7f8eb6c709d80b33c',1,'Slot::Slot()'],['../class_slot.html#ae46fc2faff055668b790f42b1e3ae954',1,'Slot::Slot(string wd, double sh, double d, string tp)']]],
+  ['student_20',['Student',['../class_student.html#af9168cedbfa5565cf0b20c1a9d3f5c9d',1,'Student::Student()'],['../class_student.html#a90fac86b8a122b4fdf5a0e0e5c4fdeda',1,'Student::Student(long int stc, string stn, list&lt; ClassPerUC &gt; cpu)']]],
+  ['studentsperclass_21',['studentsPerClass',['../class_schedule_management.html#a2f2175d56ade5b9fd5e16f7932ebe60b',1,'ScheduleManagement']]]
 ];

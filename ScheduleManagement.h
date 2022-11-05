@@ -57,8 +57,13 @@ public:
     void pushInvalidRequest(Request r);
     //counters
     int studentsPerClass(string _uc,string _class);
+    // bool
     bool compatibleClass(long int up,string uc, string cc);
     bool isAlreadyInThisUc(long int up,string uc);
+    //binary search
+    int binary_search(string name);
+    //aux
+    void print_exitOptions();
 private:
     set<Student> students;
     vector<Student> auxStudents;
