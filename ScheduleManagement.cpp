@@ -644,6 +644,7 @@ void ScheduleManagement::listingStudentsInClass() {
     cout << "De que unidade curricular? (Ex: L.EIC003): ";
     string _uc; cin >> _uc;
     int count=0;
+
     for(auto i:auxStudents){
         for(auto j: i.get_classPerUC()){
             if(j.get_classCode()==_class && j.get_ucCode()==_uc){
@@ -654,6 +655,7 @@ void ScheduleManagement::listingStudentsInClass() {
         }
     }
     if(count==0){cout<<"Não há estudantes nesta turma e nesta unidade curricular";}
+    cout << "Há " << count << " alunos nesta turma e nesta unidade curricular." << endl;
     cout << "\nDeseja realizar outra operação? (S/N)? ";
     string answer; cin >> answer;
     while (!(answer == "S" || answer == "N" || answer == "n" || answer == "s")){
@@ -909,6 +911,13 @@ void ScheduleManagement::listingUcsPerStudent() {
     if (mode == "1"){
         cout << "Introduza o número UP (Ex: 202041977): ";
         long int up; cin >> up;
+        //input fail
+        while(std::cin.fail() || to_string(up).length()!= 9) {
+            cout << "Input inválido, tente novamente: ";
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cin >> up;
+        }
         auto result = find_if(students.begin(), students.end(), find_by_studentCode(up));
         cout << up << ": ";
         for (auto i: (*result).get_classPerUC()){
@@ -920,6 +929,12 @@ void ScheduleManagement::listingUcsPerStudent() {
     else{
         cout << "Introduza o nome do aluno: ";
         string name; cin >> name;
+        while(std::cin.fail()) {
+            cout << "Input inválido, tente novamente: ";
+            cin.clear();
+            cin.ignore(INT_MAX, '\n');
+            cin >> name;
+        }
         auto result = find_if(students.begin(), students.end(), find_by_studentName(name));
         cout << name << ": ";
         for (auto it: (*result).get_classPerUC()){
