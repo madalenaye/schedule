@@ -876,7 +876,7 @@ void ScheduleManagement::listingUcsByClass() {
     print_exitOptions();
 }
 /**
- * Verifica se é possível fazer a mudanção ou adição de turma com base na diferença de alunos por turma de de uma UC.
+ * Verifica se é possível fazer a mudanção ou adição de turma com base no tamanho das turmas de uma UC.
  * Complexidade= O(n*log(n)), n -> tamanho da lista cpu.
  * @param stu estudante em questão.
  * @param uc cadeira em que deseja mudar de turma.
