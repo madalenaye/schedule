@@ -20,9 +20,9 @@ void createMenu(){
     printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
     cout << endl;
     cout << endl;
-    cout << setw(51) << "Bem-vind@ ao melhor gestor de horários!" << endl;
+    cout << setw(52) << "Bem-vind@ ao melhor gestor de horários!" << endl;
     cout<< setw(41) << "Que ficheiro deseja ler?" << endl;
-    cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(31) << "2. Ficheiro atualizado" << endl;
+    cout << "\n" << setw(24) << "1. Ficheiro inicial"<< setw(33) << "2. Ficheiro atualizado" << endl;
     printf("\n  Opção: ");
     string option; cin >> option;
     // input error
