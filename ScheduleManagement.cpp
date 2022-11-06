@@ -631,7 +631,7 @@ void ScheduleManagement::removeStudent(long code,string _uc,string _class) {
     Student es = (*it);
     s.set_studentName(es.get_studentName());
     list<ClassPerUC> cpu;
-    if (isNotAlreadyInThisUc(code,_uc)){
+    if (isNotAlreadyInThisUc(code,_uc) || isNotAlreadyInThisClass(code,_class)){
         pushInvalidRequest(Request(REMOVE,code,_uc,_class,""));
         return;
     }
@@ -961,7 +961,7 @@ void ScheduleManagement::pushInvalidRequest(Request r){
     invalid_requests.push_back(r);
 }
 /**
- * Para os pedidos ADD, verifica se o estudante em questão já está inscrito na unidade curricular
+ * Para os pedidos ADD e REMOVE, verifica se o estudante em questão já está inscrito na unidade curricular
  * e se já tem uma turma associada
  * Complexidade: 0(n), n-> tamanho da lista de turmas do estudante s.
  * @param up
@@ -976,6 +976,24 @@ bool ScheduleManagement::isNotAlreadyInThisUc(long int up, string uc){
     s.set_ClassPerUC(es.get_classPerUC());
     for (ClassPerUC i:s.get_classPerUC()){
         if (i.get_ucCode() == uc){return false;}
+    }
+    return true;
+}
+/**
+ * Para os pedidos Remove, verifica se o estudante em questão já está inscrito na turma em questão.
+ * Complexidade: 0(n), n-> tamanho da lista de turmas do estudante s.
+ * @param up
+ * @param uc
+ * @return true se não estiver inscrito na turma em questão.
+ */
+bool ScheduleManagement::isNotAlreadyInThisClass(long int up, string cc){
+    Student s;
+    s.set_studentCode(up);
+    const set<Student>::iterator &it = students.find(s);
+    Student es = *it;
+    s.set_ClassPerUC(es.get_classPerUC());
+    for (ClassPerUC i:s.get_classPerUC()){
+        if (i.get_classCode() == cc){return false;}
     }
     return true;
 }
