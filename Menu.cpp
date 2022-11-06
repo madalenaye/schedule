@@ -94,7 +94,7 @@ void listingOptions(ScheduleManagement manager){
         else if (type == "3"){listSchedule(manager);}
         else if (type == "4"){listUCs(manager);}
         else{
-            printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << '\n'; menuOperations(manager);}
+            printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations(manager);}
 }
 /**
  * Permite o output da listagem das turmas com um critério em específico.
@@ -423,10 +423,10 @@ void set_definitions(ScheduleManagement manager){
         }
         manager.set_cap(i);
     }
-    cout << '\n';
+    printf("\n");
     printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
-    cout << '\n';
-    cout << '\n';
+    printf("\n");
+    printf("\n");
     menuOperations(manager);
 }
 // end menu
