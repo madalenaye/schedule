@@ -62,6 +62,7 @@ public:
     // bool
     bool compatibleClassUnbalance(string uc, string cc);
     bool isNotAlreadyInThisUc(long int up,string uc);
+    bool isNotAlreadyInThisClass(long int up,string cc);
     bool compatibleClassSchedule(long int up,string uc,string cc);
     //binary search
     int binary_search(string name);
