@@ -17,12 +17,12 @@ using namespace std;
  */
 void createMenu(){
     printf("\n");
-    printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+    printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
     printf("\n");
     printf("\n");
-    cout << setw(51) << "Bem-vind@ ao melhor gestor de horários!\n";
+    cout << setw(50) << "Bem-vind@ ao melhor gestor de horários!\n";
     cout<< setw(41) << "Que ficheiro deseja ler?\n";
-    cout << "\n" << setw(25) << "1. Ficheiro inicial"<< setw(31) << "2. Ficheiro atualizado\n";
+    cout << "\n" << setw(24) << "1. Ficheiro inicial"<< setw(31) << "2. Ficheiro atualizado\n";
     printf("\n  Opção: ");
     string option; cin >> option;
     // input error
@@ -33,8 +33,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/students_classes.csv";
-    else filename="/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
+    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -94,7 +94,7 @@ void listingOptions(ScheduleManagement manager){
         else if (type == "3"){listSchedule(manager);}
         else if (type == "4"){listUCs(manager);}
         else{
-            printf("\n");printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations(manager);}
+            printf("\n");printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t"); cout << "\n" << "\n"; menuOperations(manager);}
 }
 /**
  * Permite o output da listagem das turmas com um critério em específico.
@@ -197,16 +197,7 @@ void listSchedule(ScheduleManagement manager){
  * Struct para usar para procurar no set a partir de um código de estudante.
  * Complexidade: O(1).
  */
-struct find_by_studentCode{
-    find_by_studentCode(long int code) : code(code) {}
 
-    bool operator()(Student student) const{
-        return student.get_studentCode() == code;
-    }
-
-private:
-    long int code;
-};
 // modification options
 /**
  * Permite ao utilizador escolher o que alterar.
@@ -261,7 +252,7 @@ void modifyOptions(ScheduleManagement manager){
         }
         if (answer == "S" || answer == "s"){
             printf("\n");
-            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
             printf("\n");
             printf("\n");
             menuOperations(manager);
@@ -309,7 +300,7 @@ void modifyOptions(ScheduleManagement manager){
         }
         if (answer == "S" || answer == "s"){
             printf("\n");
-            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
             printf("\n");
             printf("\n");
             menuOperations(manager);
@@ -365,7 +356,7 @@ void modifyOptions(ScheduleManagement manager){
         }
         if (answer == "S" || answer == "s"){
             printf("\n");
-            printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+            printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
             printf("\n");
             printf("\n");
             menuOperations(manager);
@@ -373,7 +364,7 @@ void modifyOptions(ScheduleManagement manager){
         else terminate(manager);}
     else{
         printf("\n");
-        printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+        printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
         printf("\n");
         printf("\n");
         menuOperations(manager);
@@ -389,7 +380,7 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<'\n';
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
@@ -397,7 +388,7 @@ void terminate(ScheduleManagement manager){
         }
     }
     file.close();
-    invalid.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/invalid_requests.csv");
+    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<'\n';
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<'\n';
@@ -424,7 +415,7 @@ void set_definitions(ScheduleManagement manager){
         manager.set_cap(i);
     }
     printf("\n");
-    printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
+    printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");
     printf("\n");
     printf("\n");
     menuOperations(manager);
@@ -435,7 +426,7 @@ void set_definitions(ScheduleManagement manager){
  */
 void endMenu(){
     printf("\n");
-    printf("\033[46m=============================================================\033[0m\n");
+    printf("\033[46m===========================================================\033[0m\n");
 }
 
 

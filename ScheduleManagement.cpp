@@ -102,9 +102,7 @@ void ScheduleManagement::readClasses(){
     string classCode, ucCode, weekday, startHour, duration, type;
     ifstream inFile;
 
-    //inFile.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes_per_uc.csv");
-    //inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
 
     getline(inFile,line);
     Lecture lecture;
@@ -116,9 +114,7 @@ void ScheduleManagement::readClasses(){
         getline(is,classCode,'\r');
         string line2;
         ifstream inFile2;
-        //inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
-        //inFile2.open("/Users/Utilizador/Desktop/aedprojeto/schedule/scheduleFiles/classes.csv");
-        inFile2.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes.csv");
+        inFile2.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes.csv");
         getline(inFile2,line2);
         string cc,uc;
         while (getline(inFile2,line2)){
@@ -152,7 +148,6 @@ void ScheduleManagement::readStudents(string filename){
     string line;
     string stCode, stName, ucCode, classCode;
     ifstream inFile;
-
     inFile.open(filename);
     getline(inFile,line);
     //Reading the first line with actual data
@@ -205,7 +200,7 @@ vector<ClassPerUC> ScheduleManagement::readClassesPerUC(){
     string line;
     string ucCode, classCode;
     ifstream inFile;
-    inFile.open("/home/sereno/CLionProjects/ProjetoAED/schedule/scheduleFiles/classes_per_uc.csv");
+    inFile.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/classes_per_uc.csv");
     getline(inFile,line);
     vector<ClassPerUC> classes;
     ClassPerUC uc_class;
@@ -1008,7 +1003,7 @@ void ScheduleManagement::print_exitOptions(){
         cin >> answer;
     }
     if (answer == "S" || answer == "s") {
-        cout << '\n';printf("\033[44m======================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << '\n';
+        cout << '\n';printf("\033[44m====================== IɴғᴏPᴏᴄᴋᴇᴛ =========================\033[0m\t\t");printf("\n");cout << '\n';
         menuOperations(*this);
     }
     else terminate(*this);
