@@ -33,8 +33,8 @@ void createMenu(){
     char c = option[0];
     // file versions
     string filename;
-    if(c=='1') filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/students_classes.csv";
-    else filename="/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv";
+    if(c=='1') filename="../scheduleFiles/students_classes.csv";
+    else filename="../scheduleFiles/new_students_classes.csv";
 
     ScheduleManagement manager;
     manager.readClasses();
@@ -380,7 +380,7 @@ void terminate(ScheduleManagement manager){
 
     while(!manager.get_requests().empty()){manager.doRequest();}
     ofstream file,invalid;
-    file.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/new_students_classes.csv");
+    file.open("../scheduleFiles/new_students_classes.csv");
     file<<"StudentCode"<<","<<"StudentName"<<","<<"UcCode"<<","<<"ClassCode"<<'\n';
     for(auto i: manager.get_students()){
         for(auto j: i.get_classPerUC()){
@@ -388,7 +388,7 @@ void terminate(ScheduleManagement manager){
         }
     }
     file.close();
-    invalid.open("/Users/madalenaye/Downloads/AED/project/schedule/scheduleFiles/invalid_requests.csv");
+    invalid.open("../scheduleFiles/invalid_requests.csv");
     invalid<<"Request Type"<<","<<"StudentCode"<<","<<"UcCode"<<","<<"ClassCode"<<","<<"NewClassCode"<<'\n';
     for(auto i: manager.get_invalidRequests()){
         invalid<<i.getType()<<","<<i.getStudentCode()<<","<<i.getUc()<<","<<i.getClass()<<","<<i.getNewClass()<<'\n';
